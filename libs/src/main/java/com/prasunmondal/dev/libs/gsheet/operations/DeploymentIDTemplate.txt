@@ -1,0 +1,7 @@
+package com.prasunmondal.postjsontosheets.operations
+
+class DeploymentID {
+    companion object {
+        var deploymentId = "<deploymentID>"
+    }
+}
