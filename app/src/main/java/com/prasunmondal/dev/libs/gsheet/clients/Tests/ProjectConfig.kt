@@ -1,6 +1,6 @@
-package com.prasunmondal.libs.gsheet.clients.Tests
+package com.prasunmondal.dev.libs.gsheet.clients.Tests
 
-import com.prasunmondal.libs.gsheet.operations.DeploymentID.Companion.deploymentId
+import com.prasunmondal.dev.libs.gsheet.operations.DeploymentID.Companion.deploymentId
 import java.io.FileNotFoundException
 
 object ProjectConfig {

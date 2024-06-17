@@ -1,11 +1,11 @@
 package com.prasunmondal.dev.libs.gsheet.clients.APIRequests.ReadAPIs
 
-import com.prasunmondal.libs.gsheet.clients.APIRequests.APIRequests
-import com.prasunmondal.libs.gsheet.clients.APIResponses.APIResponse
-import com.prasunmondal.libs.gsheet.clients.APIResponses.ReadResponse
-import com.prasunmondal.libs.gsheet.clients.responseCaching.APIRequestsTemplates
-import com.prasunmondal.libs.gsheet.clients.responseCaching.ResponseCache
-import com.prasunmondal.libs.gsheet.serializer.parsers.Parser
+import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.APIRequests
+import com.prasunmondal.dev.libs.gsheet.clients.APIResponses.APIResponse
+import com.prasunmondal.dev.libs.gsheet.clients.APIResponses.ReadResponse
+import com.prasunmondal.dev.libs.gsheet.clients.responseCaching.APIRequestsTemplates
+import com.prasunmondal.dev.libs.gsheet.clients.responseCaching.ResponseCache
+import com.prasunmondal.dev.libs.gsheet.serializer.parsers.Parser
 import kotlin.reflect.KFunction
 
 abstract class ReadAPIs<T> : APIRequests(), ResponseCache {

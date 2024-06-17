@@ -1,6 +1,6 @@
 package com.prasunmondal.dev.libs.logs.instant.sheets;
 
-import com.prasunmondal.libs.logs.instant.sheets.PostToGSheet;
+import com.prasunmondal.dev.libs.logs.instant.sheets.PostToGSheet;
 
 public class LogToSheet {
 

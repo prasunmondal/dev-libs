@@ -1,9 +1,9 @@
 package com.prasunmondal.dev.libs.gsheet.clients.Tests.ReadAPIs.FetchData
 
-import com.prasunmondal.libs.gsheet.clients.APIRequests.ReadAPIs.FetchData.GSheetFetchByQuery
-import com.prasunmondal.libs.gsheet.clients.GScript
-import com.prasunmondal.libs.gsheet.clients.Tests.ModelInsertObject
-import com.prasunmondal.libs.gsheet.clients.Tests.ProjectConfig
+import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.ReadAPIs.FetchData.GSheetFetchByQuery
+import com.prasunmondal.dev.libs.gsheet.clients.GScript
+import com.prasunmondal.dev.libs.gsheet.clients.Tests.ModelInsertObject
+import com.prasunmondal.dev.libs.gsheet.clients.Tests.ProjectConfig
 
 class FetchByQueryTest {
     constructor() {

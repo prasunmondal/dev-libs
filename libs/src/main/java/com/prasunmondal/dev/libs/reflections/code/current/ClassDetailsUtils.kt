@@ -1,6 +1,6 @@
 package com.prasunmondal.dev.libs.reflections.code.current
 
-import com.prasunmondal.libs.gsheet.clients.Tests.Test
+import com.prasunmondal.dev.libs.gsheet.clients.Tests.Test
 import kotlin.reflect.KClass
 
 class ClassDetailsUtils {

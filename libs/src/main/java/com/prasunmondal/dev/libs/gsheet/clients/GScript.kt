@@ -1,14 +1,14 @@
 package com.prasunmondal.dev.libs.gsheet.clients
 
-import com.prasunmondal.libs.gsheet.clients.APIRequests.APIRequests
-import com.prasunmondal.libs.gsheet.clients.APIRequests.ReadAPIs.ReadAPIs
-import com.prasunmondal.libs.gsheet.clients.APIResponses.APIResponse
-import com.prasunmondal.libs.gsheet.clients.APIResponses.ReadResponse
-import com.prasunmondal.libs.gsheet.clients.responseCaching.ResponseCache
-import com.prasunmondal.libs.gsheet.exceptions.GScriptDuplicateUIDException
-import com.prasunmondal.libs.gsheet.post.serializable.PostObjectResponse
-import com.prasunmondal.libs.gsheet.serializer.parsers.Parser
-import com.prasunmondal.libs.logs.instant.terminal.LogMe
+import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.APIRequests
+import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.ReadAPIs.ReadAPIs
+import com.prasunmondal.dev.libs.gsheet.clients.APIResponses.APIResponse
+import com.prasunmondal.dev.libs.gsheet.clients.APIResponses.ReadResponse
+import com.prasunmondal.dev.libs.gsheet.clients.responseCaching.ResponseCache
+import com.prasunmondal.dev.libs.gsheet.exceptions.GScriptDuplicateUIDException
+import com.prasunmondal.dev.libs.gsheet.post.serializable.PostObjectResponse
+import com.prasunmondal.dev.libs.gsheet.serializer.parsers.Parser
+import com.prasunmondal.dev.libs.logs.instant.terminal.LogMe
 import org.json.JSONArray
 import org.json.JSONObject
 import java.io.Serializable

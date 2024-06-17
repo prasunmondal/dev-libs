@@ -1,8 +1,8 @@
-package com.prasunmondal.libs.logs
+package com.prasunmondal.dev.libs.logs
 
 import com.prasunmondal.dev.libs.logs.LogConfigurations
-import com.prasunmondal.libs.logs.instant.terminal.LogMe
-import com.prasunmondal.libs.reflections.code.stacktrace.GetStacktraceDetails
+import com.prasunmondal.dev.libs.logs.instant.terminal.LogMe
+import com.prasunmondal.dev.libs.reflections.code.stacktrace.GetStacktraceDetails
 
 object LogUtils {
     val caller: StackTraceElement

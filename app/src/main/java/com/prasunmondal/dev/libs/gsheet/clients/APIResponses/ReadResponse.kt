@@ -1,4 +1,4 @@
-package com.prasunmondal.libs.gsheet.clients.APIResponses
+package com.prasunmondal.dev.libs.gsheet.clients.APIResponses
 
 class ReadResponse<T> : APIResponse() {
     lateinit var sheetId: String

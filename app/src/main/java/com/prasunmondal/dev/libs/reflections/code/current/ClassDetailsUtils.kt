@@ -1,6 +1,6 @@
-package com.prasunmondal.libs.reflections.code.current
+package com.prasunmondal.dev.libs.reflections.code.current
 
-import com.prasunmondal.libs.gsheet.clients.Tests.Test
+import com.prasunmondal.dev.libs.gsheet.clients.Tests.Test
 import kotlin.reflect.KClass
 
 class ClassDetailsUtils {
@@ -14,7 +14,7 @@ class ClassDetailsUtils {
         fun getCaller(thresholdClass: String = ""): String {
             val parentPackage =
                 if (thresholdClass.isNotEmpty()) thresholdClass
-                else "com.prasunmondal.libs.reflections.code"
+                else "com.prasunmondal.dev.libs.reflections.code"
 
             var startSearching = false
 

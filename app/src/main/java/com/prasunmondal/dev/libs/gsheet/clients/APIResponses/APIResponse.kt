@@ -1,11 +1,11 @@
-package com.prasunmondal.libs.gsheet.clients.APIResponses
+package com.prasunmondal.dev.libs.gsheet.clients.APIResponses
 
 import android.util.Log
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
 import com.google.gson.reflect.TypeToken
-import com.prasunmondal.libs.gsheet.clients.JsonTags
+import com.prasunmondal.dev.libs.gsheet.clients.JsonTags
 import org.json.JSONObject
 import java.io.Serializable
 import java.lang.reflect.Type

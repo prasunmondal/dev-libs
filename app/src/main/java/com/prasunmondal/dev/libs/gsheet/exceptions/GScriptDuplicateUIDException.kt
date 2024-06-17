@@ -1,3 +1,3 @@
-package com.prasunmondal.libs.gsheet.exceptions
+package com.prasunmondal.dev.libs.gsheet.exceptions
 
 class GScriptDuplicateUIDException : Exception()

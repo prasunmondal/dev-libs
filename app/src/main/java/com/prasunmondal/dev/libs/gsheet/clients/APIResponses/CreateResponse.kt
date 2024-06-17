@@ -1,4 +1,6 @@
-package com.prasunmondal.libs.gsheet.clients.APIResponses
+package com.prasunmondal.dev.libs.gsheet.clients.APIResponses
+
+import com.prasunmondal.dev.libs.gsheet.clients.APIResponses.APIResponse
 
 class CreateResponse : APIResponse() {
     lateinit var sheetId: String

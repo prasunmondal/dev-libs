@@ -1,4 +1,4 @@
-package com.prasunmondal.libs.gsheet.clients.APIRequests.DeleteAPIs
+package com.prasunmondal.dev.libs.gsheet.clients.APIRequests.DeleteAPIs
 
 import org.json.JSONObject
 

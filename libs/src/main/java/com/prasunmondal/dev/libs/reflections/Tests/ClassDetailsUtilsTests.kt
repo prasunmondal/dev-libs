@@ -1,7 +1,7 @@
 package com.prasunmondal.dev.libs.reflections.Tests
 
-import com.prasunmondal.libs.logs.instant.terminal.LogMe
-import com.prasunmondal.libs.reflections.code.current.ClassDetailsUtils
+import com.prasunmondal.dev.libs.logs.instant.terminal.LogMe
+import com.prasunmondal.dev.libs.reflections.code.current.ClassDetailsUtils
 
 class ClassDetailsUtilsTests {
 

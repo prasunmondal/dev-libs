@@ -1,7 +1,7 @@
 package com.prasunmondal.dev.libs.logs.instant.terminal;
 
-import com.prasunmondal.libs.logs.LogUtils;
-import com.prasunmondal.libs.logs.instant.terminal.LogMe;
+import com.prasunmondal.dev.libs.logs.LogUtils;
+import com.prasunmondal.dev.libs.logs.instant.terminal.LogMe;
 
 public class LogExceptions extends LogStackTrace {
 

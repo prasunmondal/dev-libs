@@ -1,8 +1,8 @@
 package com.prasunmondal.dev.libs.gsheet.clients.Tests
 
-import com.prasunmondal.libs.gsheet.clients.APIRequests.APIRequests
-import com.prasunmondal.libs.gsheet.clients.APIRequests.ReadAPIs.FetchData.GSheetFetchAll
-import com.prasunmondal.libs.gsheet.serializer.Tech4BytesSerializable
+import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.APIRequests
+import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.ReadAPIs.FetchData.GSheetFetchAll
+import com.prasunmondal.dev.libs.gsheet.serializer.Tech4BytesSerializable
 import java.io.Serializable
 
 //import com.prasunmondal.GSheet.serializer.Tech4BytesSerializable

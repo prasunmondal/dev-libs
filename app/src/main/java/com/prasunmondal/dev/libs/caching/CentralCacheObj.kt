@@ -1,6 +1,6 @@
-package com.prasunmondal.libs.caching
+package com.prasunmondal.dev.libs.caching
 
-import com.tech4bytes.extrack.centralCache.CentralCache
+import com.prasunmondal.dev.libs.caching.CentralCache
 
 object CentralCacheObj {
 

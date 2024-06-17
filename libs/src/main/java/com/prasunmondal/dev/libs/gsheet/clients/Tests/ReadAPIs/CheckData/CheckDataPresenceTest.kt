@@ -1,10 +1,10 @@
 package com.prasunmondal.dev.libs.gsheet.clients.Tests.ReadAPIs.CheckData
 
-import com.prasunmondal.libs.gsheet.clients.APIRequests.CreateAPIs.GSheetInsertObject
-import com.prasunmondal.libs.gsheet.clients.APIRequests.ReadAPIs.CheckData.GSheetCheckDataPresence
-import com.prasunmondal.libs.gsheet.clients.GScript
-import com.prasunmondal.libs.gsheet.clients.Tests.ModelInsertObject
-import com.prasunmondal.libs.gsheet.clients.Tests.ProjectConfig
+import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.CreateAPIs.GSheetInsertObject
+import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.ReadAPIs.CheckData.GSheetCheckDataPresence
+import com.prasunmondal.dev.libs.gsheet.clients.GScript
+import com.prasunmondal.dev.libs.gsheet.clients.Tests.ModelInsertObject
+import com.prasunmondal.dev.libs.gsheet.clients.Tests.ProjectConfig
 
 class CheckDataPresenceTest {
     init {

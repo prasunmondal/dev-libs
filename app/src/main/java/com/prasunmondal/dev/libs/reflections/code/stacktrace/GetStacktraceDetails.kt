@@ -1,4 +1,4 @@
-package com.prasunmondal.libs.reflections.code.stacktrace
+package com.prasunmondal.dev.libs.reflections.code.stacktrace
 
 import com.prasunmondal.dev.libs.logs.LogConfigurations
 

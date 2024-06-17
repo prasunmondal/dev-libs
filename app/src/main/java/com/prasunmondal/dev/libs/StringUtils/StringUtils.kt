@@ -1,4 +1,4 @@
-package com.prasunmondal.libs.StringUtils
+package com.prasunmondal.dev.libs.StringUtils
 
 import java.util.UUID
 

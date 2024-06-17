@@ -1,5 +1,6 @@
-package com.prasunmondal.libs.gsheet.clients.APIRequests.DeleteAPIs
+package com.prasunmondal.dev.libs.gsheet.clients.APIRequests.DeleteAPIs
 
+import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.DeleteAPIs.DeleteAPIs
 import org.json.JSONObject
 
 class GSheetDeleteAll : DeleteAPIs() {

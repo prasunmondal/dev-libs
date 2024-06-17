@@ -1,4 +1,4 @@
-package com.tech4bytes.mbrosv3.Utils.centralCache
+package com.prasunmondal.dev.libs.caching
 
 class CentralCacheConstants : java.io.Serializable {
     companion object {

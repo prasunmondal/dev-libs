@@ -1,7 +1,7 @@
-package com.prasunmondal.libs.app.contexts
+package com.prasunmondal.dev.libs.contexts
 
 import android.content.Context
-import com.prasunmondal.libs.logs.instant.terminal.LogMe
+import com.prasunmondal.dev.libs.logs.instant.terminal.LogMe
 
 class AppContexts {
 

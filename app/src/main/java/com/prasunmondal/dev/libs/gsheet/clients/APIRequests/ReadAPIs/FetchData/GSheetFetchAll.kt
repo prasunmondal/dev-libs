@@ -1,8 +1,8 @@
-package com.prasunmondal.libs.gsheet.clients.APIRequests.ReadAPIs.FetchData
+package com.prasunmondal.dev.libs.gsheet.clients.APIRequests.ReadAPIs.FetchData
 
-import com.prasunmondal.libs.gsheet.clients.APIRequests.APIRequests
-import com.prasunmondal.libs.gsheet.clients.APIRequests.ReadAPIs.ReadAPIs
-import com.prasunmondal.libs.gsheet.clients.responseCaching.APIRequestsTemplates
+import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.APIRequests
+import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.ReadAPIs.ReadAPIs
+import com.prasunmondal.dev.libs.gsheet.clients.responseCaching.APIRequestsTemplates
 import org.json.JSONObject
 
 class GSheetFetchAll<T> : ReadAPIs<T>() {

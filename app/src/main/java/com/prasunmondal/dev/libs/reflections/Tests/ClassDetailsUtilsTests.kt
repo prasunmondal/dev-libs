@@ -1,7 +1,7 @@
-package com.prasunmondal.libs.reflections.Tests
+package com.prasunmondal.dev.libs.reflections.Tests
 
-import com.prasunmondal.libs.logs.instant.terminal.LogMe
-import com.prasunmondal.libs.reflections.code.current.ClassDetailsUtils
+import com.prasunmondal.dev.libs.logs.instant.terminal.LogMe
+import com.prasunmondal.dev.libs.reflections.code.current.ClassDetailsUtils
 
 class ClassDetailsUtilsTests {
 
@@ -23,7 +23,7 @@ class ClassDetailsUtilsTests {
     fun getCallerClassTests1() {
         val className = ClassDetailsUtils.getCaller()
         LogMe.log(className)
-        assert("com.prasunmondal.libs.reflections.Tests.ClassDetailsUtilsTests" == className)
+        assert("com.prasunmondal.dev.libs.reflections.Tests.ClassDetailsUtilsTests" == className)
     }
 
     companion object {
@@ -31,7 +31,7 @@ class ClassDetailsUtilsTests {
         fun getCallerClassTests2() {
             val className = ClassDetailsUtils.getCaller()
             LogMe.log(className)
-            assert("com.prasunmondal.libs.reflections.Tests.ClassDetailsUtilsTests" == className)
+            assert("com.prasunmondal.dev.libs.reflections.Tests.ClassDetailsUtilsTests" == className)
         }
     }
 }

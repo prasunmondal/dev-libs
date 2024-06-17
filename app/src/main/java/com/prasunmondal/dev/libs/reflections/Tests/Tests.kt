@@ -1,4 +1,4 @@
-package com.prasunmondal.libs.reflections.Tests
+package com.prasunmondal.dev.libs.reflections.Tests
 
 class Tests {
 

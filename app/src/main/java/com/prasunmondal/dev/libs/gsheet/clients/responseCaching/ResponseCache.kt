@@ -1,11 +1,11 @@
-package com.prasunmondal.libs.gsheet.clients.responseCaching
+package com.prasunmondal.dev.libs.gsheet.clients.responseCaching
 
-import com.prasunmondal.libs.app.contexts.AppContexts
-import com.prasunmondal.libs.caching.CentralCacheObj
-import com.prasunmondal.libs.gsheet.clients.APIRequests.APIRequests
-import com.prasunmondal.libs.gsheet.clients.APIRequests.ReadAPIs.ReadAPIs
-import com.prasunmondal.libs.gsheet.clients.APIResponses.ReadResponse
-import com.prasunmondal.libs.logs.instant.terminal.LogMe
+import com.prasunmondal.dev.libs.contexts.AppContexts
+import com.prasunmondal.dev.libs.caching.CentralCacheObj
+import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.APIRequests
+import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.ReadAPIs.ReadAPIs
+import com.prasunmondal.dev.libs.gsheet.clients.APIResponses.ReadResponse
+import com.prasunmondal.dev.libs.logs.instant.terminal.LogMe
 import java.io.Serializable
 
 interface ResponseCache : Serializable {

@@ -1,4 +1,4 @@
-package com.prasunmondal.libs.gsheet.clients
+package com.prasunmondal.dev.libs.gsheet.clients
 
 class JsonTags {
     companion object {
