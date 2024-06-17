@@ -1,5 +1,6 @@
 package com.prasunmondal.dev.libs.logs.instant.terminal
 
+import com.prasunmondal.dev.libs.contexts.AppContexts
 import com.prasunmondal.dev.libs.logs.LogConfigurations
 import com.prasunmondal.dev.libs.logs.instant.sheets.LogToSheet
 import com.prasunmondal.dev.libs.logs.instant.terminal.LogExceptions
@@ -19,11 +20,11 @@ object LogMe : LogExceptions() {
 
     @JvmStatic
     fun log(msg: String?) {
-        var msg = msg
-        if (msg == null) {
-            msg = "<null string detected in log>"
+        var msg_ = msg
+        if (msg_ == null) {
+            msg_ = "<null string detected in log>"
         }
-        log(msg, true, false)
+        log(msg_, true, false)
     }
 
     @JvmStatic
@@ -58,7 +59,7 @@ object LogMe : LogExceptions() {
         str = LogUtils.putOffset(str)
         println(str)
         if (postLogToSheet) {
-            LogToSheet.logs.post(str, get())
+            LogToSheet.logs.post(str, AppContexts.get())
         }
     }
 }
