@@ -31,17 +31,25 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
+    publishing {
+        singleVariant("release") {
+            withSourcesJar()
+        }
+    }
 }
 
 val ver = project.version
 
-publishing {
-    publications {
-        create<MavenPublication>("mavenJava") {
-            from(components["release"])
-            groupId = project.group.toString()
-            artifactId = project.name
-            version = ver.toString()
+afterEvaluate {
+    publishing {
+        publications {
+            create<MavenPublication>("mavenJava") {
+                from(components["release"])
+                groupId = project.group.toString()
+                artifactId = project.name
+                version = ver.toString()
+            }
         }
     }
 }
