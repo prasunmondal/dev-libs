@@ -14,7 +14,7 @@ class ClassDetailsUtils {
         fun getCaller(thresholdClass: String = ""): String {
             val parentPackage =
                 if (thresholdClass.isNotEmpty()) thresholdClass
-                else "com.prasunmondal.libs.reflections.code"
+                else "com.prasunmondal.dev.libs.reflections.code"
 
             var startSearching = false
 
