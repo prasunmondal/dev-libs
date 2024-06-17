@@ -34,7 +34,7 @@ class ClassDetailsUtils {
         }
 
         fun <T : Any> getClassName(clazz: KClass<T>): String {
-            Test.javaClass.name
+            Test.Companion::class.java.name
             return clazz.qualifiedName + ""
         }
     }
