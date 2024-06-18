@@ -1,0 +1,4 @@
+create symlink:
+
+cd /Users/prasun/Documents/Project/dev-libs/libs/src/main/java/com.prasunmondal/
+ln -s ../../../../../app/src/main/java/com/prasunmondal/dev dev
