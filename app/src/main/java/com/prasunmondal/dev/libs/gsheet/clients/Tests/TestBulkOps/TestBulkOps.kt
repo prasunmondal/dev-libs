@@ -11,7 +11,7 @@ class TestBulkOps {
     }
 
     fun test() {
-
+        LogMe.startMethod()
         GScript.addRequest(TestSheet1Model.prepareFetchAllRequest())
         GScript.addRequest(TestSheet1Model.customFetchRequest())
 //        GScript.addRequest(TestSheet2Model.prepareFetchAllRequest())
@@ -22,7 +22,7 @@ class TestBulkOps {
         TestSheet1Model.fetchAll()
         TestSheet1Model.fetchAll()
 
-        TestSheet1Model.insert(ModelInsertObject("swagata","jerry"))
+        TestSheet1Model.insertObject(ModelInsertObject("swagata","jerry"))
         var t = TestSheet1Model.fetchAll(false)
         t.forEach {
             LogMe.log(t.toString())
@@ -31,5 +31,6 @@ class TestBulkOps {
         t.forEach {
             LogMe.log(t.toString())
         }
+
     }
 }

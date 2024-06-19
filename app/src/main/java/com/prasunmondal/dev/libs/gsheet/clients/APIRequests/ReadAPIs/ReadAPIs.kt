@@ -28,18 +28,18 @@ abstract class ReadAPIs<T> : APIRequests(), ResponseCache {
         return "${this.sheetId}\\${this.tabName}\\${getJSON()}"
     }
 
-    override fun <T> defaultInitialize(
-        request: APIRequests,
-        reqValues: APIRequestsTemplates<T>
-    ): APIRequests {
-        var request_ = request as ReadAPIs<T>
-        super.defaultInitialize(request, reqValues)
-        request_.sheetId = reqValues.sheetURL
-        request_.tabName = reqValues.tabname
-        request_.classTypeForResponseParsing = reqValues.classTypeForResponseParsing
-        request_.cacheData = cacheData
-        return request
-    }
+//    override fun <T> defaultInitialize(
+//        request: APIRequests,
+//        reqValues: APIRequestsTemplates<T>
+//    ): APIRequests {
+//        var request_ = request as ReadAPIs<T>
+//        super.defaultInitialize(request, reqValues)
+//        request_.sheetId = reqValues.sheetURL
+//        request_.tabName = reqValues.tabname
+//        request_.classTypeForResponseParsing = reqValues.classTypeForResponseParsing
+//        request_.cacheData = cacheData
+//        return request
+//    }
 
     override fun prepareResponse(
         requestObj: APIRequests,

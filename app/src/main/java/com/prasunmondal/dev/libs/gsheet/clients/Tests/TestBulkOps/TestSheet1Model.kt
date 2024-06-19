@@ -1,5 +1,6 @@
 package com.prasunmondal.dev.libs.gsheet.clients.Tests.TestBulkOps
 
+import com.prasunmondal.dev.libs.gsheet.caching.readApis.FetchWithByAndConditionTemplate
 import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.APIRequests
 import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.ReadAPIs.FetchData.GSheetFetchByAndCondition
 import com.prasunmondal.dev.libs.gsheet.clients.GSheetSerialized
@@ -17,8 +18,7 @@ object TestSheet1Model : GSheetSerialized<ModelInsertObject>(
 ) {
 
     fun customFetchRequest(): APIRequests {
-        val request = GSheetFetchByAndCondition<ModelInsertObject>()
-        request.defaultInitialize(request, this)
+        val request = prepareFetchByAndConditionRequest()
         request.conditionAnd("name", "Prasun")
         return request
     }

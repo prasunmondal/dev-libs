@@ -7,7 +7,7 @@ import com.prasunmondal.dev.libs.gsheet.clients.Tests.TestBulkOps.TestSheet1Mode
 import com.prasunmondal.dev.libs.gsheet.serializer.Tech4BytesSerializableLocks
 import com.prasunmondal.dev.libs.logs.instant.terminal.LogMe
 
-open class CachingUtils {
+interface CachingUtils<T> {
     fun <T> get(context: Context, request: ReadAPIs<T>, useCache: Boolean): List<T> {
         val cacheKey = request.getCacheKey()
         var cacheResults = readFromCache(context, request, useCache)
