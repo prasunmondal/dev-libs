@@ -4,10 +4,11 @@ import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.APIRequests
 import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.ReadAPIs.ReadAPIs
 import com.prasunmondal.dev.libs.gsheet.clients.APIResponses.APIResponse
 import com.prasunmondal.dev.libs.gsheet.clients.APIResponses.ReadResponse
+import com.prasunmondal.dev.libs.gsheet.clients.Tests.ProjectConfig
 import com.prasunmondal.dev.libs.gsheet.clients.responseCaching.ResponseCache
 import com.prasunmondal.dev.libs.gsheet.exceptions.GScriptDuplicateUIDException
 import com.prasunmondal.dev.libs.gsheet.post.serializable.PostObjectResponse
-import com.prasunmondal.dev.libs.gsheet.serializer.parsers.Parser
+import com.prasunmondal.dev.libs.jsons.JsonParser
 import com.prasunmondal.dev.libs.logs.instant.terminal.LogMe
 import org.json.JSONArray
 import org.json.JSONObject
@@ -16,13 +17,17 @@ import java.net.URL
 import java.util.UUID
 import java.util.function.Consumer
 
-abstract class GScript : Serializable {
+interface GScript : Serializable {
 
-    lateinit var scriptURL: String
-    lateinit var json: JSONObject
-    var onCompletion: Consumer<PostObjectResponse>? = null
+    var scriptURL: String
+        get() = ProjectConfig.dBServerScriptURL
+        set(value) = TODO()
 
-    abstract fun getJSON(): JSONObject
+    //    var json: JSONObject
+    var onCompletion: Consumer<PostObjectResponse>?
+        get() = null
+        set(value) = TODO()
+
 
     // TODO: add direct execution
     fun execute(scriptURL: String, useCache: Boolean = true): APIResponse {
@@ -117,7 +122,7 @@ abstract class GScript : Serializable {
 
             LogMe.log("response2: $response2")
 
-            val apiResponsesList = Parser.convertJsonArrayStringToJsonObjList(response2)
+            val apiResponsesList = JsonParser.convertJsonArrayStringToJsonObjList(response2)
             val map: MutableMap<String, APIResponse> = mutableMapOf()
             for (apiResponse in apiResponsesList) {
                 val responseOpId = apiResponse.get("opId").toString()

@@ -4,7 +4,7 @@ import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.APIRequests
 import com.prasunmondal.dev.libs.gsheet.clients.APIResponses.APIResponse
 import com.prasunmondal.dev.libs.gsheet.clients.APIResponses.ReadResponse
 import com.prasunmondal.dev.libs.gsheet.clients.responseCaching.ResponseCache
-import com.prasunmondal.dev.libs.gsheet.serializer.parsers.Parser
+import com.prasunmondal.dev.libs.jsons.JsonParser
 
 abstract class ReadAPIs<T> : APIRequests(), ResponseCache {
     lateinit var sheetId: String
@@ -55,10 +55,10 @@ abstract class ReadAPIs<T> : APIRequests(), ResponseCache {
 //        super.prepareResponse(requestObj, receivedResponseObj, buildingResponseObj)
         buildingResponseObj_.sheetId = this.sheetId
         buildingResponseObj_.tabName = this.tabName
-        buildingResponseObj_.parsedResponse = Parser.convertJsonArrayStringToJavaObjList(
+        buildingResponseObj_.parsedResponse = JsonParser.convertJsonArrayStringToJavaObjList(
             receivedResponseObj.content,
             (requestObj as ReadAPIs<T>).classTypeForResponseParsing
-        ) as List<T>
+        )
         return buildingResponseObj_
     }
 }

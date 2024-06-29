@@ -3,10 +3,13 @@ package com.prasunmondal.dev.libs.gsheet.clients.APIRequests
 import com.prasunmondal.dev.libs.StringUtils.StringUtils
 import com.prasunmondal.dev.libs.gsheet.clients.APIResponses.APIResponse
 import com.prasunmondal.dev.libs.gsheet.clients.GScript
+import org.json.JSONObject
 
-abstract class APIRequests : GScript() {
+abstract class APIRequests : GScript {
     private var uId: String = setUId()
     open var opCode: String = ""
+
+    abstract fun getJSON(): JSONObject
 
     fun getUId(): String {
         return uId

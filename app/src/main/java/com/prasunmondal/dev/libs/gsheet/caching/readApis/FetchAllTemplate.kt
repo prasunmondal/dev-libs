@@ -4,7 +4,7 @@ import com.prasunmondal.dev.libs.contexts.AppContexts
 import com.prasunmondal.dev.libs.gsheet.caching.RequestTemplatesInterface
 import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.ReadAPIs.FetchData.GSheetFetchAll
 import com.prasunmondal.dev.libs.gsheet.clients.GScript
-import com.prasunmondal.dev.libs.gsheet.clients.responseCaching.CachingUtils
+import com.prasunmondal.dev.libs.gsheet.caching.CachingUtils
 
 interface FetchAllTemplate<T>: RequestTemplatesInterface<T>, CachingUtils<T> {
     fun prepareFetchAllRequest(): GSheetFetchAll<T> {

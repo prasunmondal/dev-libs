@@ -22,17 +22,17 @@ class Test {
 //            testMultiple()
 
 //        New     New     New     New     New     New     New     New     New
-            InsertObjectTest()
-//            InsertUniqueObjectTest()
-//            InsertStringArrayTest()
-            FetchAllTest()
-            FetchByQueryTest()
-            FetchByAndConditionTest()
-            FetchByOrConditionTest()
-            DeleteAllTest()
-            DeleteByAndConditionTest()
-            DeleteByOrConditionTest()
-            CheckDataPresenceTest()
+//            InsertObjectTest()
+////            InsertUniqueObjectTest()
+////            InsertStringArrayTest()
+//            FetchAllTest()
+//            FetchByQueryTest()
+//            FetchByAndConditionTest()
+//            FetchByOrConditionTest()
+//            DeleteAllTest()
+//            DeleteByAndConditionTest()
+//            DeleteByOrConditionTest()
+//            CheckDataPresenceTest()
 
             TestBulkOps()
 //        }

@@ -118,7 +118,8 @@ abstract class Tech4BytesSerializable<T : Any> : java.io.Serializable {
         LogMe.log(rawResponse)
 //        val typeOfT: Type = TypeToken.getParameterized(MutableList::class.java, clazz).type
         var parsedResponse =
-            APIResponse.JsonArrayToObjectArray<T>(rawResponse, classTypeForResponseParsing)
+            // TODO: Use JsonParser class
+            APIResponse.JsonArrayToObjectArray(rawResponse, classTypeForResponseParsing)
 
         LogMe.log(parsedResponse.size)
         if ((getEmptyListIfEmpty || this.getEmptyListIfEmpty) && parsedResponse.isEmpty())

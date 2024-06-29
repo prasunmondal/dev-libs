@@ -1,4 +1,4 @@
-package com.prasunmondal.dev.libs.gsheet.serializer.parsers
+package com.prasunmondal.dev.libs.jsons
 
 import com.google.gson.Gson
 import com.google.gson.JsonParser
@@ -8,11 +8,10 @@ import org.json.JSONArray
 import org.json.JSONObject
 import java.lang.reflect.Type
 
-class Parser {
+class JsonParser {
 
     companion object {
-
-        open fun convertJsonArrayStringToJsonObjList(jsonArrayString: String?): List<JSONObject> {
+        fun convertJsonArrayStringToJsonObjList(jsonArrayString: String?): List<JSONObject> {
             val jsonObjectList: MutableList<JSONObject> = ArrayList()
             try {
                 val jsonArray = JSONArray(jsonArrayString)
@@ -25,14 +24,6 @@ class Parser {
             return jsonObjectList
         }
 
-        //        fun <T> JsonArrayToObjectArray(jsonString: String, clazz: Class<T>): List<T> {
-//            val jsonArrayString = jsonString.trimIndent()
-//            val gson = Gson()
-//            val jsonArray = JsonParser().parse(jsonArrayString).asJsonArray
-//            val contentListType: Type = TypeToken.getParameterized(MutableList::class.java, clazz).type
-//            val t: List<T> = gson.fromJson(jsonArray, contentListType)
-//            return t
-//        }
         fun <T> convertJsonArrayStringToJavaObjList(jsonString: String, clazz: Class<T>): List<T> {
             LogMe.log("Parsing string in 'convertJsonArrayStringToJavaObjList': " + jsonString)
             val jsonArrayString = jsonString.trimIndent()
@@ -43,6 +34,5 @@ class Parser {
             val t: List<T> = gson.fromJson(jsonArray, contentListType)
             return t
         }
-
     }
 }
