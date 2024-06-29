@@ -2,6 +2,7 @@ package com.prasunmondal.dev.libs.gsheet.clients
 
 import android.content.Context
 import android.util.Log
+import com.prasunmondal.dev.libs.contexts.AppContexts
 import com.prasunmondal.dev.libs.gsheet.caching.createApis.InsertAPIsTemplate
 import com.prasunmondal.dev.libs.gsheet.caching.deleteApis.DeleteAPIsTemplate
 import com.prasunmondal.dev.libs.gsheet.caching.readApis.ReadAPIsTemplate
@@ -14,15 +15,13 @@ open class GSheetSerialized<T>(
     override var scriptURL: String,
     override var sheetURL: String,
     override var tabname: String,
-    override var query: String? = null,
     override var classTypeForResponseParsing: Class<T>,
     override var appendInServer: Boolean,
     override var appendInLocal: Boolean,
-    override var getEmptyListIfEmpty: Boolean = false,
-    override var cacheTag: String = "default",
-    override var shallCacheData: Boolean,
-    override var context: Context,
-//    override var json: JSONObject,
+    override var query: String? = null,
+    override var shallCacheData: Boolean = true,
+    override var context: Context = AppContexts.get(),
+    override var cacheTag: String? = null,
     override var onCompletion: Consumer<PostObjectResponse>? = null
 ) : ReadAPIsTemplate<T>, DeleteAPIsTemplate<T>, InsertAPIsTemplate<T> {
 
