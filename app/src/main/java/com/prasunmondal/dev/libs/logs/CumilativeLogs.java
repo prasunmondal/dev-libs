@@ -1,6 +1,5 @@
 package com.prasunmondal.dev.libs.logs;
 
-import com.prasunmondal.dev.libs.logs.LogUtils;
 import com.prasunmondal.dev.libs.logs.instant.terminal.LogMe;
 
 public class CumilativeLogs {

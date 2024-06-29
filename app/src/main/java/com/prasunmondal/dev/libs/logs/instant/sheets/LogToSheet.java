@@ -1,7 +1,5 @@
 package com.prasunmondal.dev.libs.logs.instant.sheets;
 
-import com.prasunmondal.dev.libs.logs.instant.sheets.PostToGSheet;
-
 public class LogToSheet {
 
     //    public static String prodLogsSheet = "https://docs.google.com/spreadsheets/d/1bhcArLoXvN2nRPSWMpgXhLzDw8zlCWu5UhCMdk-Iu60/edit#gid=0";

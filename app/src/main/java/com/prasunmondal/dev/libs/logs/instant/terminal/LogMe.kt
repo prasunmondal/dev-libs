@@ -2,10 +2,8 @@ package com.prasunmondal.dev.libs.logs.instant.terminal
 
 import com.prasunmondal.dev.libs.contexts.AppContexts
 import com.prasunmondal.dev.libs.logs.LogConfigurations
-import com.prasunmondal.dev.libs.logs.instant.sheets.LogToSheet
-import com.prasunmondal.dev.libs.logs.instant.terminal.LogExceptions
-import com.prasunmondal.dev.libs.contexts.AppContexts.Companion.get
 import com.prasunmondal.dev.libs.logs.LogUtils
+import com.prasunmondal.dev.libs.logs.instant.sheets.LogToSheet
 
 object LogMe : LogExceptions() {
     var obj: LogMe? = null

@@ -1,6 +1,5 @@
 package com.prasunmondal.dev.libs.logs
 
-import com.prasunmondal.dev.libs.logs.LogConfigurations
 import com.prasunmondal.dev.libs.logs.instant.terminal.LogMe
 import com.prasunmondal.dev.libs.reflections.code.stacktrace.GetStacktraceDetails
 

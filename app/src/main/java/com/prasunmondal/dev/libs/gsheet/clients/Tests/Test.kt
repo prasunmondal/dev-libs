@@ -1,14 +1,5 @@
 package com.prasunmondal.dev.libs.gsheet.clients.Tests
 
-import com.prasunmondal.dev.libs.gsheet.clients.Tests.CreateAPIs.InsertObjectTest
-import com.prasunmondal.dev.libs.gsheet.clients.Tests.DeleteAPITests.DeleteAllTest
-import com.prasunmondal.dev.libs.gsheet.clients.Tests.DeleteAPITests.DeleteByAndConditionTest
-import com.prasunmondal.dev.libs.gsheet.clients.Tests.DeleteAPITests.DeleteByOrConditionTest
-import com.prasunmondal.dev.libs.gsheet.clients.Tests.ReadAPIs.CheckData.CheckDataPresenceTest
-import com.prasunmondal.dev.libs.gsheet.clients.Tests.ReadAPIs.FetchData.FetchAllTest
-import com.prasunmondal.dev.libs.gsheet.clients.Tests.ReadAPIs.FetchData.FetchByAndConditionTest
-import com.prasunmondal.dev.libs.gsheet.clients.Tests.ReadAPIs.FetchData.FetchByOrConditionTest
-import com.prasunmondal.dev.libs.gsheet.clients.Tests.ReadAPIs.FetchData.FetchByQueryTest
 import com.prasunmondal.dev.libs.gsheet.clients.Tests.TestBulkOps.TestBulkOps
 
 class Test {

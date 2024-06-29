@@ -1,8 +1,5 @@
 package com.prasunmondal.dev.libs.gsheet.clients.Tests.TestBulkOps
 
-import com.prasunmondal.dev.libs.gsheet.clients.GScript
-import com.prasunmondal.dev.libs.gsheet.clients.Tests.ModelInsertObject
-import com.prasunmondal.dev.libs.gsheet.clients.Tests.ProjectConfig
 import com.prasunmondal.dev.libs.logs.instant.terminal.LogMe
 
 class TestBulkOps {

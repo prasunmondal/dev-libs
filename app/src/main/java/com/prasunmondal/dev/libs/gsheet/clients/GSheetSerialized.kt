@@ -1,14 +1,11 @@
 package com.prasunmondal.dev.libs.gsheet.clients
 
 import android.content.Context
-import android.util.Log
 import com.prasunmondal.dev.libs.contexts.AppContexts
 import com.prasunmondal.dev.libs.gsheet.caching.createApis.InsertAPIsTemplate
 import com.prasunmondal.dev.libs.gsheet.caching.deleteApis.DeleteAPIsTemplate
 import com.prasunmondal.dev.libs.gsheet.caching.readApis.ReadAPIsTemplate
-import com.prasunmondal.dev.libs.gsheet.clients.APIResponses.APIResponse
 import com.prasunmondal.dev.libs.gsheet.post.serializable.PostObjectResponse
-import org.json.JSONObject
 import java.util.function.Consumer
 
 open class GSheetSerialized<T>(
@@ -25,24 +22,24 @@ open class GSheetSerialized<T>(
     override var onCompletion: Consumer<PostObjectResponse>? = null
 ) : ReadAPIsTemplate<T>, DeleteAPIsTemplate<T>, InsertAPIsTemplate<T> {
 
-    fun <T> parseToObject(jsonString: JSONObject): APIResponse {
-        Log.e("parsing to object ", jsonString.toString())
-        var result = APIResponse()
-        result.opId = jsonString.getString("opId")
-        result.affectedRows = try {
-            (jsonString.getString("affectedRows")).toInt()
-        } catch (e: Exception) {
-            0
-        }
-        result.statusCode = try {
-            (jsonString.getString("statusCode")).toInt()
-        } catch (e: Exception) {
-            0
-        }
-        result.content = jsonString.getString("content")
-        result.logs = jsonString.getString("logs")
-        return result
-    }
+//    fun <T> parseToObject(jsonString: JSONObject): APIResponse {
+//        Log.e("parsing to object ", jsonString.toString())
+//        var result = APIResponse()
+//        result.opId = jsonString.getString("opId")
+//        result.affectedRows = try {
+//            (jsonString.getString("affectedRows")).toInt()
+//        } catch (e: Exception) {
+//            0
+//        }
+//        result.statusCode = try {
+//            (jsonString.getString("statusCode")).toInt()
+//        } catch (e: Exception) {
+//            0
+//        }
+//        result.content = jsonString.getString("content")
+//        result.logs = jsonString.getString("logs")
+//        return result
+//    }
 
 //    fun saveToLocal(dataObject: Any?, cacheKey: String? = getFilterName()) {
 //        var finalCacheKey = cacheKey

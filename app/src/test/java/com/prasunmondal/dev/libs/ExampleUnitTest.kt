@@ -1,9 +1,8 @@
 package com.prasunmondal.dev.libs
 
 import com.prasunmondal.dev.libs.logs.instant.terminal.LogMe
+import org.junit.Assert.assertEquals
 import org.junit.Test
-
-import org.junit.Assert.*
 
 /**
  * Example local unit test, which will execute on the development machine (host).
