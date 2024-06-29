@@ -6,7 +6,7 @@ import com.prasunmondal.dev.libs.gsheet.caching.RequestTemplatesInterface
 import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.ReadAPIs.FetchData.GSheetFetchAll
 import com.prasunmondal.dev.libs.gsheet.clients.GScript
 
-interface FetchAllTemplate<T>: RequestTemplatesInterface<T>, CachingUtils<T> {
+interface FetchAllTemplate<T> : RequestTemplatesInterface<T>, CachingUtils<T> {
     fun prepareFetchAllRequest(): GSheetFetchAll<T> {
         val request = GSheetFetchAll<T>()
 

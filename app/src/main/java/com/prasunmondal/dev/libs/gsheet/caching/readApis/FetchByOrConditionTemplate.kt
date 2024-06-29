@@ -4,7 +4,7 @@ import com.prasunmondal.dev.libs.gsheet.caching.CachingUtils
 import com.prasunmondal.dev.libs.gsheet.caching.RequestTemplatesInterface
 import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.ReadAPIs.FetchData.GSheetFetchByAndCondition
 
-interface FetchByOrConditionTemplate<T>: RequestTemplatesInterface<T>, CachingUtils<T> {
+interface FetchByOrConditionTemplate<T> : RequestTemplatesInterface<T>, CachingUtils<T> {
     fun prepareFetchByOrConditionRequest(): GSheetFetchByAndCondition<T> {
         val request = GSheetFetchByAndCondition<T>()
 
