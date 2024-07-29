@@ -5,6 +5,7 @@ import com.prasunmondal.dev.libs.caching.CentralCacheObj
 import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.APIRequests
 import com.prasunmondal.dev.libs.gsheet.clients.APIResponses.APIResponse
 import com.prasunmondal.dev.libs.gsheet.clients.GScript
+import com.prasunmondal.dev.libs.gsheet.clients.GSheetSerialized
 import com.prasunmondal.dev.libs.jsons.JsonParser
 import com.prasunmondal.dev.libs.logs.instant.terminal.LogMe
 
@@ -22,7 +23,9 @@ interface GSheetCaching<T>: GScript {
 
     fun getFromServer(shallCacheData: Boolean = true): List<T> {
         val apiResponse = (this as APIRequests).execute(scriptURL)
-        val parsedResponse = parseResponse(apiResponse)
+        var parsedResponse = parseResponse(apiResponse)
+        parsedResponse = (this as GSheetSerialized).filter(parsedResponse)
+        parsedResponse = (this as GSheetSerialized).sort(parsedResponse)
         if(shallCacheData) {
             saveResponse(parsedResponse)
         }

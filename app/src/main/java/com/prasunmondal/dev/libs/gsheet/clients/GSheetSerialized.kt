@@ -19,7 +19,9 @@ open class GSheetSerialized<T>(
     override var shallCacheData: Boolean = true,
     override var context: Context = AppContexts.get(),
     override var cacheTag: String? = null,
-    override var onCompletion: Consumer<PostObjectResponse>? = null
+    override var onCompletion: Consumer<PostObjectResponse>? = null,
+    override val filter: (List<T>) -> List<T> = { list: List<T> -> list },
+    override val sort: (List<T>) -> List<T> = { list: List<T> -> list }
 ) : ReadAPIsTemplate<T>, DeleteAPIsTemplate<T>, InsertAPIsTemplate<T> {
 
 //    fun <T> parseToObject(jsonString: JSONObject): APIResponse {
