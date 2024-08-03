@@ -16,6 +16,12 @@ object LogMe : LogExceptions() {
         log("" + msg)
     }
 
+    fun <T> log(list: List<T>) {
+        list.forEach {
+            log(it.toString())
+        }
+    }
+
     @JvmStatic
     fun log(msg: String?) {
         var msg_ = msg
