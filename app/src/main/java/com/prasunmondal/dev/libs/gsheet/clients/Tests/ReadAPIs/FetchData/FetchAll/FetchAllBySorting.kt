@@ -10,7 +10,7 @@ import com.prasunmondal.dev.libs.logs.instant.terminal.LogMe
 
 class FetchAllBySorting {
 
-    constructor() {
+    init {
         resetData()
         LogMe.log("Starting Data fetch - 1.")
         val t = TestSheet1Model.fetch(false)
@@ -52,7 +52,9 @@ object FetchAllBySortingModel: GSheetSerialized<ModelInsertObject>(
     classTypeForResponseParsing = ModelInsertObject::class.java,
     appendInServer = true,
     appendInLocal = true,
-    sort = { list: List<ModelInsertObject> -> list.filter { it.name == "Prasun" } }
+    sort = {
+        list: List<ModelInsertObject> -> list.filter { it.name == "Prasun" }
+    }
 ) {
     fun customFetchRequest(): APIRequests {
         val request = prepareFetchByAndConditionRequest()
