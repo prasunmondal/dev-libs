@@ -50,6 +50,10 @@ open class APIResponse : Serializable {
         return "APIResponse(content='$content', statusCode=$statusCode, affectedRows=$affectedRows, opId='$opId', logs='$logs')"
     }
 
+    fun <T> parseToObj(classTypeForResponseParsing: Class<T>): List<T> {
+        return com.prasunmondal.dev.libs.jsons.JsonParser.convertJsonArrayStringToJavaObjList(this.content, classTypeForResponseParsing)
+    }
+
     companion object {
         fun <T> JsonArrayToObjectArray(jsonString: String, clazz: Class<T>): List<T> {
             val jsonArrayString = jsonString.trimIndent()

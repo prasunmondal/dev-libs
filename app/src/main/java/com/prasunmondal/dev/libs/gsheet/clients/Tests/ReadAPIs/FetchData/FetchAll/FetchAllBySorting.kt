@@ -12,14 +12,20 @@ class FetchAllBySorting {
 
     constructor() {
         resetData()
-        val t = TestSheet1Model.fetchAll(false)
-        val t1 = FetchAllBySortingModel.fetchAll(false)
-        LogMe.log("Start here...")
+        LogMe.log("Starting Data fetch - 1.")
+        val t = TestSheet1Model.fetch(false)
+        LogMe.log("Completed Data fetch - 1.")
+        LogMe.log("Starting Data fetch - 2.")
+        val t1 = FetchAllBySortingModel.fetch(false)
+        LogMe.log("Completed Data fetch - 2.")
+        LogMe.log("Logging the data - 1.")
         LogMe.log(t)
+        LogMe.log("Logging the data - 2.")
         LogMe.log(t1)
     }
 
     fun resetData() {
+        LogMe.log("Resetting Data")
         GScript.clearAll()
         val deleteRequest = FetchAllBySortingModel.prepareDeleteAllRequest()
         GScript.addRequest(deleteRequest)
@@ -33,6 +39,8 @@ class FetchAllBySorting {
         val obj3 = ModelInsertObject("FetchAllBySorting5", "FetchAllBySorting6")
         val addData3 = FetchAllBySortingModel.prepareInsertObjRequest(obj3)
         GScript.addRequest(addData3)
+        GScript.execute(ProjectConfig.dBServerScriptURL)
+        LogMe.log("Reset Completed.")
     }
 }
 

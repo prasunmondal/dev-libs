@@ -39,6 +39,15 @@ interface GScript : Serializable {
         return response[uId]!!
     }
 
+    fun executeOne(scriptURL: String, apiRequest: APIRequests, useCache: Boolean = true): APIResponse {
+        val apiRequest = this as APIRequests
+        val instantCalls: MutableMap<String, APIRequests> = mutableMapOf()
+        var uId = generateUniqueString()
+        instantCalls[uId] = apiRequest
+        val response = execute(instantCalls, scriptURL, useCache)
+        return response[uId]!!
+    }
+
     fun postExecute(response: String) {
         if (onCompletion == null)
             return
@@ -143,6 +152,10 @@ interface GScript : Serializable {
         fun generateUniqueString(): String {
             val currentTimeMillis = System.currentTimeMillis()
             return UUID.randomUUID().toString() + "-" + currentTimeMillis
+        }
+
+        fun clearAll() {
+            calls.clear()
         }
     }
 }

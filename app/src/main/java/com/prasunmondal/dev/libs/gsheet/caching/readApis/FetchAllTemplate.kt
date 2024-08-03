@@ -19,6 +19,10 @@ interface FetchAllTemplate<T> : RequestTemplatesInterface<T>, CachingUtils<T> {
     }
 
     fun fetchAll(useCache: Boolean = true): List<T> {
+        return getMultiple(AppContexts.get(), prepareFetchAllRequest(), useCache)
+    }
+
+    fun fetch(useCache: Boolean = true): List<T> {
         return get(AppContexts.get(), prepareFetchAllRequest(), useCache)
     }
 

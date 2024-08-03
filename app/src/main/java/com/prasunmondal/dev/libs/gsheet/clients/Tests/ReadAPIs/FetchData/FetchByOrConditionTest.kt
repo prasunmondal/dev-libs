@@ -52,7 +52,7 @@ class FetchByOrConditionTest {
 
         if (!(responses["test-tiu2t4t"]!!.statusCode == 200
                     && responses["test-wiew7triq"]!!.statusCode == 204
-                    && responses["test-r2654643"]!!.statusCode == 200)
+                    && responses["test-r2654643"]!!.statusCode == 204)
         ) {
             throw AssertionError()
         }

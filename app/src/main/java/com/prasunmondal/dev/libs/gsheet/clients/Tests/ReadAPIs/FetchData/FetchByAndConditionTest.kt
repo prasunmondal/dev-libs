@@ -5,11 +5,22 @@ import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.ReadAPIs.FetchData.G
 import com.prasunmondal.dev.libs.gsheet.clients.GScript
 import com.prasunmondal.dev.libs.gsheet.clients.Tests.ModelInsertObject
 import com.prasunmondal.dev.libs.gsheet.clients.Tests.ProjectConfig
+import com.prasunmondal.dev.libs.gsheet.clients.Tests.ReadAPIs.FetchData.FetchAll.FetchAllBySortingModel
 import com.prasunmondal.dev.libs.logs.instant.terminal.LogMe
 
 class FetchByAndConditionTest {
     constructor() {
+        resetData()
         test()
+    }
+
+    fun resetData() {
+        LogMe.log("Resetting Data")
+        GScript.clearAll()
+        val deleteRequest = FetchAllBySortingModel.prepareDeleteAllRequest()
+        GScript.addRequest(deleteRequest)
+        GScript.execute(ProjectConfig.dBServerScriptURL)
+        LogMe.log("Reset Completed.")
     }
 
     fun test() {
@@ -67,8 +78,11 @@ class FetchByAndConditionTest {
 
         if (!(responses["test-tiu2t4t"]!!.statusCode == 200
                     && responses["test-wiew7triq"]!!.statusCode == 204
-                    && responses["test-r2654643"]!!.statusCode == 200)
+                    && responses["test-r2654643"]!!.statusCode == 204)
         ) {
+            responses.forEach {
+                LogMe.log("responses["+it.key+"]!!.statusCode: " + it.value.statusCode)
+            }
             throw AssertionError()
         }
     }

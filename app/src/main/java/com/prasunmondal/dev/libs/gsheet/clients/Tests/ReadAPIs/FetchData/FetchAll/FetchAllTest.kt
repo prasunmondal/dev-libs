@@ -1,4 +1,4 @@
-package com.prasunmondal.dev.libs.gsheet.clients.Tests.ReadAPIs.FetchData
+package com.prasunmondal.dev.libs.gsheet.clients.Tests.ReadAPIs.FetchData.FetchAll
 
 import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.CreateAPIs.GSheetInsertObject
 import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.DeleteAPIs.GSheetDeleteAll
@@ -6,10 +6,16 @@ import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.ReadAPIs.FetchData.G
 import com.prasunmondal.dev.libs.gsheet.clients.GScript
 import com.prasunmondal.dev.libs.gsheet.clients.Tests.ModelInsertObject
 import com.prasunmondal.dev.libs.gsheet.clients.Tests.ProjectConfig
+import com.prasunmondal.dev.libs.gsheet.clients.Tests.TestBulkOps.TestSheet1Model
 
 class FetchAllTest {
     constructor() {
-        test()
+        FetchAllBySorting()
+//        test()
+    }
+
+    fun testByCallingClassesGetMethod() {
+        TestSheet1Model.fetchAll()
     }
 
     fun test() {

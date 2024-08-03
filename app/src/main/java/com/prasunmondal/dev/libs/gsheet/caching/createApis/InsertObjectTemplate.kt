@@ -49,7 +49,7 @@ interface InsertObjectTemplate<T>: RequestTemplatesInterface<T>, CachingUtils<T>
     fun saveToLocal(obj1: GSheetSerialized<T>, obj: List<T>, append: Boolean = appendInLocal) {
         var prevList = mutableListOf<T>()
         if(appendInLocal) {
-            prevList = obj1.get(AppContexts.get(), obj1.prepareFetchAllRequest(), true) as MutableList<T>
+            prevList = obj1.getMultiple(AppContexts.get(), obj1.prepareFetchAllRequest(), true) as MutableList<T>
         }
         prevList.addAll(obj)
         obj1.saveToCache(getCacheKey(), prevList)
