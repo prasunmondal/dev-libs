@@ -7,6 +7,7 @@ import com.prasunmondal.dev.libs.gsheet.clients.APIResponses.ReadResponse
 import com.prasunmondal.dev.libs.gsheet.clients.Tests.ProjectConfig
 import com.prasunmondal.dev.libs.gsheet.clients.responseCaching.ResponseCache
 import com.prasunmondal.dev.libs.gsheet.exceptions.GScriptDuplicateUIDException
+import com.prasunmondal.dev.libs.gsheet.metrics.GSheetMetrics
 import com.prasunmondal.dev.libs.gsheet.post.serializable.PostObjectResponse
 import com.prasunmondal.dev.libs.jsons.JsonParser
 import com.prasunmondal.dev.libs.logs.instant.terminal.LogMe
@@ -110,6 +111,9 @@ interface GScript : Serializable {
             scriptURL: String,
             useCache: Boolean = true
         ): MutableMap<String, APIResponse> {
+
+            GSheetMetrics.callCounter++
+
             val scriptUrl = URL(scriptURL)
             val filteredCalls =
                 calls.filter { (key, apiRequest) -> removeCallsWhoseResponsesAreCached(apiRequest) } as MutableMap
