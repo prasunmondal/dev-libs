@@ -146,7 +146,10 @@ interface GScript : Serializable {
 
                 // Enable caching of responses only for read APIs
                 if (requestObj is ReadAPIs<*>) {
-                    requestObj.sorting(requestObj.filter(preparedResponse))
+//                    var parsedResponse = (preparedResponse as ReadResponse<*>).parsedResponse
+//                    parsedResponse = requestObj.filter(parsedResponse)
+//                    parsedResponse = requestObj.sort(parsedResponse)
+//                    preparedResponse.parsedResponse = parsedResponse
                     ResponseCache.saveToLocal(requestObj, preparedResponse as ReadResponse<*>)
                 }
             }

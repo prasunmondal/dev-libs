@@ -3,6 +3,7 @@ package com.prasunmondal.dev.libs.gsheet.clients.APIRequests.ReadAPIs
 import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.APIRequests
 import com.prasunmondal.dev.libs.gsheet.clients.APIResponses.APIResponse
 import com.prasunmondal.dev.libs.gsheet.clients.APIResponses.ReadResponse
+import com.prasunmondal.dev.libs.gsheet.clients.Tests.ModelInsertObject
 import com.prasunmondal.dev.libs.gsheet.clients.responseCaching.ResponseCache
 import com.prasunmondal.dev.libs.jsons.JsonParser
 
@@ -12,8 +13,10 @@ abstract class ReadAPIs<T> : APIRequests(), ResponseCache {
     lateinit var data: String
     open lateinit var classTypeForResponseParsing: Class<T>
     var cacheData: Boolean = true
-    var filter: (APIResponse) -> APIResponse = { apiResponse -> apiResponse }
-    var sorting: (APIResponse) -> APIResponse = { apiResponse -> apiResponse }
+    var filter: ((List<T>) -> List<T>)? = null
+    var sort: ((List<T>) -> List<T>)? = null
+//    var filter: (List<T>) -> List<T> = { list: List<T> -> list }
+//    var sort: (List<T>) -> List<T> = { list: List<T> -> list }
 
     fun sheetId(sheetId: String) {
         this.sheetId = sheetId
@@ -59,6 +62,12 @@ abstract class ReadAPIs<T> : APIRequests(), ResponseCache {
             receivedResponseObj.content,
             (requestObj as ReadAPIs<T>).classTypeForResponseParsing
         )
+        
+        if(requestObj.filter!=null)
+            buildingResponseObj_.parsedResponse = requestObj.filter!!(buildingResponseObj_.parsedResponse)
+        if(requestObj.sort!=null)
+            buildingResponseObj_.parsedResponse = requestObj.sort!!(buildingResponseObj_.parsedResponse)
+
         return buildingResponseObj_
     }
 }

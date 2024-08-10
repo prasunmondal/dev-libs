@@ -6,6 +6,7 @@ import com.prasunmondal.dev.libs.gsheet.caching.createApis.InsertAPIsTemplate
 import com.prasunmondal.dev.libs.gsheet.caching.deleteApis.DeleteAPIsTemplate
 import com.prasunmondal.dev.libs.gsheet.caching.readApis.ReadAPIsTemplate
 import com.prasunmondal.dev.libs.gsheet.post.serializable.PostObjectResponse
+import com.prasunmondal.dev.libs.logs.instant.terminal.LogMe
 import java.util.function.Consumer
 
 open class GSheetSerialized<T>(
@@ -20,8 +21,8 @@ open class GSheetSerialized<T>(
     override var context: Context = AppContexts.get(),
     override var cacheTag: String? = null,
     override var onCompletion: Consumer<PostObjectResponse>? = null,
-    override val filter: (List<T>) -> List<T> = { list: List<T> -> list },
-    override val sort: (List<T>) -> List<T> = { list: List<T> -> list }
+//    override val filter: (List<T>) -> List<T> = { list: List<T> -> list },
+//    override val sort: (List<T>) -> List<T> = { list: List<T> -> list }
 ) : ReadAPIsTemplate<T>, DeleteAPIsTemplate<T>, InsertAPIsTemplate<T> {
 
 //    fun <T> parseToObject(jsonString: JSONObject): APIResponse {

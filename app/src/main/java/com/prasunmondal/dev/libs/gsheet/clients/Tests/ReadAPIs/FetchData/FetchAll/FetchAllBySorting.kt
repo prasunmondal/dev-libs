@@ -44,7 +44,6 @@ class FetchAllBySorting {
     }
 }
 
-
 object FetchAllBySortingModel: GSheetSerialized<ModelInsertObject>(
     ProjectConfig.dBServerScriptURL,
     ProjectConfig.DB_SHEET_ID,
@@ -52,9 +51,7 @@ object FetchAllBySortingModel: GSheetSerialized<ModelInsertObject>(
     classTypeForResponseParsing = ModelInsertObject::class.java,
     appendInServer = true,
     appendInLocal = true,
-    sort = {
-        list: List<ModelInsertObject> -> list.filter { it.name == "Prasun" }
-    }
+//    sort = { list: List<ModelInsertObject> -> list.filter { it.name == "Prasun" } }
 ) {
     fun customFetchRequest(): APIRequests {
         val request = prepareFetchByAndConditionRequest()
