@@ -13,14 +13,4 @@ class GSheetFetchAll<T> : ReadAPIs<T>() {
         postDataParams.put("tabName", this.tabName)
         return postDataParams
     }
-
-//    override fun <T> defaultInitialize(
-//        request: APIRequests,
-//        reqValues: APIRequestsTemplates<T>
-//    ): APIRequests {
-//        var request_ = request as ReadAPIs<T>
-//        super.defaultInitialize(request, reqValues)
-//        request_.opCode = opCode
-//        return request
-//    }
 }

@@ -24,13 +24,6 @@ abstract class APIRequests : GScript {
         return this.uId
     }
 
-//    open fun <T> defaultInitialize(
-//        request: APIRequests,
-//        reqValues: APIRequestsTemplates<T>
-//    ): APIRequests {
-//        return request
-//    }
-
     open fun prepareResponse(
         requestObj: APIRequests,
         receivedResponseObj: APIResponse,

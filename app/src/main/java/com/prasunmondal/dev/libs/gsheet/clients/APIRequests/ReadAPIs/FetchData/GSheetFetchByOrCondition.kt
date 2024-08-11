@@ -29,14 +29,4 @@ class GSheetFetchByOrCondition<T> : ReadAPIs<T>() {
         this.conditionOrColumn += conditionColumn
         this.conditionOrValue += conditionValue
     }
-
-//    override fun <T> defaultInitialize(
-//        request: APIRequests,
-//        reqValues: APIRequestsTemplates<T>
-//    ): APIRequests {
-//        var request_ = request as ReadAPIs<CheckResult>
-//        super.defaultInitialize(request, reqValues)
-//        request_.opCode = opCode
-//        return request
-//    }
 }

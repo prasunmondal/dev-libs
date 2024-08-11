@@ -98,11 +98,6 @@ abstract class Tech4BytesSerializable<T : Any> : java.io.Serializable {
                     LogMe.log(it.toString())
                 }
                 return list
-//                if(r.size == 1) {
-//                    return parseAndSaveToCache2(r.get(0)!!.content, cacheKey)
-//                } else {
-//                    listOf()
-//                }
             }
         }
     }
@@ -117,7 +112,6 @@ abstract class Tech4BytesSerializable<T : Any> : java.io.Serializable {
 
     private fun parseNGetResponse2(rawResponse: String): List<T> {
         LogMe.log(rawResponse)
-//        val typeOfT: Type = TypeToken.getParameterized(MutableList::class.java, clazz).type
         var parsedResponse =
             // TODO: Use JsonParser class
             APIResponse.JsonArrayToObjectArray(rawResponse, classTypeForResponseParsing)

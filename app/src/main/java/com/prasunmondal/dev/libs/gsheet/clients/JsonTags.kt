@@ -6,6 +6,6 @@ class JsonTags {
         val RESPONSE_OP_CODE = "operation"
         val RESPONSE_DATA_CODE = "records"
         val RESPONSE_IS_LOCKED_OPERATION = "lockedOperation"
-        val RESPONSE_ROWS_AFFECTED = "rows_affected"
+        val RESPONSE_ROWS_AFFECTED = "affectedRows"
     }
 }
