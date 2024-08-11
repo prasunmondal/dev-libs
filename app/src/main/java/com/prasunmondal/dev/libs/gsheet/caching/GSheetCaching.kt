@@ -20,6 +20,8 @@ interface GSheetCaching<T>: GScript {
     var cacheTag: String?
     var shallCacheData: Boolean
     var context: Context
+    var filter: ((List<T>) -> List<T>)?
+    var sort: ((List<T>) -> List<T>)?
 
     fun getFromServer(shallCacheData: Boolean = true): List<T> {
         val apiResponse = (this as APIRequests).execute(scriptURL)

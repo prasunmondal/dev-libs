@@ -13,6 +13,8 @@ interface FetchAllTemplate<T> : RequestTemplatesInterface<T>, CachingUtils<T> {
         if (sheetURL.isNotBlank() && tabname.isNotBlank()) {
             request.sheetId(sheetURL)
             request.tabName(tabname)
+            request.filter = filter
+            request.sort = sort
             request.classTypeForResponseParsing = classTypeForResponseParsing
         }
         return request

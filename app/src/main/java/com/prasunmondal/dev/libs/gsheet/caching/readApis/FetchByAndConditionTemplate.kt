@@ -11,6 +11,8 @@ interface FetchWithByAndConditionTemplate<T> : RequestTemplatesInterface<T>, Cac
         if (sheetURL.isNotBlank() && tabname.isNotBlank()) {
             request.sheetId(sheetURL)
             request.tabName(tabname)
+            request.filter = filter
+            request.sort = sort
             request.classTypeForResponseParsing = classTypeForResponseParsing
         }
         return request
