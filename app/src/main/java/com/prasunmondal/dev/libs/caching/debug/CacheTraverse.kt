@@ -6,15 +6,18 @@ import com.prasunmondal.dev.libs.logs.instant.terminal.LogMe
 
 class CacheTraverse {
     companion object {
-        fun getAllCacheKeys(context: Context, cacheObjectKey: String = "") {
+        fun getAllCacheKeys(context: Context, cacheObjectKey: String = ""): MutableList<String> {
+            val listOfCacheKeys = mutableListOf<String>()
             CentralCacheObj.centralCache.cache =
                 CentralCacheObj.centralCache.getCacheDataFromFile(context, cacheObjectKey)
 
             CentralCacheObj.centralCache.cache.forEach { k, v ->
                 v.forEach { k1, v1 ->
+                    listOfCacheKeys.add(k1)
                     LogMe.log("CacheTag: $k1")
                 }
             }
+            return listOfCacheKeys
         }
     }
 }
