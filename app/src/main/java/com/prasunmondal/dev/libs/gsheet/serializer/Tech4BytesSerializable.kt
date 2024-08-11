@@ -1,7 +1,7 @@
 package com.prasunmondal.dev.libs.gsheet.serializer
 
+import android.content.Context
 import com.prasunmondal.dev.libs.caching.CentralCacheObj
-import com.prasunmondal.dev.libs.contexts.AppContexts
 import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.APIRequests
 import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.CreateAPIs.GSheetInsertObject
 import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.DeleteAPIs.GSheetDeleteAll
@@ -67,6 +67,7 @@ abstract class Tech4BytesSerializable<T : Any> : java.io.Serializable {
     abstract fun getRequest(): APIRequests
 
     fun get(
+        context: Context,
         useCache: Boolean = true,
         getEmptyListIfEmpty: Boolean = false,
         cacheTag: String = this.cacheTag
@@ -74,9 +75,9 @@ abstract class Tech4BytesSerializable<T : Any> : java.io.Serializable {
         val cacheKey = getFilterName(cacheTag)
         LogMe.log("Getting records: $cacheKey")
         val cacheResults = try {
-            CentralCacheObj.centralCache.get<T>(AppContexts.get(), cacheKey, useCache)
+            CentralCacheObj.centralCache.get<T>(context, cacheKey, useCache)
         } catch (ex: ClassCastException) {
-            arrayListOf(CentralCacheObj.centralCache.get<T>(AppContexts.get(), cacheKey, useCache))
+            arrayListOf(CentralCacheObj.centralCache.get<T>(context, cacheKey, useCache))
         }
 
         LogMe.log("Getting delivery records: Cache Hit: " + (cacheResults != null))
@@ -129,8 +130,8 @@ abstract class Tech4BytesSerializable<T : Any> : java.io.Serializable {
         return parsedResponse
     }
 
-    fun getGetRequest(useCache: Boolean = true, cacheTag: String = this.cacheTag): APIRequests? {
-        return if (useCache && isDataAvailable(cacheTag))
+    fun getGetRequest(context: Context, useCache: Boolean = true, cacheTag: String = this.cacheTag): APIRequests? {
+        return if (useCache && isDataAvailable(context, cacheTag))
             null
         else
             getGetRequest()
@@ -153,14 +154,14 @@ abstract class Tech4BytesSerializable<T : Any> : java.io.Serializable {
         }
     }
 
-    fun isDataAvailable(cacheTag: String = "default"): Boolean {
+    fun isDataAvailable(context: Context, cacheTag: String = "default"): Boolean {
         val useCache = true
         val cacheKey = getFilterName(cacheTag)
         LogMe.log("Getting records: " + cacheKey)
         val cacheResults = try {
-            CentralCacheObj.centralCache.get<T>(AppContexts.get(), cacheKey, useCache)
+            CentralCacheObj.centralCache.get<T>(context, cacheKey, useCache)
         } catch (ex: ClassCastException) {
-            arrayListOf(CentralCacheObj.centralCache.get<T>(AppContexts.get(), cacheKey, useCache))
+            arrayListOf(CentralCacheObj.centralCache.get<T>(context, cacheKey, useCache))
         }
         return cacheResults != null
     }
@@ -200,8 +201,8 @@ abstract class Tech4BytesSerializable<T : Any> : java.io.Serializable {
         return list
     }
 
-    fun <T : Any> saveToLocalThenServer(dataObject: T) {
-        saveToLocal(dataObject)
+    fun <T : Any> saveToLocalThenServer(context: Context, dataObject: T) {
+        saveToLocal(context, dataObject)
         saveToServer(dataObject)
     }
 
@@ -214,16 +215,16 @@ abstract class Tech4BytesSerializable<T : Any> : java.io.Serializable {
     *
     *
      */
-    fun saveToServerThenLocal(dataObject: T) {
+    fun saveToServerThenLocal(context: Context, dataObject: T) {
         saveToServer(dataObject)
-        saveToLocal(dataObject)
+        saveToLocal(context, dataObject)
     }
 
     /**
      * dataObject: Data to save
      * cacheKey: cacheKey used to identify the cache object, pass null to generate the cacheKey
      */
-    fun saveToLocal(dataObject: Any?, cacheKey: String? = getFilterName()) {
+    fun saveToLocal(context: Context, dataObject: Any?, cacheKey: String? = getFilterName()) {
         var finalCacheKey = cacheKey
         if (cacheKey == null) {
             finalCacheKey = getFilterName()
@@ -238,7 +239,7 @@ abstract class Tech4BytesSerializable<T : Any> : java.io.Serializable {
         }
 
         val dataToSave = if (appendInLocal) {
-            var dataList = get() as ArrayList
+            var dataList = get(context) as ArrayList
             dataList.addAll(arrayListOf(dataObject as T))
             dataList = filterResults(dataList)
             dataList = sortResults(dataList)
@@ -279,13 +280,13 @@ abstract class Tech4BytesSerializable<T : Any> : java.io.Serializable {
     *
      */
 
-    fun deleteData() {
+    fun deleteData(context: Context) {
         deleteDataFromServer()
-        deleteDataFromLocal()
+        deleteDataFromLocal(context)
     }
 
-    fun deleteDataFromLocal() {
-        saveToLocal(null)
+    fun deleteDataFromLocal(context: Context) {
+        saveToLocal(context, null)
     }
 
     fun deleteDataFromServer() {

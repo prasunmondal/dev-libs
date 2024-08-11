@@ -1,6 +1,5 @@
 package com.prasunmondal.dev.libs.gsheet.caching.createApis
 
-import com.prasunmondal.dev.libs.contexts.AppContexts
 import com.prasunmondal.dev.libs.gsheet.caching.CachingUtils
 import com.prasunmondal.dev.libs.gsheet.caching.RequestTemplatesInterface
 import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.CreateAPIs.GSheetInsertObject
@@ -49,7 +48,7 @@ interface InsertObjectTemplate<T>: RequestTemplatesInterface<T>, CachingUtils<T>
     fun saveToLocal(obj1: GSheetSerialized<T>, obj: List<T>, append: Boolean = appendInLocal) {
         var prevList = mutableListOf<T>()
         if(appendInLocal) {
-            prevList = obj1.getMultiple(AppContexts.get(), obj1.prepareFetchAllRequest(), true) as MutableList<T>
+            prevList = obj1.getMultiple(context, obj1.prepareFetchAllRequest(), true) as MutableList<T>
         }
         prevList.addAll(obj)
         obj1.saveToCache(getCacheKey(), prevList)

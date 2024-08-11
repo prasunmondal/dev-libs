@@ -1,6 +1,5 @@
 package com.prasunmondal.dev.libs.gsheet.caching.readApis
 
-import com.prasunmondal.dev.libs.contexts.AppContexts
 import com.prasunmondal.dev.libs.gsheet.caching.CachingUtils
 import com.prasunmondal.dev.libs.gsheet.caching.RequestTemplatesInterface
 import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.ReadAPIs.FetchData.GSheetFetchAll
@@ -21,11 +20,11 @@ interface FetchAllTemplate<T> : RequestTemplatesInterface<T>, CachingUtils<T> {
     }
 
     fun fetchAll(useCache: Boolean = true): List<T> {
-        return getMultiple(AppContexts.get(), prepareFetchAllRequest(), useCache)
+        return getMultiple(context, prepareFetchAllRequest(), useCache)
     }
 
     fun fetch(useCache: Boolean = true): List<T> {
-        return get(AppContexts.get(), prepareFetchAllRequest(), useCache)
+        return get(context, prepareFetchAllRequest(), useCache)
     }
 
     fun queueFetchAll() {

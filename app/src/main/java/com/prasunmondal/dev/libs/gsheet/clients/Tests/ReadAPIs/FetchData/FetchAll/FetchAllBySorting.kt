@@ -1,5 +1,6 @@
 package com.prasunmondal.dev.libs.gsheet.clients.Tests.ReadAPIs.FetchData.FetchAll
 
+import com.prasunmondal.dev.libs.contexts.AppContexts
 import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.APIRequests
 import com.prasunmondal.dev.libs.gsheet.clients.GScript
 import com.prasunmondal.dev.libs.gsheet.clients.GSheetSerialized
@@ -45,6 +46,7 @@ class FetchAllBySorting {
 }
 
 object FetchAllBySortingModel: GSheetSerialized<ModelInsertObject>(
+    AppContexts.get(),
     ProjectConfig.dBServerScriptURL,
     ProjectConfig.DB_SHEET_ID,
     "TestSheet1",
