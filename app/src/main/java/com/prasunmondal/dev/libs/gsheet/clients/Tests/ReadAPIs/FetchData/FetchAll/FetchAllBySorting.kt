@@ -2,6 +2,8 @@ package com.prasunmondal.dev.libs.gsheet.clients.Tests.ReadAPIs.FetchData.FetchA
 
 import com.prasunmondal.dev.libs.contexts.AppContexts
 import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.APIRequests
+import com.prasunmondal.dev.libs.gsheet.clients.ClientFilter
+import com.prasunmondal.dev.libs.gsheet.clients.ClientSort
 import com.prasunmondal.dev.libs.gsheet.clients.GScript
 import com.prasunmondal.dev.libs.gsheet.clients.GSheetSerialized
 import com.prasunmondal.dev.libs.gsheet.clients.Tests.ModelInsertObject
@@ -53,7 +55,7 @@ object FetchAllBySortingModel: GSheetSerialized<ModelInsertObject>(
     classTypeForResponseParsing = ModelInsertObject::class.java,
     appendInServer = true,
     appendInLocal = true,
-    sort = { list: List<ModelInsertObject> -> list.filter { it.name == "Prasun" } }
+    filter = ClientFilter("filterWithNamePrasun", { list: List<ModelInsertObject> -> list.filter { it.name == "Prasun" } })
 ) {
     fun customFetchRequest(): APIRequests {
         val request = prepareFetchByAndConditionRequest()

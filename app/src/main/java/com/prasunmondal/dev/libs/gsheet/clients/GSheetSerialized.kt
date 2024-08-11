@@ -19,6 +19,6 @@ open class GSheetSerialized<T>(
     override var shallCacheData: Boolean = true,
     override var cacheTag: String? = null,
     override var onCompletion: Consumer<PostObjectResponse>? = null,
-    override var filter: ((List<T>) -> List<T>)? = null,
-    override var sort: ((List<T>) -> List<T>)? = null,
+    override var filter: ClientFilter<T>? = null,
+    override var sort: ClientSort<T>? = null,
 ) : ReadAPIsTemplate<T>, DeleteAPIsTemplate<T>, InsertAPIsTemplate<T>

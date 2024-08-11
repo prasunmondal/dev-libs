@@ -3,7 +3,8 @@ package com.prasunmondal.dev.libs.gsheet.clients.APIRequests.ReadAPIs
 import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.APIRequests
 import com.prasunmondal.dev.libs.gsheet.clients.APIResponses.APIResponse
 import com.prasunmondal.dev.libs.gsheet.clients.APIResponses.ReadResponse
-import com.prasunmondal.dev.libs.gsheet.clients.Tests.ModelInsertObject
+import com.prasunmondal.dev.libs.gsheet.clients.ClientFilter
+import com.prasunmondal.dev.libs.gsheet.clients.ClientSort
 import com.prasunmondal.dev.libs.gsheet.clients.responseCaching.ResponseCache
 import com.prasunmondal.dev.libs.jsons.JsonParser
 
@@ -13,10 +14,8 @@ abstract class ReadAPIs<T> : APIRequests(), ResponseCache {
     lateinit var data: String
     open lateinit var classTypeForResponseParsing: Class<T>
     var cacheData: Boolean = true
-    var filter: ((List<T>) -> List<T>)? = null
-    var sort: ((List<T>) -> List<T>)? = null
-//    var filter: (List<T>) -> List<T> = { list: List<T> -> list }
-//    var sort: (List<T>) -> List<T> = { list: List<T> -> list }
+    var filter: ClientFilter<T>? = null
+    var sort: ClientSort<T>? = null
 
     fun sheetId(sheetId: String) {
         this.sheetId = sheetId
@@ -30,19 +29,6 @@ abstract class ReadAPIs<T> : APIRequests(), ResponseCache {
         return "${this.sheetId}\\${this.tabName}\\${getJSON()}"
     }
 
-//    override fun <T> defaultInitialize(
-//        request: APIRequests,
-//        reqValues: APIRequestsTemplates<T>
-//    ): APIRequests {
-//        var request_ = request as ReadAPIs<T>
-//        super.defaultInitialize(request, reqValues)
-//        request_.sheetId = reqValues.sheetURL
-//        request_.tabName = reqValues.tabname
-//        request_.classTypeForResponseParsing = reqValues.classTypeForResponseParsing
-//        request_.cacheData = cacheData
-//        return request
-//    }
-
     override fun prepareResponse(
         requestObj: APIRequests,
         receivedResponseObj: APIResponse,
@@ -55,7 +41,6 @@ abstract class ReadAPIs<T> : APIRequests(), ResponseCache {
                 super.prepareResponse(requestObj, receivedResponseObj, buildingResponseObj)
                     ) as ReadResponse<T>
 
-//        super.prepareResponse(requestObj, receivedResponseObj, buildingResponseObj)
         buildingResponseObj_.sheetId = this.sheetId
         buildingResponseObj_.tabName = this.tabName
         buildingResponseObj_.parsedResponse = JsonParser.convertJsonArrayStringToJavaObjList(
@@ -64,9 +49,9 @@ abstract class ReadAPIs<T> : APIRequests(), ResponseCache {
         )
         
         if(requestObj.filter!=null)
-            buildingResponseObj_.parsedResponse = requestObj.filter!!(buildingResponseObj_.parsedResponse)
+            buildingResponseObj_.parsedResponse = requestObj.filter!!.filter!!(buildingResponseObj_.parsedResponse)
         if(requestObj.sort!=null)
-            buildingResponseObj_.parsedResponse = requestObj.sort!!(buildingResponseObj_.parsedResponse)
+            buildingResponseObj_.parsedResponse = requestObj.sort!!.sort!!(buildingResponseObj_.parsedResponse)
 
         return buildingResponseObj_
     }
