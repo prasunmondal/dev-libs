@@ -130,7 +130,11 @@ abstract class Tech4BytesSerializable<T : Any> : java.io.Serializable {
         return parsedResponse
     }
 
-    fun getGetRequest(context: Context, useCache: Boolean = true, cacheTag: String = this.cacheTag): APIRequests? {
+    fun getGetRequest(
+        context: Context,
+        useCache: Boolean = true,
+        cacheTag: String = this.cacheTag
+    ): APIRequests? {
         return if (useCache && isDataAvailable(context, cacheTag))
             null
         else

@@ -10,7 +10,7 @@ import com.prasunmondal.dev.libs.gsheet.clients.GScript
 import com.prasunmondal.dev.libs.jsons.JsonParser
 import com.prasunmondal.dev.libs.logs.instant.terminal.LogMe
 
-interface GSheetCaching<T>: GScript {
+interface GSheetCaching<T> : GScript {
 
     var sheetURL: String
     var tabname: String
@@ -27,23 +27,37 @@ interface GSheetCaching<T>: GScript {
     fun getFromServer(shallCacheData: Boolean = true): List<T> {
         val apiResponse = (this as APIRequests).execute(scriptURL)
         val parsedResponse = parseResponse(apiResponse)
-        if(shallCacheData) {
+        if (shallCacheData) {
             saveResponse(parsedResponse)
         }
         return parsedResponse
     }
+
     fun parseResponse(apiResponse: APIResponse): List<T> {
-        return JsonParser.convertJsonArrayStringToJavaObjList(apiResponse.content, classTypeForResponseParsing)
+        return JsonParser.convertJsonArrayStringToJavaObjList(
+            apiResponse.content,
+            classTypeForResponseParsing
+        )
     }
+
     fun saveResponse(listOfObj: List<T>) {
         LogMe.log("Expensive Operation - saving data to local: ${getCacheKey()}")
         CentralCacheObj.centralCache.put(getCacheKey(), listOfObj, false)
     }
+
     fun getResponseFromCache(useCache: Boolean = false): Any? {
-        return arrayListOf(CentralCacheObj.centralCache.get<T>(context, getCacheKey(), useCache, false))
+        return arrayListOf(
+            CentralCacheObj.centralCache.get<T>(
+                context,
+                getCacheKey(),
+                useCache,
+                false
+            )
+        )
     }
+
     fun getResponseFromCacheOrServer(useCache: Boolean = true): List<T> {
-        if(CentralCacheObj.centralCache.isAvailable(context, getCacheKey())) {
+        if (CentralCacheObj.centralCache.isAvailable(context, getCacheKey())) {
             return getResponseFromCache(useCache) as List<T>
         } else {
             return getFromServer(shallCacheData)

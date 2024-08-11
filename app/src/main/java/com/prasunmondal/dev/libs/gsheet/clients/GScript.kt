@@ -40,7 +40,11 @@ interface GScript : Serializable {
         return response[uId]!!
     }
 
-    fun executeOne(scriptURL: String, apiRequest: APIRequests, useCache: Boolean = true): APIResponse {
+    fun executeOne(
+        scriptURL: String,
+        apiRequest: APIRequests,
+        useCache: Boolean = true
+    ): APIResponse {
         val apiRequest = this as APIRequests
         val instantCalls: MutableMap<String, APIRequests> = mutableMapOf()
         var uId = generateUniqueString()
@@ -141,7 +145,8 @@ interface GScript : Serializable {
                 val responseOpId = apiResponse.get("opId").toString()
                 val requestObj = filteredCalls[responseOpId]
                 map[responseOpId] = APIResponse.parseToAPIResponse(apiResponse)
-                val preparedResponse = requestObj!!.prepareResponse(requestObj, map[responseOpId]!!, null)
+                val preparedResponse =
+                    requestObj!!.prepareResponse(requestObj, map[responseOpId]!!, null)
                 map[responseOpId] = preparedResponse
                 // Enable caching of responses only for read APIs
                 if (requestObj is ReadAPIs<*>) {

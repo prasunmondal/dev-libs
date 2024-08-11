@@ -81,7 +81,7 @@ class FetchByAndConditionTest {
                     && responses["test-r2654643"]!!.statusCode == 204)
         ) {
             responses.forEach {
-                LogMe.log("responses["+it.key+"]!!.statusCode: " + it.value.statusCode)
+                LogMe.log("responses[" + it.key + "]!!.statusCode: " + it.value.statusCode)
             }
             throw AssertionError()
         }

@@ -12,5 +12,4 @@ object ProjectConfig {
     @get:Throws(FileNotFoundException::class)
     val dBServerScriptURL: String
         get() = "https://script.google.com/macros/s/" + deploymentId + "/exec"
-//    https://script.google.com/macros/s//exec
 }

@@ -51,7 +51,10 @@ open class APIResponse : Serializable {
     }
 
     fun <T> parseToObj(classTypeForResponseParsing: Class<T>): List<T> {
-        return com.prasunmondal.dev.libs.jsons.JsonParser.convertJsonArrayStringToJavaObjList(this.content, classTypeForResponseParsing)
+        return com.prasunmondal.dev.libs.jsons.JsonParser.convertJsonArrayStringToJavaObjList(
+            this.content,
+            classTypeForResponseParsing
+        )
     }
 
     companion object {
