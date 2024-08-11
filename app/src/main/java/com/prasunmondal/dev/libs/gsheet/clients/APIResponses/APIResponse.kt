@@ -70,7 +70,7 @@ open class APIResponse : Serializable {
             var result = APIResponse()
             result.opId = jsonString.getString("opId")
             result.affectedRows = try {
-                (jsonString.getString("affectedRows")).toInt()
+                (jsonString.getString("rowsAffected")).toInt()
             } catch (e: Exception) {
                 0
             }

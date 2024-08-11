@@ -1,5 +1,6 @@
 package com.prasunmondal.dev.libs.gsheet.clients.Tests.CreateAPIs
 
+import com.prasunmondal.dev.libs.TestUtils.TestUtils
 import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.CreateAPIs.GSheetInsertObject
 import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.DeleteAPIs.GSheetDeleteAll
 import com.prasunmondal.dev.libs.gsheet.clients.GScript
@@ -44,11 +45,10 @@ class InsertObjectTest {
 
         val responses = GScript.execute(ProjectConfig.dBServerScriptURL)
 
-        LogMe.log((responses["test-e.234"]!!.statusCode % 100 == 2).toString())
-        if (!(responses["test-e.234"]!!.statusCode / 100 == 2
-                    && responses["test-t218625"]!!.statusCode == 200
-                    && responses["test-d218625"]!!.statusCode == 200
-                    && responses["test-w8324545"]!!.statusCode == 500)
+        if (!(TestUtils.assert(responses["test-e.234"]!!.statusCode / 100, 2)
+                    && TestUtils.assert(responses["test-t218625"]!!.statusCode, 200)
+                    && TestUtils.assert(responses["test-d218625"]!!.statusCode, 200)
+                    && TestUtils.assert(responses["test-w8324545"]!!.statusCode, 500))
         ) {
             throw AssertionError()
         }

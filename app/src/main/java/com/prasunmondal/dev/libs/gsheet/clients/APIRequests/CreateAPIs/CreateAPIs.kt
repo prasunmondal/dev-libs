@@ -27,7 +27,7 @@ abstract class CreateAPIs : APIRequests() {
         if (buildingResponseObj_ == null)
             buildingResponseObj_ = CreateResponse()
 
-        super.prepareResponse(requestObj, receivedResponseObj, buildingResponseObj)
+        super.prepareResponse(requestObj, receivedResponseObj, buildingResponseObj_)
         buildingResponseObj_.sheetId = this.sheetId
         buildingResponseObj_.tabName = this.tabName
         return buildingResponseObj_

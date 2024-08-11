@@ -3,10 +3,11 @@ package com.prasunmondal.dev.libs.gsheet.caching
 import android.content.Context
 import com.prasunmondal.dev.libs.caching.CentralCacheObj
 import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.ReadAPIs.ReadAPIs
+import com.prasunmondal.dev.libs.gsheet.clients.APIResponses.APIResponse
+import com.prasunmondal.dev.libs.gsheet.clients.APIResponses.ReadResponse
 import com.prasunmondal.dev.libs.gsheet.clients.Tests.TestBulkOps.TestSheet1Model.scriptURL
 import com.prasunmondal.dev.libs.gsheet.serializer.Tech4BytesSerializableLocks
 import com.prasunmondal.dev.libs.logs.instant.terminal.LogMe
-import java.util.Objects
 
 interface CachingUtils<T> {
     fun <T> getMultiple(context: Context, request: ReadAPIs<T>, useCache: Boolean): List<T> {
@@ -45,7 +46,7 @@ interface CachingUtils<T> {
                 if (response == null)
                     listOf()
                 else {
-                    val parsedResponse = response.parseToObj(request.classTypeForResponseParsing)
+                    val parsedResponse = (response as ReadResponse<T>).parsedResponse
                     saveToCache(cacheKey, parsedResponse)
                     parsedResponse
 
