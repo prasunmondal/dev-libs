@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.prasunmondal.dev.libs.R
 import com.prasunmondal.dev.libs.contexts.AppContexts
 import com.prasunmondal.dev.libs.gsheet.clients.Tests.Test
+import com.prasunmondal.dev.libs.gsheet.integrationTests.RunTest
 import com.prasunmondal.dev.libs.reflections.Tests.Tests
 
 class MainActivity : AppCompatActivity() {
@@ -13,7 +14,11 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         AppContexts.set(this)
-        testAll()
+
+        Thread {
+            RunTest().runTest(this)
+        }.start()
+//        testAll()
     }
 
     fun testAll() {
