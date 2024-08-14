@@ -165,6 +165,8 @@ abstract class Tech4BytesSerializable<T : Any> : java.io.Serializable {
     }
 
     fun parseAndSaveToCache2(response: String, cacheKey: String? = null): List<T> {
+
+        // suspect
         val resolvedCacheKey = if (cacheKey.isNullOrEmpty()) {
             getFilterName()
         } else {

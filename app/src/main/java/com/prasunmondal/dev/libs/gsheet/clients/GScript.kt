@@ -19,7 +19,6 @@ import java.util.UUID
 import java.util.function.Consumer
 
 interface GScript : Serializable {
-
     var scriptURL: String
         get() = ProjectConfig.dBServerScriptURL
         set(value) = TODO()
@@ -135,6 +134,74 @@ interface GScript : Serializable {
                 scriptUrl,
                 finalRequestJSON
             ) { }//response -> postExecute(response) }
+
+            // TODO
+            // concurrent exception
+            // Process: com.prasunmondal.dev.libs, PID: 10488
+            //                                                                                                    java.lang.RuntimeException: Unable to start activity ComponentInfo{com.prasunmondal.dev.libs/com.prasunmondal.tests.libs.MainActivity}: java.util.concurrent.ExecutionException: java.io.IOException: unexpected end of stream on com.android.okhttp.Address@be0f57bb
+            //                                                                                                    	at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:3645)
+            //                                                                                                    	at android.app.ActivityThread.handleLaunchActivity(ActivityThread.java:3782)
+            //                                                                                                    	at android.app.servertransaction.LaunchActivityItem.execute(LaunchActivityItem.java:101)
+            //                                                                                                    	at android.app.servertransaction.TransactionExecutor.executeCallbacks(TransactionExecutor.java:135)
+            //                                                                                                    	at android.app.servertransaction.TransactionExecutor.execute(TransactionExecutor.java:95)
+            //                                                                                                    	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:2307)
+            //                                                                                                    	at android.os.Handler.dispatchMessage(Handler.java:106)
+            //                                                                                                    	at android.os.Looper.loopOnce(Looper.java:201)
+            //                                                                                                    	at android.os.Looper.loop(Looper.java:288)
+            //                                                                                                    	at android.app.ActivityThread.main(ActivityThread.java:7872)
+            //                                                                                                    	at java.lang.reflect.Method.invoke(Native Method)
+            //                                                                                                    	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:548)
+            //                                                                                                    	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:936)
+            //                                                                                                    Caused by: java.util.concurrent.ExecutionException: java.io.IOException: unexpected end of stream on com.android.okhttp.Address@be0f57bb
+            //                                                                                                    	at java.util.concurrent.FutureTask.report(FutureTask.java:122)
+            //                                                                                                    	at java.util.concurrent.FutureTask.get(FutureTask.java:191)
+            //                                                                                                    	at android.os.AsyncTask.get(AsyncTask.java:618)
+            //                                                                                                    	at com.prasunmondal.dev.libs.gsheet.clients.GScript$Companion.execute(GScript.kt:138)
+            //                                                                                                    	at com.prasunmondal.dev.libs.gsheet.clients.GScript$Companion.execute(GScript.kt:102)
+            //                                                                                                    	at com.prasunmondal.dev.libs.gsheet.clients.GScript$Companion.execute$default(GScript.kt:101)
+            //                                                                                                    	at com.prasunmondal.dev.libs.gsheet.clients.Tests.CreateAPIs.InsertObjectTest.test(InsertObjectTest.kt:45)
+            //                                                                                                    	at com.prasunmondal.dev.libs.gsheet.clients.Tests.CreateAPIs.InsertObjectTest.<init>(InsertObjectTest.kt:13)
+            //                                                                                                    	at com.prasunmondal.dev.libs.gsheet.clients.Tests.Test$Companion.start(Test.kt:25)
+            //                                                                                                    	at com.prasunmondal.tests.libs.MainActivity.testAll(MainActivity.kt:22)
+            //                                                                                                    	at com.prasunmondal.tests.libs.MainActivity.onCreate(MainActivity.kt:17)
+            //                                                                                                    	at android.app.Activity.performCreate(Activity.java:8305)
+            //                                                                                                    	at android.app.Activity.performCreate(Activity.java:8284)
+            //                                                                                                    	at android.app.Instrumentation.callActivityOnCreate(Instrumentation.java:1417)
+            //                                                                                                    	at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:3626)
+            //                                                                                                    	at android.app.ActivityThread.handleLaunchActivity(ActivityThread.java:3782) 
+            //                                                                                                    	at android.app.servertransaction.LaunchActivityItem.execute(LaunchActivityItem.java:101) 
+            //                                                                                                    	at android.app.servertransaction.TransactionExecutor.executeCallbacks(TransactionExecutor.java:135) 
+            //                                                                                                    	at android.app.servertransaction.TransactionExecutor.execute(TransactionExecutor.java:95) 
+            //                                                                                                    	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:2307) 
+            //                                                                                                    	at android.os.Handler.dispatchMessage(Handler.java:106) 
+            //                                                                                                    	at android.os.Looper.loopOnce(Looper.java:201) 
+            //                                                                                                    	at android.os.Looper.loop(Looper.java:288) 
+            //                                                                                                    	at android.app.ActivityThread.main(ActivityThread.java:7872) 
+            //                                                                                                    	at java.lang.reflect.Method.invoke(Native Method) 
+            //                                                                                                    	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:548) 
+            //                                                                                                    	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:936) 
+            //                                                                                                    Caused by: java.io.IOException: unexpected end of stream on com.android.okhttp.Address@be0f57bb
+            //                                                                                                    	at com.android.okhttp.internal.http.Http1xStream.readResponse(Http1xStream.java:203)
+            //                                                                                                    	at com.android.okhttp.internal.http.Http1xStream.readResponseHeaders(Http1xStream.java:129)
+            //                                                                                                    	at com.android.okhttp.internal.http.HttpEngine.readNetworkResponse(HttpEngine.java:750)
+            //                                                                                                    	at com.android.okhttp.internal.http.HttpEngine.readResponse(HttpEngine.java:622)
+            //                                                                                                    	at com.android.okhttp.internal.huc.HttpURLConnectionImpl.execute(HttpURLConnectionImpl.java:475)
+            //                                                                                                    	at com.android.okhttp.internal.huc.HttpURLConnectionImpl.getResponse(HttpURLConnectionImpl.java:411)
+            //                                                                                                    	at com.android.okhttp.internal.huc.HttpURLConnectionImpl.getResponseCode(HttpURLConnectionImpl.java:542)
+            //                                                                                                    	at com.android.okhttp.internal.huc.DelegatingHttpsURLConnection.getResponseCode(DelegatingHttpsURLConnection.java:106)
+            //                                                                                                    	at com.android.okhttp.internal.huc.HttpsURLConnectionImpl.getResponseCode(HttpsURLConnectionImpl.java:30)
+            //                                                                                                    	at com.prasunmondal.dev.libs.gsheet.clients.ExecutePostCallsString.doInBackground(ExecutePostCallsString.kt:40)
+            //                                                                                                    	at com.prasunmondal.dev.libs.gsheet.clients.ExecutePostCallsString.doInBackground(ExecutePostCallsString.kt:17)
+            //                                                                                                    	at android.os.AsyncTask$3.call(AsyncTask.java:394)
+            //                                                                                                    	at java.util.concurrent.FutureTask.run(FutureTask.java:264)
+            //                                                                                                    	at android.os.AsyncTask$SerialExecutor$1.run(AsyncTask.java:305)
+            //2024-08-11 20:53:13.906 10488-10488 AndroidRuntime          com.prasunmondal.dev.libs            E  	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1137)
+            //                                                                                                    	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:637)
+            //                                                                                                    	at java.lang.Thread.run(Thread.java:1012)
+            //                                                                                                    Caused by: java.io.EOFException: \n not found: size=0 content=...
+            //                                                                                                    	at com.android.okhttp.okio.RealBufferedSource.readUtf8LineStrict(RealBufferedSource.java:202)
+            //                                                                                                    	at com.android.okhttp.internal.http.Http1xStream.readResponse(Http1xStream.java:188)
+            //                                                                                                    	... 16 more
             val response2 = d.execute().get()
 
             LogMe.log("response2: $response2")

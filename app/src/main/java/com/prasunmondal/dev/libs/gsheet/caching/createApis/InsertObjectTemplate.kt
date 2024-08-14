@@ -1,5 +1,6 @@
 package com.prasunmondal.dev.libs.gsheet.caching.createApis
 
+import android.content.Context
 import com.prasunmondal.dev.libs.gsheet.caching.CachingUtils
 import com.prasunmondal.dev.libs.gsheet.caching.RequestTemplatesInterface
 import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.CreateAPIs.GSheetInsertObject
@@ -51,7 +52,7 @@ interface InsertObjectTemplate<T> : RequestTemplatesInterface<T>, CachingUtils<T
         var prevList = mutableListOf<T>()
         if (appendInLocal) {
             prevList =
-                obj1.getMultiple(context, obj1.prepareFetchAllRequest(), true) as MutableList<T>
+                obj1.getMultiple(context as Context, obj1.prepareFetchAllRequest(), true) as MutableList<T>
         }
         prevList.addAll(obj)
         obj1.saveToCache(getCacheKey(), prevList)

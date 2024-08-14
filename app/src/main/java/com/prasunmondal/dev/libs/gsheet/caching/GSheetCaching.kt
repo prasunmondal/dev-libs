@@ -20,7 +20,7 @@ interface GSheetCaching<T> : GScript {
     var appendInLocal: Boolean
     var cacheTag: String?
     var shallCacheData: Boolean
-    var context: Context
+    var context: Any
     var filter: ClientFilter<T>?
     var sort: ClientSort<T>?
 
@@ -48,7 +48,7 @@ interface GSheetCaching<T> : GScript {
     fun getResponseFromCache(useCache: Boolean = false): Any? {
         return arrayListOf(
             CentralCacheObj.centralCache.get<T>(
-                context,
+                context as Context,
                 getCacheKey(),
                 useCache,
                 false
@@ -57,7 +57,7 @@ interface GSheetCaching<T> : GScript {
     }
 
     fun getResponseFromCacheOrServer(useCache: Boolean = true): List<T> {
-        if (CentralCacheObj.centralCache.isAvailable(context, getCacheKey())) {
+        if (CentralCacheObj.centralCache.isAvailable(context as Context, getCacheKey())) {
             return getResponseFromCache(useCache) as List<T>
         } else {
             return getFromServer(shallCacheData)

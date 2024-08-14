@@ -8,7 +8,7 @@ import com.prasunmondal.dev.libs.gsheet.post.serializable.PostObjectResponse
 import java.util.function.Consumer
 
 open class GSheetSerialized<T>(
-    override var context: Context,
+    override var context: Any,
     override var scriptURL: String,
     override var sheetURL: String,
     override var tabname: String,

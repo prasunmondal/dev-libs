@@ -54,9 +54,7 @@ object FetchAllBySortingModel : GSheetSerialized<ModelInsertObject>(
     classTypeForResponseParsing = ModelInsertObject::class.java,
     appendInServer = true,
     appendInLocal = true,
-    filter = ClientFilter(
-        "filterWithNamePrasun",
-        { list: List<ModelInsertObject> -> list.filter { it.name == "Prasun" } })
+    filter = ClientFilter("filterWithNamePrasun", { list: List<ModelInsertObject> -> list.filter { it.name == "Prasun" } })
 ) {
     fun customFetchRequest(): APIRequests {
         val request = prepareFetchByAndConditionRequest()

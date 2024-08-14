@@ -14,7 +14,7 @@ class CacheTraverse {
             CentralCacheObj.centralCache.cache.forEach { k, v ->
                 v.forEach { k1, v1 ->
                     listOfCacheKeys.add(k1)
-                    LogMe.log("CacheTag: $k1")
+                    LogMe.log("CacheTag: $k1\n")
                 }
             }
             return listOfCacheKeys
