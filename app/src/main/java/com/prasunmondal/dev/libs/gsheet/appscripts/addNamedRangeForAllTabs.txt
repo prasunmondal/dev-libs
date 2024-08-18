@@ -1,0 +1,36 @@
+function createNamedRangesForAllSheets() {
+  var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+  var sheets = spreadsheet.getSheets();
+  var completedTabs = [];
+
+  sheets.forEach(function(sheet) {
+    try {
+      var firstRow = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
+      var lastRow = sheet.getLastRow();
+      var hasCreatedRanges = false;
+
+      for (var i = 0; i < firstRow.length; i++) {
+        var header = firstRow[i];
+        if (header) {
+          // Ensure the header is treated as a string and make it a valid range name
+          var rangeName = header.toString().trim().replace(/\s+/g, '_').replace(/[^a-zA-Z0-9_]/g, '');
+          // Prefix the range name with the sheet name to avoid conflicts across sheets
+          var prefixedRangeName = sheet.getName() + '_' + rangeName;
+          var range = sheet.getRange(2, i + 1, lastRow - 1, 1);
+          SpreadsheetApp.getActiveSpreadsheet().setNamedRange(prefixedRangeName, range);
+          hasCreatedRanges = true;
+        }
+      }
+
+      if (hasCreatedRanges) {
+        completedTabs.push(sheet.getName());
+      }
+    } catch (e) {
+      // Log the error for debugging purposes, but continue with the next sheet
+      Logger.log('Error in sheet: ' + sheet.getName() + ' - ' + e.message);
+    }
+  });
+
+  // Log the names of tabs where ranges were successfully created
+  Logger.log('Named ranges successfully created in the following tabs: ' + completedTabs.join(', '));
+}
