@@ -6,7 +6,7 @@ import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.DeleteAPIs.GSheetDel
 import com.prasunmondal.dev.libs.gsheet.clients.GScript
 
 interface DeleteAPIsTemplate<T> : RequestTemplatesInterface<T> {
-    fun prepareDeleteAllRequest(): APIRequests {
+    override fun prepareRequest(): APIRequests {
         val request = GSheetDeleteAll()
         if (sheetURL.isNotBlank() && tabname.isNotBlank()) {
             request.sheetId(sheetURL)
@@ -16,7 +16,7 @@ interface DeleteAPIsTemplate<T> : RequestTemplatesInterface<T> {
     }
 
     fun queueDeleteAll() {
-        val request = prepareDeleteAllRequest()
+        val request = prepareRequest()
         GScript.addRequest(request)
     }
 }

@@ -6,7 +6,7 @@ import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.ReadAPIs.FetchData.G
 import com.prasunmondal.dev.libs.gsheet.clients.GScript
 
 interface FetchAllTemplate<T> : RequestTemplatesInterface<T>, CachingUtils<T> {
-    fun prepareFetchAllRequest(): GSheetFetchAll<T> {
+    override fun prepareRequest(): GSheetFetchAll<T> {
         val request = GSheetFetchAll<T>()
 
         if (sheetURL.isNotBlank() && tabname.isNotBlank()) {
@@ -20,15 +20,15 @@ interface FetchAllTemplate<T> : RequestTemplatesInterface<T>, CachingUtils<T> {
     }
 
     fun fetchAll(useCache: Boolean = true): List<T> {
-        return getMultiple(context, prepareFetchAllRequest(), useCache)
+        return getMultiple(context, prepareRequest(), useCache)
     }
 
     fun fetch(useCache: Boolean = true): List<T> {
-        return get(context, prepareFetchAllRequest(), useCache)
+        return get(context, prepareRequest(), useCache)
     }
 
     fun queueFetchAll() {
-        val request = prepareFetchAllRequest()
+        val request = prepareRequest()
         GScript.addRequest(request)
     }
 }

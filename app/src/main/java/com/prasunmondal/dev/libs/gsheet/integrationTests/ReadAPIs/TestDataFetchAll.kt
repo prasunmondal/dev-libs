@@ -9,9 +9,20 @@ import com.prasunmondal.dev.libs.logs.instant.terminal.LogMe
 
 class TestDataFetchAll {
 
-    fun main(context: Context) {
-        fetchValidData(context)
-        fetchEmptyData(context)
+    fun main(context: Context)
+    {
+        prepareData(context)
+//        fetchValidData(context)
+//        fetchEmptyData(context)
+    }
+
+    fun prepareData(context:Context){
+        val data:ArrayList<NameTitleModel> =ArrayList();
+        data.add(NameTitleModel("name1","title1"))
+        data.forEach{ item ->
+            NameTitleDataHandler(context).insertObject(item)
+        }
+        GScript.execute(ProjectConfig.dBServerScriptURL)
     }
 
     fun fetchValidData(context: Context) {

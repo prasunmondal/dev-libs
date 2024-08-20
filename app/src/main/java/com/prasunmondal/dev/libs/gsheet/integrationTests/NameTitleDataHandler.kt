@@ -13,9 +13,9 @@ class NameTitleDataHandler(context: Context) : Serializable, GSheetSerialized<Na
     appendInServer = true,
     appendInLocal = true)
 
-class NameTitleModel: Serializable {
-    val name:String="";
-    val title:String="";
+class NameTitleModel(name:String,title:String): Serializable {
+    val name:String=name;
+    val title:String=title;
     override fun toString(): String {
         return "NameTitleClassModel(name='$name', title='$title')"
     }

@@ -7,35 +7,38 @@ import com.prasunmondal.dev.libs.gsheet.clients.APIResponses.APIResponse
 import com.prasunmondal.dev.libs.gsheet.clients.GScript
 import com.prasunmondal.dev.libs.gsheet.clients.GSheetSerialized
 
-interface InsertObjectTemplate<T>: RequestTemplatesInterface<T>, CachingUtils<T> {
-    fun prepareInsertObjRequest(obj: T): GSheetInsertObject {
+interface InsertObjectTemplate<T : Any>: RequestTemplatesInterface<T>, CachingUtils<T> {
+
+    var data :T
+    override fun prepareRequest(): GSheetInsertObject {
         val request = GSheetInsertObject()
         request.sheetId = sheetURL
         request.tabName = tabname
-        request.setDataObject(obj as Any)
+        request.setDataObject(data as Any)
         return request
     }
-    fun prepareInsertObjRequest(obj: List<T>): List<GSheetInsertObject> {
-        val requestsList: MutableList<GSheetInsertObject> = mutableListOf()
-        obj.forEach {
-            requestsList.add(prepareInsertObjRequest(it))
-        }
-        return requestsList
-    }
+//    fun prepareInsertObjRequest(obj: List<T>): List<GSheetInsertObject> {
+//        val requestsList: MutableList<GSheetInsertObject> = mutableListOf()
+//        obj.forEach {
+//            requestsList.add(prepareRequest(it))
+//        }
+//        return requestsList
+//    }
 
     fun queueInsertObj(obj: T) {
-        val listOfReqs = prepareInsertObjRequest(obj)
+        val listOfReqs = prepareRequest()
         GScript.addRequest(listOfReqs)
         saveToLocal(this as GSheetSerialized<T>, listOf(obj))
     }
     fun queueInsertObj(obj: List<T>) {
-        val listOfReqs = prepareInsertObjRequest(obj)
+        val listOfReqs = prepareRequest()
         GScript.addRequest(listOfReqs)
         saveToLocal(this as GSheetSerialized<T>, obj)
     }
 
     fun insertObject(obj: T): APIResponse {
-        val t = prepareInsertObjRequest(obj).execute(scriptURL)
+        data=obj
+        val t = prepareRequest().execute(scriptURL)
         saveToLocal(this as GSheetSerialized<T>, listOf(obj), appendInLocal)
         return t
     }
@@ -48,7 +51,7 @@ interface InsertObjectTemplate<T>: RequestTemplatesInterface<T>, CachingUtils<T>
     fun saveToLocal(obj1: GSheetSerialized<T>, obj: List<T>, append: Boolean = appendInLocal) {
         var prevList = mutableListOf<T>()
         if(appendInLocal) {
-            prevList = obj1.getMultiple(context, obj1.prepareFetchAllRequest(), true) as MutableList<T>
+            prevList = obj1.getMultiple(context, obj1.prepareRequest(), true) as MutableList<T>
         }
         prevList.addAll(obj)
         obj1.saveToCache(getCacheKey(), prevList)
