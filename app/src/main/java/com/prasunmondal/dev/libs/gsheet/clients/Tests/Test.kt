@@ -22,7 +22,7 @@ class Test {
 //            testMultiple()
 
 //        New     New     New     New     New     New     New     New     New
-            InsertObjectTest()
+//            InsertObjectTest()
 //            InsertUniqueObjectTest()
 //            InsertStringArrayTest()
             FetchAllTest()

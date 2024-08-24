@@ -15,12 +15,12 @@ class FetchByAndConditionTest {
     }
 
     fun resetData() {
-        LogMe.log("Resetting Data")
-        GScript.clearAll()
-        val deleteRequest = FetchAllBySortingModel.prepareDeleteAllRequest()
-        GScript.addRequest(deleteRequest)
-        GScript.execute(ProjectConfig.dBServerScriptURL)
-        LogMe.log("Reset Completed.")
+//        LogMe.log("Resetting Data")
+//        GScript.clearAll()
+//        val deleteRequest = FetchAllBySortingModel.prepareDeleteAllRequest()
+//        GScript.addRequest(deleteRequest)
+//        GScript.execute(ProjectConfig.dBServerScriptURL)
+//        LogMe.log("Reset Completed.")
     }
 
     fun test() {

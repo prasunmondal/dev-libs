@@ -15,9 +15,9 @@ object TestSheet1Model : GSheetSerialized<ModelInsertObject>(
     appendInServer = true,
     appendInLocal = true
 ) {
-    fun customFetchRequest(): APIRequests {
-        val request = prepareFetchByAndConditionRequest()
-        request.conditionAnd("name", "Prasun")
-        return request
-    }
+//    fun customFetchRequest(): APIRequests {
+//        val request = prepareFetchByAndConditionRequest()
+//        request.conditionAnd("name", "Prasun")
+//        return request
+//    }
 }

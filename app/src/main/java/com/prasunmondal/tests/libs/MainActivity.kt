@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
 //        Thread {
             RunTest().runTest(this)
 //        }.start()
-//        testAll()
+        testAll()
     }
 
     fun testAll() {
