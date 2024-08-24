@@ -1,12 +1,29 @@
 package com.prasunmondal.dev.libs.gsheet.caching.readApis
 
+import android.content.Context
 import com.prasunmondal.dev.libs.gsheet.caching.CachingUtils
+import com.prasunmondal.dev.libs.gsheet.caching.ExecutionOperations
 import com.prasunmondal.dev.libs.gsheet.caching.RequestTemplatesInterface
+import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.APIRequests
 import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.ReadAPIs.FetchData.GSheetFetchAll
+import com.prasunmondal.dev.libs.gsheet.clients.ClientFilter
+import com.prasunmondal.dev.libs.gsheet.clients.ClientSort
 import com.prasunmondal.dev.libs.gsheet.clients.GScript
 
-interface FetchAllTemplate<T> : RequestTemplatesInterface<T>, CachingUtils<T> {
-    override fun prepareRequest(): GSheetFetchAll<T> {
+class FetchAllTemplate<T>(
+    override var sheetURL: String,
+    override var tabname: String,
+    override var query: String?,
+    override var classTypeForResponseParsing: Class<T>,
+    override var appendInServer: Boolean,
+    override var appendInLocal: Boolean,
+    override var cacheTag: String?,
+    override var shallCacheData: Boolean,
+    override var context: Context,
+    override var filter: ClientFilter<T>?,
+    override var sort: ClientSort<T>?
+) : RequestTemplatesInterface<T>, CachingUtils<T> {
+    override fun prepareRequest(): APIRequests {
         val request = GSheetFetchAll<T>()
 
         if (sheetURL.isNotBlank() && tabname.isNotBlank()) {
@@ -19,12 +36,13 @@ interface FetchAllTemplate<T> : RequestTemplatesInterface<T>, CachingUtils<T> {
         return request
     }
 
-    fun fetchAll(useCache: Boolean = true): List<T> {
-        return getMultiple(context, prepareRequest(), useCache)
-    }
+//    fun fetchAll(useCache: Boolean = true): List<T> {
+//        return getMultiple(context, prepareRequest(), useCache)
+//    }
+
 
     fun fetch(useCache: Boolean = true): List<T> {
-        return get(context, prepareRequest(), useCache)
+        return get(context, prepareRequest() as GSheetFetchAll<T>, useCache)
     }
 
     fun queueFetchAll() {

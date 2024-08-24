@@ -1,16 +1,35 @@
 package com.prasunmondal.dev.libs.gsheet.caching.createApis
 
+import android.content.Context
 import com.prasunmondal.dev.libs.gsheet.caching.CachingUtils
+import com.prasunmondal.dev.libs.gsheet.caching.ExecutionOperations
 import com.prasunmondal.dev.libs.gsheet.caching.RequestTemplatesInterface
+import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.APIRequests
 import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.CreateAPIs.GSheetInsertObject
+import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.ReadAPIs.FetchData.GSheetFetchAll
 import com.prasunmondal.dev.libs.gsheet.clients.APIResponses.APIResponse
+import com.prasunmondal.dev.libs.gsheet.clients.ClientFilter
+import com.prasunmondal.dev.libs.gsheet.clients.ClientSort
 import com.prasunmondal.dev.libs.gsheet.clients.GScript
 import com.prasunmondal.dev.libs.gsheet.clients.GSheetSerialized
 
-interface InsertObjectTemplate<T : Any>: RequestTemplatesInterface<T>, CachingUtils<T> {
+class InsertObjectTemplate<T : Any>(
+    override var sheetURL: String,
+    override var tabname: String,
+    override var query: String?,
+    override var classTypeForResponseParsing: Class<T>,
+    override var appendInServer: Boolean,
+    override var appendInLocal: Boolean,
+    override var cacheTag: String?,
+    override var shallCacheData: Boolean,
+    override var context: Context,
+    override var filter: ClientFilter<T>?,
+    override var sort: ClientSort<T>?,
+    var data :T?
+) : RequestTemplatesInterface<T>, CachingUtils<T> {
 
-    var data :T
-    override fun prepareRequest(): GSheetInsertObject {
+
+     override fun prepareRequest(): APIRequests {
         val request = GSheetInsertObject()
         request.sheetId = sheetURL
         request.tabName = tabname
@@ -18,42 +37,37 @@ interface InsertObjectTemplate<T : Any>: RequestTemplatesInterface<T>, CachingUt
         return request
     }
 //    fun prepareInsertObjRequest(obj: List<T>): List<GSheetInsertObject> {
-//        val requestsList: MutableList<GSheetInsertObject> = mutableListOf()
+//        val requestsList:final MutableList<GSheetInsertObject> = mutableListOf()
 //        obj.forEach {
 //            requestsList.add(prepareRequest(it))
 //        }
 //        return requestsList
 //    }
 
-    fun queueInsertObj(obj: T) {
-        val listOfReqs = prepareRequest()
-        GScript.addRequest(listOfReqs)
-        saveToLocal(this as GSheetSerialized<T>, listOf(obj))
-    }
-    fun queueInsertObj(obj: List<T>) {
-        val listOfReqs = prepareRequest()
-        GScript.addRequest(listOfReqs)
-        saveToLocal(this as GSheetSerialized<T>, obj)
-    }
+//    fun queueInsertObj(obj: T) {
+//        val listOfReqs = prepareRequest()
+//        GScript.addRequest(listOfReqs)
+//        saveToLocal(this as GSheetSerialized<T>, listOf(obj))
+//    }
+//    fun queueInsertObj(obj: List<T>) {
+//        val listOfReqs = prepareRequest()
+//        GScript.addRequest(listOfReqs)
+//        saveToLocal(this as GSheetSerialized<T>, obj)
+//    }
 
-    fun insertObject(obj: T): APIResponse {
-        data=obj
-        val t = prepareRequest().execute(scriptURL)
-        saveToLocal(this as GSheetSerialized<T>, listOf(obj), appendInLocal)
-        return t
-    }
+
 
 //     TODO: insert multiple insertions
 //    fun insertObjects(obj: List<T>): APIResponse {
 //        return APIResponse()
 //    }
 
-    fun saveToLocal(obj1: GSheetSerialized<T>, obj: List<T>, append: Boolean = appendInLocal) {
-        var prevList = mutableListOf<T>()
-        if(appendInLocal) {
-            prevList = obj1.getMultiple(context, obj1.prepareRequest(), true) as MutableList<T>
-        }
-        prevList.addAll(obj)
-        obj1.saveToCache(getCacheKey(), prevList)
-    }
+//    fun saveToLocal(obj1: GSheetSerialized<T>, obj: List<T>, append: Boolean = appendInLocal) {
+//        var prevList = mutableListOf<T>()
+//        if(appendInLocal) {
+//            prevList = obj1.getMultiple(context, obj1.prepareRequest() as GSheetFetchAll<T>, true) as MutableList<T>
+//        }
+//        prevList.addAll(obj)
+//        obj1.saveToCache(getCacheKey(), prevList)
+//    }
 }

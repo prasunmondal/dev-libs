@@ -11,14 +11,14 @@ interface ExecutionOperations<T> :GSheetCaching<T>  {
     }
 
     fun queue(){
-    var preparedRequest=prepareRequest()
-    GScript.calls.put(preparedRequest.getUId(),preparedRequest)
+    var preparedRequest = prepareRequest()
+        GScript.addRequest(preparedRequest)
     }
 
     fun getRequest(): APIRequests {
         return prepareRequest()
     }
 
-    abstract fun  prepareRequest():APIRequests
+    fun prepareRequest():APIRequests
     
 }

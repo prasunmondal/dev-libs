@@ -30,7 +30,7 @@ class FetchAllBySorting {
     fun resetData() {
         LogMe.log("Resetting Data")
         GScript.clearAll()
-        val deleteRequest = FetchAllBySortingModel.prepareDeleteAllRequest()
+        val deleteRequest = FetchAllBySortingModel.deleteAll().prepareRequest()
         GScript.addRequest(deleteRequest)
 
         val obj1 = ModelInsertObject("FetchAllBySorting1", "FetchAllBySorting2")
