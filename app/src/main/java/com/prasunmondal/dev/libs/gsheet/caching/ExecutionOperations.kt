@@ -4,6 +4,7 @@ import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.APIRequests
 import com.prasunmondal.dev.libs.gsheet.clients.APIResponses.ReadResponse
 import com.prasunmondal.dev.libs.gsheet.clients.GScript
 import com.prasunmondal.dev.libs.gsheet.clients.Tests.ProjectConfig
+import com.prasunmondal.dev.libs.gsheet.clients.Tests.ReadAPIs.FetchData.FetchAll.FetchAllBySortingModel
 
 interface ExecutionOperations<T> :GSheetCaching<T>  {
 
@@ -22,8 +23,8 @@ interface ExecutionOperations<T> :GSheetCaching<T>  {
     }
 
     fun queue(){
-    var preparedRequest = prepareRequest()
-        GScript.addRequest(preparedRequest)
+
+        GScript.addRequest(prepareRequest())
     }
 
     fun getRequest(): APIRequests {
