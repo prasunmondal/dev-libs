@@ -24,8 +24,8 @@ class FetchAllBySorting {
 
         t.forEach { item ->
             LogMe.log("Fetched.........")
-            (LogMe.log((item as ModelInsertObject).name))
-            (LogMe.log((item as ModelInsertObject).title))
+            (LogMe.log((item).name))
+            (LogMe.log((item).title))
         }
 
 //        LogMe.log("Starting Data fetch - 2.")
