@@ -61,7 +61,7 @@ interface GScript : Serializable {
     }
 
     companion object {
-        var calls = mutableMapOf<String, APIRequests>()
+        var defaultQueue = mutableMapOf<String, APIRequests>()
         fun addRequest(apiCall: APIRequests?): String? {
             if (apiCall == null)
                 return null
@@ -78,10 +78,10 @@ interface GScript : Serializable {
         }
 
         fun addRequest(uid: String, apiCall: APIRequests) {
-            if (calls.containsKey(uid)) {
+            if (defaultQueue.containsKey(uid)) {
                 throw GScriptDuplicateUIDException()
             }
-            calls[uid] = apiCall
+            defaultQueue[uid] = apiCall
         }
 
         fun getCombinedJson(requestList: MutableMap<String, APIRequests>): Array<JSONObject> {
@@ -95,8 +95,8 @@ interface GScript : Serializable {
         }
 
         fun execute(scriptURL: String, useCache: Boolean = true): MutableMap<String, APIResponse> {
-            val responseList = execute(calls, scriptURL, useCache)
-            calls.clear()
+            val responseList = execute(defaultQueue, scriptURL, useCache)
+            defaultQueue.clear()
             return responseList
         }
 
@@ -163,7 +163,7 @@ interface GScript : Serializable {
         }
 
         fun clearAll() {
-            calls.clear()
+            defaultQueue.clear()
         }
     }
 }

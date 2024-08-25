@@ -1,15 +1,14 @@
 package com.prasunmondal.dev.libs.gsheet.clients.Tests.ReadAPIs.FetchData.FetchAll
 
+import com.prasunmondal.dev.libs.StringUtils.StringUtils
 import com.prasunmondal.dev.libs.contexts.AppContexts
 import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.APIRequests
-import com.prasunmondal.dev.libs.gsheet.clients.APIResponses.ReadResponse
+import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.APIRequestsQueue
 import com.prasunmondal.dev.libs.gsheet.clients.ClientFilter
-import com.prasunmondal.dev.libs.gsheet.clients.ClientSort
 import com.prasunmondal.dev.libs.gsheet.clients.GScript
 import com.prasunmondal.dev.libs.gsheet.clients.GSheetSerialized
 import com.prasunmondal.dev.libs.gsheet.clients.Tests.ModelInsertObject
 import com.prasunmondal.dev.libs.gsheet.clients.Tests.ProjectConfig
-import com.prasunmondal.dev.libs.gsheet.clients.Tests.TestBulkOps.TestSheet1Model
 import com.prasunmondal.dev.libs.logs.instant.terminal.LogMe
 
 class FetchAllBySorting {
@@ -51,6 +50,17 @@ class FetchAllBySorting {
         FetchAllBySortingModel.insert(obj2).queue()
         FetchAllBySortingModel.insert(obj3).queue()
         GScript.execute(ProjectConfig.dBServerScriptURL)
+
+//        val listofAPIRequest = mutableMapOf<String, APIRequests>()
+        var request=FetchAllBySortingModel.insert(obj1).getRequestObj()
+//        listofAPIRequest.put(StringUtils.generateUniqueString(),request)
+//        GScript.execute(listofAPIRequest,ProjectConfig.dBServerScriptURL,true)
+//        listofAPIRequest.execute
+
+        var requestQueue1=APIRequestsQueue()
+        requestQueue1.addRequest(request)
+        requestQueue1.execute()
+
 //        GScript.execute(ProjectConfig.dBServerScriptURL)
         LogMe.log("Reset Completed.")
     }

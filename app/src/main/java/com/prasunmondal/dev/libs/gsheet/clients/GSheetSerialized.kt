@@ -36,7 +36,7 @@ open class GSheetSerialized<T: Any>(
           appendInServer, appendInLocal, cacheTag, shallCacheData, context, filter, sort, obj )
     }
 
-    fun deleteAll(): ExecutionOperations<T> {
+    fun deleteAll(): DeleteAPIsTemplate<T> {
         return DeleteAPIsTemplate<T>(  sheetURL , tabname, query, classTypeForResponseParsing,
          appendInServer, appendInLocal, cacheTag, shallCacheData, context, filter, sort)
     }
