@@ -21,9 +21,8 @@ class FetchAllBySorting {
         val t = FetchAllBySortingModel.fetchAll().execute()
 
         LogMe.log("Completed Data fetch - 1.")
-        var sdata: List<*> = (t as ReadResponse<*>).parsedResponse
 
-        sdata.forEach { item ->
+        t.forEach { item ->
             LogMe.log("Fetched.........")
             (LogMe.log((item as ModelInsertObject).name))
             (LogMe.log((item as ModelInsertObject).title))
