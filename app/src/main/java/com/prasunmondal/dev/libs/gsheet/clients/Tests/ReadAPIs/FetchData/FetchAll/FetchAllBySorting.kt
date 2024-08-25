@@ -59,6 +59,7 @@ class FetchAllBySorting {
 
         var requestQueue1=APIRequestsQueue()
         requestQueue1.addRequest(request)
+        requestQueue1.addRequest("id6",request)
         requestQueue1.execute()
 
 //        GScript.execute(ProjectConfig.dBServerScriptURL)
