@@ -46,7 +46,8 @@ class FetchAllBySorting {
         val obj2 = ModelInsertObject("FetchAllBySorting3", "FetchAllBySorting4")
         val obj3 = ModelInsertObject("FetchAllBySorting5", "FetchAllBySorting6")
 
-        FetchAllBySortingModel.insert(obj1).queue()
+        var requestQueue1=APIRequestsQueue()
+        FetchAllBySortingModel.insert(obj1).queue(requestQueue1)
         FetchAllBySortingModel.insert(obj2).queue()
         FetchAllBySortingModel.insert(obj3).queue()
         GScript.execute(ProjectConfig.dBServerScriptURL)
@@ -57,7 +58,7 @@ class FetchAllBySorting {
 //        GScript.execute(listofAPIRequest,ProjectConfig.dBServerScriptURL,true)
 //        listofAPIRequest.execute
 
-        var requestQueue1=APIRequestsQueue()
+
         requestQueue1.addRequest(request)
         requestQueue1.addRequest("id6",request)
         requestQueue1.execute()

@@ -1,6 +1,7 @@
 package com.prasunmondal.dev.libs.gsheet.caching
 
 import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.APIRequests
+import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.APIRequestsQueue
 import com.prasunmondal.dev.libs.gsheet.clients.APIResponses.ReadResponse
 import com.prasunmondal.dev.libs.gsheet.clients.GScript
 import com.prasunmondal.dev.libs.gsheet.clients.Tests.ProjectConfig
@@ -24,6 +25,10 @@ interface ExecutionOperations<T> :GSheetCaching<T>  {
     fun queue(){
 
         GScript.addRequest(prepareRequest())
+    }
+
+    fun queue(requestQueue1: APIRequestsQueue){
+        requestQueue1.addRequest(prepareRequest())
     }
 
     fun getRequestObj(): APIRequests {
