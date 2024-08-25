@@ -26,7 +26,16 @@ abstract class ReadAPIs<T> : APIRequests(), ResponseCache {
     }
 
     override fun getCacheKey(): String {
-        return "${this.sheetId}\\${this.tabName}\\${getJSON()}\\${this.filter!!.filterName}\\${this.sort!!.sortName}"
+        var cacheKey = "${this.sheetId}\\${this.tabName}\\${getJSON()}"
+
+        if(this.filter != null) {
+            cacheKey += "\\${this.filter!!.filterName}"
+        }
+        if(this.sort != null) {
+            cacheKey += "\\${this.sort!!.sortName}"
+        }
+
+        return cacheKey
     }
 
     override fun prepareResponse(
