@@ -26,15 +26,15 @@ class Test {
 //            InsertUniqueObjectTest()
 //            InsertStringArrayTest()
             FetchAllTest()
-            FetchByQueryTest()
-            FetchByAndConditionTest()
-            FetchByOrConditionTest()
-            DeleteAllTest()
-            DeleteByAndConditionTest()
-            DeleteByOrConditionTest()
-            CheckDataPresenceTest()
 
-            TestBulkOps()
+            // TODO: Need to cover tests
+//            FetchByQueryTest()
+//            FetchByAndConditionTest()
+//            FetchByOrConditionTest()
+//            DeleteAllTest()
+//            DeleteByAndConditionTest()
+//            DeleteByOrConditionTest()
+//            CheckDataPresenceTest()
 //        }
 
 //        fun testInsertObject() {

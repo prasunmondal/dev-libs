@@ -48,10 +48,10 @@ abstract class ReadAPIs<T> : APIRequests(), ResponseCache {
             (requestObj as ReadAPIs<T>).classTypeForResponseParsing
         )
         
-        if(requestObj.filter!=null)
-            buildingResponseObj_.parsedResponse = requestObj.filter!!.filter!!(buildingResponseObj_.parsedResponse)
-        if(requestObj.sort!=null)
-            buildingResponseObj_.parsedResponse = requestObj.sort!!.sort!!(buildingResponseObj_.parsedResponse)
+//        if(requestObj.filter!=null)
+//            buildingResponseObj_.parsedResponse = requestObj.filter!!.filter!!(buildingResponseObj_.parsedResponse)
+//        if(requestObj.sort!=null)
+//            buildingResponseObj_.parsedResponse = requestObj.sort!!.sort!!(buildingResponseObj_.parsedResponse)
 
         return buildingResponseObj_
     }

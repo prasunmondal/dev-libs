@@ -2,6 +2,7 @@ package com.prasunmondal.dev.libs.gsheet.clients.Tests.ReadAPIs.FetchData.FetchA
 
 import com.prasunmondal.dev.libs.contexts.AppContexts
 import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.APIRequests
+import com.prasunmondal.dev.libs.gsheet.clients.APIResponses.ReadResponse
 import com.prasunmondal.dev.libs.gsheet.clients.ClientFilter
 import com.prasunmondal.dev.libs.gsheet.clients.ClientSort
 import com.prasunmondal.dev.libs.gsheet.clients.GScript
@@ -16,8 +17,18 @@ class FetchAllBySorting {
     init {
         resetData()
         LogMe.log("Starting Data fetch - 1.")
-        val t = TestSheet1Model.fetchAll().execute()
+
+        val t = FetchAllBySortingModel.fetchAll().execute()
+
         LogMe.log("Completed Data fetch - 1.")
+        var sdata: List<*> = (t as ReadResponse<*>).parsedResponse
+
+        sdata.forEach { item ->
+            LogMe.log("Fetched.........")
+            (LogMe.log((item as ModelInsertObject).name))
+            (LogMe.log((item as ModelInsertObject).title))
+        }
+
 //        LogMe.log("Starting Data fetch - 2.")
 //        val t1 = FetchAllBySortingModel.fetch(false)
 //        LogMe.log("Completed Data fetch - 2.")

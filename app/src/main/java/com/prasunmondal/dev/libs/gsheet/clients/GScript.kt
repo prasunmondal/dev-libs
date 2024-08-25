@@ -141,11 +141,13 @@ interface GScript : Serializable {
                 val responseOpId = apiResponse.get("opId").toString()
                 val requestObj = filteredCalls[responseOpId]
                 map[responseOpId] = APIResponse.parseToAPIResponse(apiResponse)
-                val preparedResponse = requestObj!!.prepareResponse(requestObj, map[responseOpId]!!, null)
+                var preparedResponse = requestObj!!.prepareResponse(requestObj, map[responseOpId]!!, null)
                 map[responseOpId] = preparedResponse
                 // Enable caching of responses only for read APIs
                 if (requestObj is ReadAPIs<*>) {
-//                    var parsedResponse = (preparedResponse as ReadResponse<*>).parsedResponse
+                    preparedResponse = requestObj.prepareResponse(requestObj, map[responseOpId]!!, null)
+                    map[responseOpId] = preparedResponse
+//                    var parsedResponse =parsedResponse(preparedResponse as ReadResponse<*>).parsedResponse
 //                    parsedResponse = requestObj.filter(parsedResponse)
 //                    parsedResponse = requestObj.sort(parsedResponse)
 //                    preparedResponse.parsedResponse = parsedResponse
