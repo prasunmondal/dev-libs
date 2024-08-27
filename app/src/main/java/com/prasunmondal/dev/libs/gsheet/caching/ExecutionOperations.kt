@@ -1,5 +1,7 @@
 package com.prasunmondal.dev.libs.gsheet.caching
 
+import com.prasunmondal.dev.libs.caching.CentralCache
+import com.prasunmondal.dev.libs.caching.CentralCacheObj
 import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.APIRequests
 import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.APIRequestsQueue
 import com.prasunmondal.dev.libs.gsheet.clients.APIResponses.ReadResponse
@@ -8,22 +10,30 @@ import com.prasunmondal.dev.libs.gsheet.clients.Tests.ProjectConfig
 
 interface ExecutionOperations<T> :GSheetCaching<T>  {
 
-    fun execute(): List<T> {
-        val responseObj =
-            prepareRequest().executeOne(ProjectConfig.dBServerScriptURL, prepareRequest())
+    fun execute(useCache: Boolean = true): List<T> {
+        var resultsFromCache: T? = null
 
-        if (responseObj is ReadResponse<*>) {
-            var sdata: List<T> =responseObj.parsedResponse as List<T>
-            return sdata
+        // Try to get from cache if useCache = true
+        if(useCache) {
+            resultsFromCache =
+                CentralCacheObj.centralCache.get<T>(context, getCacheKey(), useCache)
         }
 
-        return  listOf()
-//        GScript.addRequest(prepareRequest().executeOne())
-//        GScript.executeOne(GScript.calls,ProjectConfig.dBServerScriptURL,true)
+        // If no results found, try to get it from server
+        if (resultsFromCache != null) {
+            return resultsFromCache as List<T>
+        } else {
+            val responseObj =
+                prepareRequest().executeOne(ProjectConfig.dBServerScriptURL, prepareRequest())
+
+            if (responseObj is ReadResponse<*>) {
+                return responseObj.parsedResponse as List<T>
+            }
+            return listOf()
+        }
     }
 
     fun queue(){
-
         GScript.addRequest(prepareRequest())
     }
 
@@ -36,5 +46,4 @@ interface ExecutionOperations<T> :GSheetCaching<T>  {
     }
 
     fun prepareRequest():APIRequests
-    
 }
