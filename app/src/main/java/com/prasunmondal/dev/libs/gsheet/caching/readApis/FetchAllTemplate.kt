@@ -34,13 +34,4 @@ class FetchAllTemplate<T>(
         }
         return request
     }
-
-    fun fetch(useCache: Boolean = true): List<T> {
-        return get(context, prepareRequest() as GSheetFetchAll<T>, useCache)
-    }
-
-    fun queueFetchAll() {
-        val request = prepareRequest()
-        GScript.addRequest(request)
-    }
 }

@@ -43,11 +43,15 @@ class FetchAllBySorting {
         val obj1 = ModelInsertObject("FetchAllBySorting1", "FetchAllBySorting2")
         val obj2 = ModelInsertObject("FetchAllBySorting3", "FetchAllBySorting4")
         val obj3 = ModelInsertObject("FetchAllBySorting5", "FetchAllBySorting6")
+        val obj4 = ModelInsertObject("Prasun", "Mondal1")
+        val obj5 = ModelInsertObject("Prasun", "Mondal2")
 
         var requestQueue1=APIRequestsQueue()
         FetchAllBySortingModel.insert(obj1).queue(requestQueue1)
         FetchAllBySortingModel.insert(obj2).queue()
         FetchAllBySortingModel.insert(obj3).queue()
+        FetchAllBySortingModel.insert(obj4).queue()
+        FetchAllBySortingModel.insert(obj5).queue()
         GScript.execute(ProjectConfig.dBServerScriptURL)
 
         var request=FetchAllBySortingModel.insert(obj1).getRequestObj()

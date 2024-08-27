@@ -7,7 +7,7 @@ import com.prasunmondal.dev.libs.gsheet.caching.readApis.FetchAllTemplate
 import com.prasunmondal.dev.libs.gsheet.post.serializable.PostObjectResponse
 import java.util.function.Consumer
 
-open class GSheetSerialized<T: Any>(
+open class GSheetSerialized<T : Any>(
     var context: Context,
     var scriptURL: String,
     var sheetURL: String,
@@ -23,17 +23,20 @@ open class GSheetSerialized<T: Any>(
     var sort: ClientSort<T>? = null,
 ) {
     fun fetchAll(): FetchAllTemplate<T> {
-        return FetchAllTemplate<T>(sheetURL, tabname, query, classTypeForResponseParsing,
+        return FetchAllTemplate(
+            sheetURL, tabname, query, classTypeForResponseParsing,
             appendInServer, appendInLocal, cacheTag, shallCacheData, context, filter, sort)
     }
 
     fun insert(obj: T): InsertObjectTemplate<T> {
-        return InsertObjectTemplate<T>(  sheetURL, tabname, query, classTypeForResponseParsing,
-          appendInServer, appendInLocal, cacheTag, shallCacheData, context, filter, sort, obj )
+        return InsertObjectTemplate(
+            sheetURL, tabname, query, classTypeForResponseParsing,
+            appendInServer, appendInLocal, cacheTag, shallCacheData, context, filter, sort, obj)
     }
 
     fun deleteAll(): DeleteAPIsTemplate<T> {
-        return DeleteAPIsTemplate<T>(  sheetURL , tabname, query, classTypeForResponseParsing,
-         appendInServer, appendInLocal, cacheTag, shallCacheData, context, filter, sort)
+        return DeleteAPIsTemplate(
+            sheetURL, tabname, query, classTypeForResponseParsing,
+            appendInServer, appendInLocal, cacheTag, shallCacheData, context, filter, sort)
     }
 }
