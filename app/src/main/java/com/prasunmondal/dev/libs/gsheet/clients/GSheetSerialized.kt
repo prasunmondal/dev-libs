@@ -11,7 +11,7 @@ open class GSheetSerialized<T : Any>(
     var context: Context,
     var scriptURL: String,
     var sheetURL: String,
-    var tabname: String,
+    var tabName: String,
     var classTypeForResponseParsing: Class<T>,
     var appendInServer: Boolean,
     var appendInLocal: Boolean,
@@ -20,23 +20,25 @@ open class GSheetSerialized<T : Any>(
     var cacheTag: String? = null,
     var onCompletion: Consumer<PostObjectResponse>? = null,
     var filter: ClientFilter<T>? = null,
-    var sort: ClientSort<T>? = null,
+    var sort: ClientSort<T>? = null
 ) {
+
+    private var _context: Context = context
     fun fetchAll(): FetchAllTemplate<T> {
         return FetchAllTemplate(
-            sheetURL, tabname, query, classTypeForResponseParsing,
-            appendInServer, appendInLocal, cacheTag, shallCacheData, context, filter, sort)
+            sheetURL, tabName, query, classTypeForResponseParsing,
+            appendInServer, appendInLocal, cacheTag, shallCacheData, _context, filter, sort)
     }
 
     fun insert(obj: T): InsertObjectTemplate<T> {
         return InsertObjectTemplate(
-            sheetURL, tabname, query, classTypeForResponseParsing,
-            appendInServer, appendInLocal, cacheTag, shallCacheData, context, filter, sort, obj)
+            sheetURL, tabName, query, classTypeForResponseParsing,
+            appendInServer, appendInLocal, cacheTag, shallCacheData, _context, filter, sort, obj)
     }
 
     fun deleteAll(): DeleteAPIsTemplate<T> {
         return DeleteAPIsTemplate(
-            sheetURL, tabname, query, classTypeForResponseParsing,
-            appendInServer, appendInLocal, cacheTag, shallCacheData, context, filter, sort)
+            sheetURL, tabName, query, classTypeForResponseParsing,
+            appendInServer, appendInLocal, cacheTag, shallCacheData, _context, filter, sort)
     }
 }
