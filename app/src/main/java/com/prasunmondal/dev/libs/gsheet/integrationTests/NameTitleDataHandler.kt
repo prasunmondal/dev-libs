@@ -9,7 +9,7 @@ import java.io.Serializable
 class NameTitleDataHandler(context: Context) : Serializable, GSheetSerialized<NameTitleModel>(
     context, ProjectConfig.dBServerScriptURL,
     ProjectConfig.DB_SHEET_ID,
-    "TestSheet1",classTypeForResponseParsing = NameTitleModel::class.java,
+    "TestSheet1", classTypeForResponseParsing = NameTitleModel::class.java,
     appendInServer = true,
     appendInLocal = true)
 
