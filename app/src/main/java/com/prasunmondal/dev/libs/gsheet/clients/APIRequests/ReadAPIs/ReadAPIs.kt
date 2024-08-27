@@ -29,10 +29,10 @@ abstract class ReadAPIs<T> : APIRequests(), ResponseCache {
         var cacheKey = "${this.sheetId}\\${this.tabName}\\${getJSON()}"
 
         if(this.filter != null) {
-            cacheKey += "\\${this.filter!!.filterName}"
+            cacheKey += "\\<localOp:${this.filter!!.filterName}>"
         }
         if(this.sort != null) {
-            cacheKey += "\\${this.sort!!.sortName}"
+            cacheKey += "\\<localOp:${this.sort!!.sortName}>"
         }
 
         return cacheKey
