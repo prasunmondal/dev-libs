@@ -24,7 +24,6 @@ interface GScript : Serializable {
         get() = ProjectConfig.dBServerScriptURL
         set(value) = TODO()
 
-    //    var json: JSONObject
     var onCompletion: Consumer<PostObjectResponse>?
         get() = null
         set(value) = TODO()
