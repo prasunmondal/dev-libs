@@ -36,11 +36,6 @@ class FetchAllTemplate<T>(
         return request
     }
 
-//    fun fetchAll(useCache: Boolean = true): List<T> {
-//        return getMultiple(context, prepareRequest(), useCache)
-//    }
-
-
     fun fetch(useCache: Boolean = true): List<T> {
         return get(context, prepareRequest() as GSheetFetchAll<T>, useCache)
     }

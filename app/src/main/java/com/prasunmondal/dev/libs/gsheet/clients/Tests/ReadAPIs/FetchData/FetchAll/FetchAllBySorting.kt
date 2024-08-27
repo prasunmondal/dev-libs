@@ -52,13 +52,7 @@ class FetchAllBySorting {
         FetchAllBySortingModel.insert(obj3).queue()
         GScript.execute(ProjectConfig.dBServerScriptURL)
 
-//        val listofAPIRequest = mutableMapOf<String, APIRequests>()
         var request=FetchAllBySortingModel.insert(obj1).getRequestObj()
-//        listofAPIRequest.put(StringUtils.generateUniqueString(),request)
-//        GScript.execute(listofAPIRequest,ProjectConfig.dBServerScriptURL,true)
-//        listofAPIRequest.execute
-
-
         requestQueue1.addRequest(request)
         requestQueue1.addRequest("id6",request)
         requestQueue1.execute()

@@ -30,11 +30,4 @@ class DeleteAPIsTemplate<T>(
         }
         return request
     }
-
-//    fun queueDeleteAll() {
-//        val request = prepareRequest()
-//        GScript.addRequest(request)
-//    }
-
-
 }

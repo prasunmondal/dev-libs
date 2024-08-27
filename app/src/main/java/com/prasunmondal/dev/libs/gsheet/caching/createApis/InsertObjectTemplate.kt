@@ -36,38 +36,4 @@ class InsertObjectTemplate<T : Any>(
         request.setDataObject(data as Any)
         return request
     }
-//    fun prepareInsertObjRequest(obj: List<T>): List<GSheetInsertObject> {
-//        val requestsList:final MutableList<GSheetInsertObject> = mutableListOf()
-//        obj.forEach {
-//            requestsList.add(prepareRequest(it))
-//        }
-//        return requestsList
-//    }
-
-//    fun queueInsertObj(obj: T) {
-//        val listOfReqs = prepareRequest()
-//        GScript.addRequest(listOfReqs)
-//        saveToLocal(this as GSheetSerialized<T>, listOf(obj))
-//    }
-//    fun queueInsertObj(obj: List<T>) {
-//        val listOfReqs = prepareRequest()
-//        GScript.addRequest(listOfReqs)
-//        saveToLocal(this as GSheetSerialized<T>, obj)
-//    }
-
-
-
-//     TODO: insert multiple insertions
-//    fun insertObjects(obj: List<T>): APIResponse {
-//        return APIResponse()
-//    }
-
-//    fun saveToLocal(obj1: GSheetSerialized<T>, obj: List<T>, append: Boolean = appendInLocal) {
-//        var prevList = mutableListOf<T>()
-//        if(appendInLocal) {
-//            prevList = obj1.getMultiple(context, obj1.prepareRequest() as GSheetFetchAll<T>, true) as MutableList<T>
-//        }
-//        prevList.addAll(obj)
-//        obj1.saveToCache(getCacheKey(), prevList)
-//    }
 }
