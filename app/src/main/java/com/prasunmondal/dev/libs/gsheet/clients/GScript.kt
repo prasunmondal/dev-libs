@@ -1,12 +1,12 @@
 package com.prasunmondal.dev.libs.gsheet.clients
 
 import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.APIRequests
+import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.APIRequestsQueue
 import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.ReadAPIs.ReadAPIs
 import com.prasunmondal.dev.libs.gsheet.clients.APIResponses.APIResponse
 import com.prasunmondal.dev.libs.gsheet.clients.APIResponses.ReadResponse
 import com.prasunmondal.dev.libs.gsheet.clients.Tests.ProjectConfig
 import com.prasunmondal.dev.libs.gsheet.clients.responseCaching.ResponseCache
-import com.prasunmondal.dev.libs.gsheet.exceptions.GScriptDuplicateUIDException
 import com.prasunmondal.dev.libs.gsheet.metrics.GSheetMetrics
 import com.prasunmondal.dev.libs.gsheet.post.serializable.PostObjectResponse
 import com.prasunmondal.dev.libs.jsons.JsonParser
@@ -33,18 +33,18 @@ interface GScript : Serializable {
     // TODO: add direct execution
     fun execute(scriptURL: String, useCache: Boolean = true): APIResponse {
         val apiRequest = this as APIRequests
-        val instantCalls: MutableMap<String, APIRequests> = mutableMapOf()
-        var uId = generateUniqueString()
-        instantCalls[uId] = apiRequest
+        val instantCalls = APIRequestsQueue()
+        val uId = generateUniqueString()
+        instantCalls.addRequest(uId, apiRequest)
         val response = execute(instantCalls, scriptURL, useCache)
         return response[uId]!!
     }
 
     fun executeOne(scriptURL: String, apiRequest: APIRequests, useCache: Boolean = true): APIResponse {
         val apiRequest = this as APIRequests
-        val instantCalls: MutableMap<String, APIRequests> = mutableMapOf()
-        var uId = generateUniqueString()
-        instantCalls[uId] = apiRequest
+        val instantCalls = APIRequestsQueue()
+        val uId = generateUniqueString()
+        instantCalls.addRequest(uId, apiRequest)
         val response = execute(instantCalls, scriptURL, useCache)
         return response[uId]!!
     }
@@ -61,13 +61,13 @@ interface GScript : Serializable {
     }
 
     companion object {
-        var defaultQueue = mutableMapOf<String, APIRequests>()
+        var defaultQueue = APIRequestsQueue()
         fun addRequest(apiCall: APIRequests?): String? {
             if (apiCall == null)
                 return null
 
             val uid = apiCall.getUId()
-            addRequest(uid, apiCall)
+            defaultQueue.addRequest(uid, apiCall)
             return uid
         }
 
@@ -75,13 +75,6 @@ interface GScript : Serializable {
             apiCallsList.forEach {
                 addRequest(it)
             }
-        }
-
-        fun addRequest(uid: String, apiCall: APIRequests) {
-            if (defaultQueue.containsKey(uid)) {
-                throw GScriptDuplicateUIDException()
-            }
-            defaultQueue[uid] = apiCall
         }
 
         fun getCombinedJson(requestList: MutableMap<String, APIRequests>): Array<JSONObject> {
@@ -96,7 +89,7 @@ interface GScript : Serializable {
 
         fun execute(scriptURL: String, useCache: Boolean = true): MutableMap<String, APIResponse> {
             val responseList = execute(defaultQueue, scriptURL, useCache)
-            defaultQueue.clear()
+            defaultQueue.getQueue().clear()
             return responseList
         }
 
@@ -107,7 +100,7 @@ interface GScript : Serializable {
         }
 
         fun execute(
-            calls: MutableMap<String, APIRequests>,
+            apiRequestQueue: APIRequestsQueue,
             scriptURL: String,
             useCache: Boolean = true
         ): MutableMap<String, APIResponse> {
@@ -116,7 +109,7 @@ interface GScript : Serializable {
 
             val scriptUrl = URL(scriptURL)
             val filteredCalls =
-                calls.filter { (key, apiRequest) -> removeCallsWhoseResponsesAreCached(apiRequest) } as MutableMap
+                apiRequestQueue.getQueue().filter { (key, apiRequest) -> removeCallsWhoseResponsesAreCached(apiRequest) } as MutableMap
 
             if (filteredCalls.isEmpty()) return mutableMapOf()
 
@@ -163,7 +156,7 @@ interface GScript : Serializable {
         }
 
         fun clearAll() {
-            defaultQueue.clear()
+            defaultQueue.clearList()
         }
     }
 }

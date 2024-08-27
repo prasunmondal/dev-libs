@@ -58,8 +58,6 @@ class FetchAllBySorting {
         requestQueue1.addRequest(request)
         requestQueue1.addRequest("id6",request)
         requestQueue1.execute()
-
-//        GScript.execute(ProjectConfig.dBServerScriptURL)
         LogMe.log("Reset Completed.")
     }
 }
@@ -73,10 +71,4 @@ object FetchAllBySortingModel: GSheetSerialized<ModelInsertObject>(
     appendInServer = true,
     appendInLocal = true,
     filter = ClientFilter("filterWithNamePrasun", { list: List<ModelInsertObject> -> list.filter { it.name == "Prasun" } })
-) {
-//    fun customFetchRequest(): APIRequests {
-//        val request = prepareFetchByAndConditionRequest()
-//        request.conditionAnd("name", "Prasun")
-//        return request
-//    }
-}
+)
