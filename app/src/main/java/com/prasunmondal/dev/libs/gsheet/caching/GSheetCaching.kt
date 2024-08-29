@@ -36,19 +36,19 @@ interface GSheetCaching<T>: GScript {
         return JsonParser.convertJsonArrayStringToJavaObjList(apiResponse.content, classTypeForResponseParsing)
     }
     fun saveResponse(listOfObj: List<T>) {
-        LogMe.log("Expensive Operation - saving data to local: ${getCacheKey()}")
-        CentralCacheObj.centralCache.put(getCacheKey(), listOfObj, false)
+        LogMe.log("Expensive Operation - saving data to local: ${getCacheKeyForGSheet()}")
+        CentralCacheObj.centralCache.put(getCacheKeyForGSheet(), listOfObj, false)
     }
     fun getResponseFromCache(useCache: Boolean = false): Any? {
-        return arrayListOf(CentralCacheObj.centralCache.get<T>(context, getCacheKey(), useCache, false))
+        return arrayListOf(CentralCacheObj.centralCache.get<T>(context, getCacheKeyForGSheet(), useCache, false))
     }
     fun getResponseFromCacheOrServer(useCache: Boolean = true): List<T> {
-        if(CentralCacheObj.centralCache.isAvailable(context, getCacheKey())) {
+        if(CentralCacheObj.centralCache.isAvailable(context, getCacheKeyForGSheet())) {
             return getResponseFromCache(useCache) as List<T>
         } else {
             return getFromServer(shallCacheData)
         }
     }
 
-    fun getCacheKey(): String
+    fun getCacheKeyForGSheet(): String
 }

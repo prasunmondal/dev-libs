@@ -18,7 +18,9 @@ class FetchAllBySorting {
         val t = FetchAllBySortingModel.fetchAll().execute()
 
         LogMe.log("Completed Data fetch - 1.")
-
+        LogMe.log("Starting Data fetch - 2.")
+        val r = FetchAllBySortingModel.fetchAll().execute()
+        LogMe.log("Completed Data fetch - 2.")
         t.forEach { item ->
             LogMe.log("Fetched.........")
             (LogMe.log((item).name))
