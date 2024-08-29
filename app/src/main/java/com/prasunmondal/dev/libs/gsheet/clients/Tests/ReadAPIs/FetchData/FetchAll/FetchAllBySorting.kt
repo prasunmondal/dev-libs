@@ -41,7 +41,7 @@ class FetchAllBySorting {
         GScript.clearAll()
 //        val deleteRequest = FetchAllBySortingModel.deleteAll().prepareRequest()
 //        GScript.addRequest(deleteRequest)
-        FetchAllBySortingModel.deleteAll().queue()
+        FetchAllBySortingModel.deleteAll().execute()
         val obj1 = ModelInsertObject("FetchAllBySorting1", "FetchAllBySorting2")
         val obj2 = ModelInsertObject("FetchAllBySorting3", "FetchAllBySorting4")
         val obj3 = ModelInsertObject("FetchAllBySorting5", "FetchAllBySorting6")
@@ -53,7 +53,7 @@ class FetchAllBySorting {
         FetchAllBySortingModel.insert(obj2).queue()
         FetchAllBySortingModel.insert(obj3).queue()
         FetchAllBySortingModel.insert(obj4).queue()
-        FetchAllBySortingModel.insert(obj5).queue()
+        FetchAllBySortingModel.insert(obj5).execute()
         GScript.execute(ProjectConfig.dBServerScriptURL)
 
         var request=FetchAllBySortingModel.insert(obj1).getRequestObj()

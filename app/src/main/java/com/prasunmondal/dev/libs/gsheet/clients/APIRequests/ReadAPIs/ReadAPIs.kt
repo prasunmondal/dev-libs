@@ -34,7 +34,6 @@ abstract class ReadAPIs<T> : APIRequests(), ResponseCache {
         if(this.sort != null) {
             cacheKey += "\\<localOp:${this.sort!!.sortName}>"
         }
-
         return cacheKey
     }
 

@@ -48,7 +48,6 @@ interface CachingUtils<T> {
                     val parsedResponse = (response as ReadResponse<T>).parsedResponse
                     saveToCache(cacheKey, parsedResponse)
                     parsedResponse
-
                 }
             }
         }

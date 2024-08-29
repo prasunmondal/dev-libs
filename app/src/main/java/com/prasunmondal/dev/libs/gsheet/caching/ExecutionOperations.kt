@@ -1,6 +1,5 @@
 package com.prasunmondal.dev.libs.gsheet.caching
 
-import com.prasunmondal.dev.libs.caching.CentralCacheObj
 import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.APIRequests
 import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.APIRequestsQueue
 import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.ReadAPIs.ReadAPIs
@@ -11,17 +10,12 @@ import com.prasunmondal.dev.libs.gsheet.clients.Tests.ProjectConfig
 interface ExecutionOperations<T> :GSheetCaching<T>, CachingUtils<T> {
 
     fun execute(useCache: Boolean = true): List<T> {
-        var resultsFromCache: List<T>? = null
-
-        // Try to get from cache if useCache = true
-        if(isCachingEnabledForThisRequest(prepareRequest()) && useCache) {
-            resultsFromCache = get(context, prepareRequest() as ReadAPIs<T>, useCache)
+        if(isCachingEnabledForThisRequest(prepareRequest())) {
+            // If the request is ReadAPI, look into the cache
+            return get(context, prepareRequest() as ReadAPIs<T>, useCache)
         }
-
-        // If no results found, try to get it from server
-        if (resultsFromCache != null) {
-            return resultsFromCache
-        } else {
+        else {
+            // If the request is not ReadAPI, execute directly
             val responseObj =
                 prepareRequest().executeOne(ProjectConfig.dBServerScriptURL, prepareRequest())
 
