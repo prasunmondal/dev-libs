@@ -44,6 +44,7 @@ class InsertObjectTemplate<T : Any>(
             val existingList = CentralCacheObj.centralCache.get<T>(context, "${request.sheetId}//${request.tabName}") as MutableList<T>
             list.addAll(existingList)
         }
+        list.add(data)
         CentralCacheObj.centralCache.putDirect("${request.sheetId}//${request.tabName}", list)
     }
 }
