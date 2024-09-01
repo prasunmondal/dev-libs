@@ -7,6 +7,9 @@ import android.provider.Settings
 import java.util.UUID
 
 object DeviceUtils {
+
+    private val uniqueDeviceId: String? = null
+
     val isEmulator: Boolean
         get() =
             (Build.BRAND.startsWith("generic") && Build.DEVICE.startsWith("generic")
@@ -29,6 +32,11 @@ object DeviceUtils {
 
 
     fun getUniqueID(context: Context): String {
+        
+        if(uniqueDeviceId != null) {
+            return uniqueDeviceId
+        }
+
         val PREF_UNIQUE_ID = "PREF_UNIQUE_ID"
         val DEFAULT_ANDROID_ID = "9774d56d682e549c"
 
