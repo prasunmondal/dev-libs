@@ -22,6 +22,10 @@ interface ExecutionOperations<T> :GSheetCaching<T>, CachingUtils<T> {
             if (responseObj is ReadResponse<*>) {
                 return responseObj.parsedResponse as List<T>
             }
+
+            // Delete the cached objects
+            deleteCacheObjects("$sheetURL\\$tabname")
+
             return listOf()
         }
     }

@@ -23,7 +23,6 @@ class InsertObjectTemplate<T : Any>(
     var data :T?
 ) : RequestTemplatesInterface<T>, CachingUtils<T> {
 
-
      override fun prepareRequest(): APIRequests {
         val request = GSheetInsertObject()
         request.sheetId = sheetURL

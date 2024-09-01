@@ -46,7 +46,7 @@ interface CachingUtils<T> {
                     listOf()
                 else {
                     val parsedResponse = (response as ReadResponse<T>).parsedResponse
-                    saveToCache(cacheKey, parsedResponse)
+                    saveToCache(cacheKey, parsedResponse, false)
                     parsedResponse
                 }
             }
@@ -62,11 +62,15 @@ interface CachingUtils<T> {
         }
     }
 
-    fun saveToCache(cacheKey: String, obj: List<T>) {
-        CentralCacheObj.centralCache.put(cacheKey, obj)
+    fun saveToCache(cacheKey: String, obj: List<T>, appendCacheKeyPrefix: Boolean = true) {
+        CentralCacheObj.centralCache.put(cacheKey, obj, appendCacheKeyPrefix)
     }
 
     fun <T> insert(obj: List<T>) {
 
+    }
+
+    fun deleteCacheObjects(whereKeyStartsWith: String) {
+        CentralCacheObj.centralCache.removeCacheObjectsWhereKeyStartsWith(whereKeyStartsWith)
     }
 }

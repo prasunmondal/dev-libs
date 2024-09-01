@@ -172,4 +172,12 @@ open class CentralCache : CacheFileOps() {
         )
     }
 
+    fun removeCacheObjectsWhereKeyStartsWith(keyStartingString: String) {
+        val keysToRemove = CentralCacheObj.centralCache.cache[getClassKey()]!!.keys.filter { it.startsWith(keyStartingString) }
+        for (key in keysToRemove) {
+            CentralCacheObj.centralCache.cache[getClassKey()]!!.remove(key)
+            LogMe.log("Cache Op: Deleted: key: $key")
+        }
+        CentralCacheObj.centralCache.saveCacheDataToFile("ignoredFileName", CentralCacheObj.centralCache.cache)
+    }
 }

@@ -182,7 +182,7 @@ abstract class Tech4BytesSerializable<T : Any> : java.io.Serializable {
 
     private fun getFilterName(cacheTag: String = "default"): String {
 //        var callerClassName = ClassDetailsUtils.getCaller(ClassDetailsUtils.getCaller())
-        return "$sheetURL/$tabname/$cacheTag"
+        return "$sheetURL\\$tabname\\$cacheTag"
     }
 
     open fun <T : Any> filterResults(list: ArrayList<T>): ArrayList<T> {
