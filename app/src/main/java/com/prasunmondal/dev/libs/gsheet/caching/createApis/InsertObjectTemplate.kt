@@ -21,7 +21,7 @@ class InsertObjectTemplate<T : Any>(
     override var context: Context,
     override var filter: ClientFilter<T>?,
     override var sort: ClientSort<T>?,
-    var data: T?
+    var data: T
 ) : RequestTemplatesInterface<T>, CachingUtils<T> {
 
     var request = GSheetInsertObject()
@@ -38,9 +38,12 @@ class InsertObjectTemplate<T : Any>(
     }
 
     fun saveToLocal(append: Boolean = false) {
+        val request = GSheetInsertObject()
+        val list: MutableList<T> = mutableListOf()
         if(append) {
-            throw Exception("Appending is not allowed as of now!")
+            val existingList = CentralCacheObj.centralCache.get<T>(context, "${request.sheetId}//${request.tabName}") as MutableList<T>
+            list.addAll(existingList)
         }
-        CentralCacheObj.centralCache.putDirect("${request.sheetId}//${request.tabName}", data)
+        CentralCacheObj.centralCache.putDirect("${request.sheetId}//${request.tabName}", list)
     }
 }
