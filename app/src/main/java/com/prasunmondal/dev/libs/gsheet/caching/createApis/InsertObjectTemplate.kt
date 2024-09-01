@@ -30,4 +30,9 @@ class InsertObjectTemplate<T : Any>(
         request.setDataObject(data as Any)
         return request
     }
+
+    override fun cacheUpdateOperation() {
+        val request = GSheetInsertObject()
+        deleteCacheObjects("${request.sheetId}//${request.tabName}")
+    }
 }
