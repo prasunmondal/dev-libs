@@ -35,6 +35,12 @@ open class GSheetSerialized<T : Any>(
             appendInServer, appendInLocal, cacheTag, shallCacheData, context, filter, sort, obj)
     }
 
+//    fun insert(obj: List<T>, context: Context = AppContexts.get()): InsertObjectTemplate<T> {
+//        return InsertObjectTemplate(
+//            sheetURL, tabName, query, classTypeForResponseParsing,
+//            appendInServer, appendInLocal, cacheTag, shallCacheData, context, filter, sort, obj)
+//    }
+
     fun deleteAll(context: Context = AppContexts.get()): DeleteAPIsTemplate<T> {
         return DeleteAPIsTemplate(
             sheetURL, tabName, query, classTypeForResponseParsing,

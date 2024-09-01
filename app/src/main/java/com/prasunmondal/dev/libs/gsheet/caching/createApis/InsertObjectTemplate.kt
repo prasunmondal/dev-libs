@@ -1,6 +1,7 @@
 package com.prasunmondal.dev.libs.gsheet.caching.createApis
 
 import android.content.Context
+import com.prasunmondal.dev.libs.caching.CentralCacheObj
 import com.prasunmondal.dev.libs.gsheet.caching.CachingUtils
 import com.prasunmondal.dev.libs.gsheet.caching.RequestTemplatesInterface
 import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.APIRequests
@@ -23,8 +24,9 @@ class InsertObjectTemplate<T : Any>(
     var data: T?
 ) : RequestTemplatesInterface<T>, CachingUtils<T> {
 
+    var request = GSheetInsertObject()
+
     override fun prepareRequest(): APIRequests {
-        val request = GSheetInsertObject()
         request.sheetId = sheetURL
         request.tabName = tabname
         request.setDataObject(data as Any)
@@ -32,7 +34,13 @@ class InsertObjectTemplate<T : Any>(
     }
 
     override fun cacheUpdateOperation() {
-        val request = GSheetInsertObject()
         deleteCacheObjects("${request.sheetId}//${request.tabName}")
+    }
+
+    fun saveToLocal(append: Boolean = false) {
+        if(append) {
+            throw Exception("Appending is not allowed as of now!")
+        }
+        CentralCacheObj.centralCache.putDirect("${request.sheetId}//${request.tabName}", data)
     }
 }

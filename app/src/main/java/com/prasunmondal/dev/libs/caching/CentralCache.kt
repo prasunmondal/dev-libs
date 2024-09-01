@@ -140,6 +140,21 @@ open class CentralCache : CacheFileOps() {
         )
     }
 
+    fun <T> putDirect(key: String, data: T) {
+        val cacheClassKey = getClassKey()
+        val cacheKey = getCacheKey(key, false)
+        LogMe.log("Putting data to Cache - key: $cacheKey")
+        val presentData = CentralCacheObj.centralCache.cache[cacheClassKey]
+        if (presentData == null) {
+            CentralCacheObj.centralCache.cache[cacheClassKey] = hashMapOf()
+        }
+        CentralCacheObj.centralCache.cache[cacheClassKey]!![key] = CacheModel(data as Any?)
+        CentralCacheObj.centralCache.saveCacheDataToFile(
+            key,
+            CentralCacheObj.centralCache.cache
+        )
+    }
+
     fun <T> putNGet(key: String, data: T): T {
         put(key, data)
         return data
