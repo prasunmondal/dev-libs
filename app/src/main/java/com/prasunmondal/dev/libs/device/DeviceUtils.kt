@@ -32,7 +32,7 @@ object DeviceUtils {
 
 
     fun getUniqueID(context: Context): String {
-        
+
         if(uniqueDeviceId != null) {
             return uniqueDeviceId
         }

@@ -1,6 +1,7 @@
 package com.prasunmondal.dev.libs.gsheet.clients
 
 import android.content.Context
+import com.prasunmondal.dev.libs.contexts.AppContexts
 import com.prasunmondal.dev.libs.gsheet.caching.createApis.InsertObjectTemplate
 import com.prasunmondal.dev.libs.gsheet.caching.deleteApis.DeleteAPIsTemplate
 import com.prasunmondal.dev.libs.gsheet.caching.readApis.FetchAllTemplate
@@ -8,7 +9,6 @@ import com.prasunmondal.dev.libs.gsheet.post.serializable.PostObjectResponse
 import java.util.function.Consumer
 
 open class GSheetSerialized<T : Any>(
-    var context: Context,
     var scriptURL: String,
     var sheetURL: String,
     var tabName: String,
@@ -23,22 +23,21 @@ open class GSheetSerialized<T : Any>(
     var sort: ClientSort<T>? = null
 ) {
 
-    private var _context: Context = context
-    fun fetchAll(): FetchAllTemplate<T> {
+    fun fetchAll(context: Context = AppContexts.get()): FetchAllTemplate<T> {
         return FetchAllTemplate(
             sheetURL, tabName, query, classTypeForResponseParsing,
-            appendInServer, appendInLocal, cacheTag, shallCacheData, _context, filter, sort)
+            appendInServer, appendInLocal, cacheTag, shallCacheData, context, filter, sort)
     }
 
-    fun insert(obj: T): InsertObjectTemplate<T> {
+    fun insert(obj: T, context: Context = AppContexts.get()): InsertObjectTemplate<T> {
         return InsertObjectTemplate(
             sheetURL, tabName, query, classTypeForResponseParsing,
-            appendInServer, appendInLocal, cacheTag, shallCacheData, _context, filter, sort, obj)
+            appendInServer, appendInLocal, cacheTag, shallCacheData, context, filter, sort, obj)
     }
 
-    fun deleteAll(): DeleteAPIsTemplate<T> {
+    fun deleteAll(context: Context = AppContexts.get()): DeleteAPIsTemplate<T> {
         return DeleteAPIsTemplate(
             sheetURL, tabName, query, classTypeForResponseParsing,
-            appendInServer, appendInLocal, cacheTag, shallCacheData, _context, filter, sort)
+            appendInServer, appendInLocal, cacheTag, shallCacheData, context, filter, sort)
     }
 }
