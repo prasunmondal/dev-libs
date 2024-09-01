@@ -4,8 +4,7 @@ import android.content.Context
 
 class TestDataFetchAll {
 
-    fun main(context: Context)
-    {
+    fun main(context: Context) {
 //        prepareData(context)
 //        fetchValidData(context)
 //        fetchEmptyData(context)

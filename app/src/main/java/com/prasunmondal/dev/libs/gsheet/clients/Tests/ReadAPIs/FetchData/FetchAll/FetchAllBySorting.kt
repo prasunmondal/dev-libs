@@ -49,7 +49,7 @@ class FetchAllBySorting {
         val obj4 = ModelInsertObject("Prasun", "Mondal1")
         val obj5 = ModelInsertObject("Prasun", "Mondal2")
 
-        var requestQueue1=APIRequestsQueue()
+        var requestQueue1 = APIRequestsQueue()
         FetchAllBySortingModel.insert(obj1).queue(requestQueue1)
         FetchAllBySortingModel.insert(obj2).queue()
         FetchAllBySortingModel.insert(obj3).queue()
@@ -57,15 +57,15 @@ class FetchAllBySorting {
         FetchAllBySortingModel.insert(obj5).execute()
         GScript.execute(ProjectConfig.dBServerScriptURL)
 
-        var request=FetchAllBySortingModel.insert(obj1).getRequestObj()
+        var request = FetchAllBySortingModel.insert(obj1).getRequestObj()
         requestQueue1.addRequest(request)
-        requestQueue1.addRequest("id6",request)
+        requestQueue1.addRequest("id6", request)
         requestQueue1.execute()
         LogMe.log("Reset Completed.")
     }
 }
 
-object FetchAllBySortingModel: GSheetSerialized<ModelInsertObject>(
+object FetchAllBySortingModel : GSheetSerialized<ModelInsertObject>(
     AppContexts.get(),
     ProjectConfig.dBServerScriptURL,
     ProjectConfig.DB_SHEET_ID,
@@ -73,5 +73,7 @@ object FetchAllBySortingModel: GSheetSerialized<ModelInsertObject>(
     classTypeForResponseParsing = ModelInsertObject::class.java,
     appendInServer = true,
     appendInLocal = true,
-    filter = ClientFilter("filterWithNamePrasun", { list: List<ModelInsertObject> -> list.filter { it.name == "Prasun" } })
+    filter = ClientFilter(
+        "filterWithNamePrasun",
+        { list: List<ModelInsertObject> -> list.filter { it.name == "Prasun" } })
 )

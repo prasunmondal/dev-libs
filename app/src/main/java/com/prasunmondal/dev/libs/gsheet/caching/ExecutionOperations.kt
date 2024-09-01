@@ -7,14 +7,13 @@ import com.prasunmondal.dev.libs.gsheet.clients.APIResponses.ReadResponse
 import com.prasunmondal.dev.libs.gsheet.clients.GScript
 import com.prasunmondal.dev.libs.gsheet.clients.Tests.ProjectConfig
 
-interface ExecutionOperations<T> :GSheetCaching<T>, CachingUtils<T> {
+interface ExecutionOperations<T> : GSheetCaching<T>, CachingUtils<T> {
 
     fun execute(useCache: Boolean = true): List<T> {
-        if(isCachingEnabledForThisRequest(prepareRequest())) {
+        if (isCachingEnabledForThisRequest(prepareRequest())) {
             // If the request is ReadAPI, look into the cache
             return get(context, prepareRequest() as ReadAPIs<T>, useCache)
-        }
-        else {
+        } else {
             // If the request is not ReadAPI, execute directly
             val responseObj =
                 prepareRequest().executeOne(ProjectConfig.dBServerScriptURL, prepareRequest())
@@ -34,11 +33,11 @@ interface ExecutionOperations<T> :GSheetCaching<T>, CachingUtils<T> {
         return request is ReadAPIs<*>
     }
 
-    fun queue(){
+    fun queue() {
         GScript.addRequest(prepareRequest())
     }
 
-    fun queue(requestQueue1: APIRequestsQueue){
+    fun queue(requestQueue1: APIRequestsQueue) {
         requestQueue1.addRequest(prepareRequest())
     }
 
@@ -46,5 +45,5 @@ interface ExecutionOperations<T> :GSheetCaching<T>, CachingUtils<T> {
         return prepareRequest()
     }
 
-    fun prepareRequest():APIRequests
+    fun prepareRequest(): APIRequests
 }

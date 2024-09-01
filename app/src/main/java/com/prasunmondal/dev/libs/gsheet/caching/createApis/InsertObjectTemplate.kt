@@ -20,10 +20,10 @@ class InsertObjectTemplate<T : Any>(
     override var context: Context,
     override var filter: ClientFilter<T>?,
     override var sort: ClientSort<T>?,
-    var data :T?
+    var data: T?
 ) : RequestTemplatesInterface<T>, CachingUtils<T> {
 
-     override fun prepareRequest(): APIRequests {
+    override fun prepareRequest(): APIRequests {
         val request = GSheetInsertObject()
         request.sheetId = sheetURL
         request.tabName = tabname

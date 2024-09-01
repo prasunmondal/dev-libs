@@ -7,7 +7,6 @@ import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.APIRequests
 import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.ReadAPIs.FetchData.GSheetFetchAll
 import com.prasunmondal.dev.libs.gsheet.clients.ClientFilter
 import com.prasunmondal.dev.libs.gsheet.clients.ClientSort
-import com.prasunmondal.dev.libs.gsheet.clients.GScript
 
 class FetchAllTemplate<T>(
     override var sheetURL: String,

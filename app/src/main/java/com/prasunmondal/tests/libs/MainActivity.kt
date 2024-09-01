@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
         AppContexts.set(this)
 
 //        Thread {
-            RunTest().runTest(this)
+        RunTest().runTest(this)
 //        }.start()
         testAll()
     }

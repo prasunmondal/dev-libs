@@ -12,12 +12,12 @@ class APIRequestsQueue {
         return listofAPIRequest
     }
 
-    fun addRequest(request:APIRequests){
+    fun addRequest(request: APIRequests) {
         listofAPIRequest[StringUtils.generateUniqueString()] = request
     }
 
-    fun execute(){
-        GScript.execute(this, ProjectConfig.dBServerScriptURL,true)
+    fun execute() {
+        GScript.execute(this, ProjectConfig.dBServerScriptURL, true)
     }
 
     fun addRequest(uid: String, request: APIRequests) {
