@@ -32,6 +32,7 @@ class AppContexts {
                 getCaller()
                 contextResult = contexts[contexts.keys.first()]!!.applicationContext
             }
+            LogMe.log("No Contexts Found.")
             return contextResult!!
         }
 
