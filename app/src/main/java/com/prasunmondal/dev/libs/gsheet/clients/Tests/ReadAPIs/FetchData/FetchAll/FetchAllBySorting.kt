@@ -40,9 +40,9 @@ class FetchAllBySorting {
     }
 
     fun testSingleAttribute() {
-        val t = SingleAttributedDataUtils.getRecords(true)
-        val r = SingleAttributedDataUtils.getRecords(false)
-        val i = 0
+//        val t = SingleAttributedDataUtils.getRecords(true)
+//        val r = SingleAttributedDataUtils.getRecords(false)
+//        val i = 0
     }
 
     fun resetData() {
