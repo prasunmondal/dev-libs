@@ -9,7 +9,6 @@ import com.prasunmondal.dev.libs.gsheet.clients.GSheetSerialized
 import com.prasunmondal.dev.libs.gsheet.clients.Tests.ModelInsertObject
 import com.prasunmondal.dev.libs.gsheet.clients.Tests.ProjectConfig
 import com.prasunmondal.dev.libs.logs.instant.terminal.LogMe
-import com.tech4bytes.mbrosv3.BusinessData.SingleAttributedDataUtils
 
 class FetchAllBySorting {
 
