@@ -7,7 +7,6 @@ import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.ReadAPIs.FetchData.G
 import com.prasunmondal.dev.libs.gsheet.clients.GScript
 import com.prasunmondal.dev.libs.gsheet.clients.Tests.ModelInsertObject
 import com.prasunmondal.dev.libs.gsheet.clients.Tests.ProjectConfig
-import com.prasunmondal.dev.libs.gsheet.clients.Tests.TestBulkOps.TestSheet1Model
 
 class FetchAllTest {
     constructor() {
@@ -16,7 +15,7 @@ class FetchAllTest {
     }
 
     fun testByCallingClassesGetMethod() {
-        TestSheet1Model.fetchAll()
+//        TestSheet1Model.fetchAll()
     }
 
     fun test() {

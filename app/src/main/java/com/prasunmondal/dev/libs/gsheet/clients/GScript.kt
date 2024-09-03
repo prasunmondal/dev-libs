@@ -19,7 +19,7 @@ import java.net.URL
 import java.util.UUID
 import java.util.function.Consumer
 
-interface GScript : Serializable {
+interface GScript {
 
     var context: Context
     var scriptURL: String

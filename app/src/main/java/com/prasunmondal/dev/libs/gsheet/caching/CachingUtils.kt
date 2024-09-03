@@ -4,7 +4,6 @@ import android.content.Context
 import com.prasunmondal.dev.libs.caching.CentralCacheObj
 import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.ReadAPIs.ReadAPIs
 import com.prasunmondal.dev.libs.gsheet.clients.APIResponses.ReadResponse
-import com.prasunmondal.dev.libs.gsheet.clients.Tests.TestBulkOps.TestSheet1Model.scriptURL
 import com.prasunmondal.dev.libs.gsheet.serializer.Tech4BytesSerializableLocks
 import com.prasunmondal.dev.libs.logs.instant.terminal.LogMe
 
@@ -20,7 +19,7 @@ interface CachingUtils<T> {
             synchronized(Tech4BytesSerializableLocks.getLock(cacheKey)!!) {
                 // Synchronized code block
                 println("Synchronized function called with key: $cacheKey")
-                request.execute(scriptURL)
+                request.execute(request.scriptURL)
                 cacheResults = readFromCache(context, request, useCache)
                 if (cacheResults == null)
                     listOf()
@@ -41,7 +40,7 @@ interface CachingUtils<T> {
             synchronized(Tech4BytesSerializableLocks.getLock(cacheKey)!!) {
                 // Synchronized code block
                 println("Synchronized function called with key: $cacheKey")
-                val response = request.executeOne(scriptURL, request)
+                val response = request.executeOne(request.scriptURL, request)
                 if (response == null)
                     listOf()
                 else {

@@ -9,6 +9,8 @@ class CacheModel : java.io.Serializable {
     var entryTime: LocalDateTime
     var expiryTime: LocalDateTime
     var content: Any?
+
+    @Transient
     var context: Context
 
     constructor(context: Context, content: Any?) {
