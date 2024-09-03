@@ -30,9 +30,9 @@ interface CachingUtils<T> {
         }
     }
 
-    fun get(context: Context, request: ReadAPIs<T>, useCache: Boolean): List<T> {
+    fun get(request: ReadAPIs<T>, useCache: Boolean): List<T> {
         val cacheKey = request.getCacheKey()
-        var cacheResults = readFromCache(context, request, useCache)
+        var cacheResults = readFromCache(request.context, request, useCache)
 
         LogMe.log("Getting delivery records: Cache Hit: " + (cacheResults != null))
         return if (cacheResults != null) {
@@ -46,7 +46,7 @@ interface CachingUtils<T> {
                     listOf()
                 else {
                     val parsedResponse = (response as ReadResponse<T>).parsedResponse
-                    saveToCache(cacheKey, parsedResponse, false)
+                    saveToCache(request.context, cacheKey, parsedResponse, false)
                     parsedResponse
                 }
             }
@@ -62,16 +62,16 @@ interface CachingUtils<T> {
         }
     }
 
-    fun saveToCache(cacheKey: String, obj: List<T>, appendCacheKeyPrefix: Boolean = true) {
-        CentralCacheObj.centralCache.put(cacheKey, obj, appendCacheKeyPrefix)
+    fun saveToCache(context: Context, cacheKey: String, obj: List<T>, appendCacheKeyPrefix: Boolean = true) {
+        CentralCacheObj.centralCache.put(context, cacheKey, obj, appendCacheKeyPrefix)
     }
 
     fun <T> insert(obj: List<T>) {
 
     }
 
-    fun deleteCacheObjects(whereKeyStartsWith: String) {
-        CentralCacheObj.centralCache.removeCacheObjectsWhereKeyStartsWith(whereKeyStartsWith)
+    fun deleteCacheObjects(context: Context, whereKeyStartsWith: String) {
+        CentralCacheObj.centralCache.removeCacheObjectsWhereKeyStartsWith(context, whereKeyStartsWith)
     }
 
     fun cacheUpdateOperation() {

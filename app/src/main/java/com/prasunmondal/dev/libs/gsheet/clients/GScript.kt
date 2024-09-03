@@ -1,5 +1,6 @@
 package com.prasunmondal.dev.libs.gsheet.clients
 
+import com.prasunmondal.dev.libs.gsheet.ContextKeeper
 import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.APIRequests
 import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.APIRequestsQueue
 import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.ReadAPIs.ReadAPIs
@@ -10,6 +11,7 @@ import com.prasunmondal.dev.libs.gsheet.clients.responseCaching.ResponseCache
 import com.prasunmondal.dev.libs.gsheet.metrics.GSheetMetrics
 import com.prasunmondal.dev.libs.gsheet.post.serializable.PostObjectResponse
 import com.prasunmondal.dev.libs.jsons.JsonParser
+import android.content.Context
 import com.prasunmondal.dev.libs.logs.instant.terminal.LogMe
 import org.json.JSONArray
 import org.json.JSONObject
@@ -20,6 +22,7 @@ import java.util.function.Consumer
 
 interface GScript : Serializable {
 
+    var context: Context
     var scriptURL: String
         get() = ProjectConfig.dBServerScriptURL
         set(value) = TODO()

@@ -1,11 +1,13 @@
 package com.prasunmondal.dev.libs.gsheet.clients.APIRequests.CreateAPIs
 
+import android.content.Context
 import com.google.gson.Gson
+import com.prasunmondal.dev.libs.gsheet.ContextKeeper
 import com.prasunmondal.dev.libs.gsheet.post.serializable.PostObjectResponse
 import org.json.JSONObject
 import java.util.function.Consumer
 
-class GSheetInsertObject : CreateAPIs() {
+class GSheetInsertObject(override var context: Context) : CreateAPIs() {
     private lateinit var dataObject: Any
     override var onCompletion: Consumer<PostObjectResponse>? = null
     fun setDataObject(dataObject: Any): GSheetInsertObject {

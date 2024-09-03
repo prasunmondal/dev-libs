@@ -1,5 +1,7 @@
 package com.prasunmondal.dev.libs.gsheet.clients.Tests.ReadAPIs.FetchData.FetchAll
 
+import com.prasunmondal.dev.libs.contexts.AppContexts
+import com.prasunmondal.dev.libs.gsheet.ContextKeeper
 import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.CreateAPIs.GSheetInsertObject
 import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.DeleteAPIs.GSheetDeleteAll
 import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.ReadAPIs.FetchData.GSheetFetchAll
@@ -19,34 +21,34 @@ class FetchAllTest {
     }
 
     fun test() {
-        val e = GSheetDeleteAll()
+        val e = GSheetDeleteAll(AppContexts.get())
         e.setUId("test-e.234")
         e.sheetId(ProjectConfig.DB_SHEET_ID)
         e.tabName("TestSheet1")
         GScript.addRequest(e)
 
-        val f = GSheetInsertObject()
+        val f = GSheetInsertObject(AppContexts.get())
         f.setUId("test-t218625")
         f.sheetId(ProjectConfig.DB_SHEET_ID)
         f.tabName("TestSheet1")
         f.setDataObject(ModelInsertObject("Prasun", "Mondal"))
         GScript.addRequest(f)
 
-        val d = GSheetInsertObject()
+        val d = GSheetInsertObject(AppContexts.get())
         d.setUId("test-d218625")
         d.sheetId(ProjectConfig.DB_SHEET_ID)
         d.tabName("TestSheet1")
         d.setDataObject(ModelInsertObject("Dona", "Mondal"))
         GScript.addRequest(d)
 
-        val t = GSheetFetchAll<ModelInsertObject>()
+        val t = GSheetFetchAll<ModelInsertObject>(AppContexts.get())
         t.setUId("test-ti35uy2t")
         t.sheetId(ProjectConfig.DB_SHEET_ID)
         t.tabName("TestSheet1")
         t.classTypeForResponseParsing = ModelInsertObject::class.java
         GScript.addRequest(t)
 
-        val w = GSheetFetchAll<ModelInsertObject>()
+        val w = GSheetFetchAll<ModelInsertObject>(AppContexts.get())
         w.setUId("test-w245ueyt")
         w.sheetId(ProjectConfig.DB_SHEET_ID)
         w.tabName("TestSheet1")

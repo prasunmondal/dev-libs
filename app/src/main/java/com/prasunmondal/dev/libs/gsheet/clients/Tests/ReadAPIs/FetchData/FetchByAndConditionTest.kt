@@ -1,5 +1,7 @@
 package com.prasunmondal.dev.libs.gsheet.clients.Tests.ReadAPIs.FetchData
 
+import com.prasunmondal.dev.libs.contexts.AppContexts
+import com.prasunmondal.dev.libs.gsheet.ContextKeeper
 import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.CreateAPIs.GSheetInsertObject
 import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.ReadAPIs.FetchData.GSheetFetchByAndCondition
 import com.prasunmondal.dev.libs.gsheet.clients.GScript
@@ -23,21 +25,21 @@ class FetchByAndConditionTest {
     }
 
     fun test() {
-        val a = GSheetInsertObject()
+        val a = GSheetInsertObject(AppContexts.get())
         a.setUId("test-a-3456")
         a.sheetId(ProjectConfig.DB_SHEET_ID)
         a.tabName("TestSheet1")
         a.setDataObject(ModelInsertObject("Swagata", "Mondal"))
         GScript.addRequest(a)
 
-        val b = GSheetInsertObject()
+        val b = GSheetInsertObject(AppContexts.get())
         b.setUId("test-a-3458")
         b.sheetId(ProjectConfig.DB_SHEET_ID)
         b.tabName("TestSheet1")
         b.setDataObject(ModelInsertObject("Dona", "Mondal"))
         GScript.addRequest(b)
 
-        val t = GSheetFetchByAndCondition<ModelInsertObject>()
+        val t = GSheetFetchByAndCondition<ModelInsertObject>(AppContexts.get())
         t.setUId("test-tiu2t4t")
         t.sheetId(ProjectConfig.DB_SHEET_ID)
         t.tabName("TestSheet1")
@@ -45,7 +47,7 @@ class FetchByAndConditionTest {
         t.classTypeForResponseParsing = ModelInsertObject::class.java
         GScript.addRequest(t)
 
-        val w = GSheetFetchByAndCondition<ModelInsertObject>()
+        val w = GSheetFetchByAndCondition<ModelInsertObject>(AppContexts.get())
         w.setUId("test-wiew7triq")
         w.sheetId(ProjectConfig.DB_SHEET_ID)
         w.tabName("TestSheet1")
@@ -53,7 +55,7 @@ class FetchByAndConditionTest {
         w.classTypeForResponseParsing = ModelInsertObject::class.java
         GScript.addRequest(w)
 
-        val r = GSheetFetchByAndCondition<ModelInsertObject>()
+        val r = GSheetFetchByAndCondition<ModelInsertObject>(AppContexts.get())
         r.setUId("test-r2654643")
         r.sheetId(ProjectConfig.DB_SHEET_ID)
         r.tabName("TestSheet1")
@@ -62,7 +64,7 @@ class FetchByAndConditionTest {
         GScript.addRequest(r)
 
         // TODO - Fix multiple AND conditions
-        val z = GSheetFetchByAndCondition<ModelInsertObject>()
+        val z = GSheetFetchByAndCondition<ModelInsertObject>(AppContexts.get())
         z.setUId("test-z5634243")
         z.sheetId(ProjectConfig.DB_SHEET_ID)
         z.tabName("TestSheet1")

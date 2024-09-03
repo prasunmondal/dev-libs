@@ -1,5 +1,7 @@
 package com.prasunmondal.dev.libs.gsheet.clients.Tests.ReadAPIs.CheckData
 
+import com.prasunmondal.dev.libs.contexts.AppContexts
+import com.prasunmondal.dev.libs.gsheet.ContextKeeper
 import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.CreateAPIs.GSheetInsertObject
 import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.ReadAPIs.CheckData.GSheetCheckDataPresence
 import com.prasunmondal.dev.libs.gsheet.clients.GScript
@@ -12,21 +14,21 @@ class CheckDataPresenceTest {
     }
 
     fun test() {
-        val f = GSheetInsertObject()
+        val f = GSheetInsertObject(AppContexts.get())
         f.setUId("test-t218625")
         f.sheetId(ProjectConfig.DB_SHEET_ID)
         f.tabName("TestSheet1")
         f.setDataObject(ModelInsertObject("Prasun", "Mondal"))
         GScript.addRequest(f)
 
-        val g = GSheetInsertObject()
+        val g = GSheetInsertObject(AppContexts.get())
         g.setUId("test-t21t525")
         g.sheetId(ProjectConfig.DB_SHEET_ID)
         g.tabName("TestSheet1")
         g.setDataObject(ModelInsertObject("Dona", "Mondal"))
         GScript.addRequest(g)
 
-        val t = GSheetCheckDataPresence()
+        val t = GSheetCheckDataPresence(AppContexts.get())
         t.setUId("test-t34674")
         t.sheetId(ProjectConfig.DB_SHEET_ID)
         t.tabName("TestSheet1")
@@ -34,7 +36,7 @@ class CheckDataPresenceTest {
         t.values("Dona")
         GScript.addRequest(t)
 
-        val w = GSheetCheckDataPresence()
+        val w = GSheetCheckDataPresence(AppContexts.get())
         w.setUId("test-w23456")
         w.sheetId(ProjectConfig.DB_SHEET_ID)
         w.tabName("TestSheet1")

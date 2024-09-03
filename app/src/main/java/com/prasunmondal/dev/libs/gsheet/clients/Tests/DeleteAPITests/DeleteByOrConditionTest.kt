@@ -1,5 +1,7 @@
 package com.prasunmondal.dev.libs.gsheet.clients.Tests.DeleteAPITests
 
+import com.prasunmondal.dev.libs.contexts.AppContexts
+import com.prasunmondal.dev.libs.gsheet.ContextKeeper
 import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.CreateAPIs.GSheetInsertObject
 import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.DeleteAPIs.GSheetDeleteByOrCondition
 import com.prasunmondal.dev.libs.gsheet.clients.GScript
@@ -12,14 +14,14 @@ class DeleteByOrConditionTest {
     }
 
     fun test() {
-        val a = GSheetInsertObject()
+        val a = GSheetInsertObject(AppContexts.get())
         a.setUId("test-a-3456")
         a.sheetId(ProjectConfig.DB_SHEET_ID)
         a.tabName("TestSheet1")
         a.setDataObject(ModelInsertObject("Swagata", "Sarkar"))
         GScript.addRequest(a)
 
-        val t = GSheetDeleteByOrCondition()
+        val t = GSheetDeleteByOrCondition(AppContexts.get())
         t.setUId("test-ti87686")
         t.sheetId(ProjectConfig.DB_SHEET_ID)
         t.tabName("TestSheet1")

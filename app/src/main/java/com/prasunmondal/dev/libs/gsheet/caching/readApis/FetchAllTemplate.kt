@@ -1,6 +1,7 @@
 package com.prasunmondal.dev.libs.gsheet.caching.readApis
 
 import android.content.Context
+import com.prasunmondal.dev.libs.gsheet.ContextKeeper
 import com.prasunmondal.dev.libs.gsheet.caching.CachingUtils
 import com.prasunmondal.dev.libs.gsheet.caching.RequestTemplatesInterface
 import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.APIRequests
@@ -9,6 +10,7 @@ import com.prasunmondal.dev.libs.gsheet.clients.ClientFilter
 import com.prasunmondal.dev.libs.gsheet.clients.ClientSort
 
 class FetchAllTemplate<T>(
+    override var context: Context,
     override var sheetURL: String,
     override var tabname: String,
     override var query: String?,
@@ -17,12 +19,12 @@ class FetchAllTemplate<T>(
     override var appendInLocal: Boolean,
     override var cacheTag: String?,
     override var shallCacheData: Boolean,
-    override var context: Context,
     override var filter: ClientFilter<T>?,
-    override var sort: ClientSort<T>?
+    override var sort: ClientSort<T>?,
 ) : RequestTemplatesInterface<T>, CachingUtils<T> {
+
     override fun prepareRequest(): APIRequests {
-        val request = GSheetFetchAll<T>()
+        val request = GSheetFetchAll<T>(context)
 
         if (sheetURL.isNotBlank() && tabname.isNotBlank()) {
             request.sheetId(sheetURL)

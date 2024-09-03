@@ -7,7 +7,7 @@ import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.ReadAPIs.FetchData.G
 
 interface FetchByOrConditionTemplate<T> : RequestTemplatesInterface<T>, CachingUtils<T> {
     override fun prepareRequest(): APIRequests {
-        val request = GSheetFetchByAndCondition<T>()
+        val request = GSheetFetchByAndCondition<T>(context)
 
         if (sheetURL.isNotBlank() && tabname.isNotBlank()) {
             request.sheetId(sheetURL)

@@ -1,5 +1,7 @@
 package com.prasunmondal.dev.libs.gsheet.clients.Tests.ReadAPIs.FetchData.FetchAll
 
+import com.prasunmondal.dev.libs.contexts.AppContexts
+import com.prasunmondal.dev.libs.gsheet.ContextKeeper
 import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.APIRequestsQueue
 import com.prasunmondal.dev.libs.gsheet.clients.ClientFilter
 import com.prasunmondal.dev.libs.gsheet.clients.GScript
@@ -7,10 +9,12 @@ import com.prasunmondal.dev.libs.gsheet.clients.GSheetSerialized
 import com.prasunmondal.dev.libs.gsheet.clients.Tests.ModelInsertObject
 import com.prasunmondal.dev.libs.gsheet.clients.Tests.ProjectConfig
 import com.prasunmondal.dev.libs.logs.instant.terminal.LogMe
+import com.tech4bytes.mbrosv3.BusinessData.SingleAttributedDataUtils
 
 class FetchAllBySorting {
 
     init {
+        testSingleAttribute()
         resetData()
         LogMe.log("Starting Data fetch - 1.")
 
@@ -33,6 +37,12 @@ class FetchAllBySorting {
 //        LogMe.log(t)
 //        LogMe.log("Logging the data - 2.")
 //        LogMe.log(t1)
+    }
+
+    fun testSingleAttribute() {
+        val t = SingleAttributedDataUtils.getRecords(true)
+        val r = SingleAttributedDataUtils.getRecords(false)
+        val i = 0
     }
 
     fun resetData() {
@@ -65,6 +75,7 @@ class FetchAllBySorting {
 }
 
 object FetchAllBySortingModel : GSheetSerialized<ModelInsertObject>(
+    ContextKeeper(AppContexts.get()),
     ProjectConfig.dBServerScriptURL,
     ProjectConfig.DB_SHEET_ID,
     "TestSheet1",

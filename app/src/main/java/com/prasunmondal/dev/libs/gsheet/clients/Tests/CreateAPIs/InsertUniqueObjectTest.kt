@@ -1,5 +1,6 @@
 package com.prasunmondal.dev.libs.gsheet.clients.Tests.CreateAPIs
 
+import com.prasunmondal.dev.libs.contexts.AppContexts
 import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.CreateAPIs.GSheetInsertUniqueObject
 import com.prasunmondal.dev.libs.gsheet.clients.GScript
 import com.prasunmondal.dev.libs.gsheet.clients.Tests.ModelInsertObject
@@ -12,7 +13,7 @@ class InsertUniqueObjectTest {
     }
 
     fun test() {
-        val t = GSheetInsertUniqueObject()
+        val t = GSheetInsertUniqueObject(AppContexts.get())
         t.setUId("test-t7569286")
         t.sheetId(ProjectConfig.DB_SHEET_ID)
         t.tabName("TestSheet1")
@@ -20,7 +21,7 @@ class InsertUniqueObjectTest {
         t.uniqueColumn("name")
         GScript.addRequest(t)
 
-        val w = GSheetInsertUniqueObject()
+        val w = GSheetInsertUniqueObject(AppContexts.get())
         w.setUId("test-wi2u5ytf")
         w.sheetId(ProjectConfig.DB_SHEET_ID)
         w.tabName("Sheet3")

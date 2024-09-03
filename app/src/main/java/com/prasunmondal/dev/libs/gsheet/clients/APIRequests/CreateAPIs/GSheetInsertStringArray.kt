@@ -1,9 +1,11 @@
 package com.prasunmondal.dev.libs.gsheet.clients.APIRequests.CreateAPIs
 
+import android.content.Context
+import com.prasunmondal.dev.libs.gsheet.ContextKeeper
 import com.tech4bytes.extrack.DB.clients.ListUtils
 import org.json.JSONObject
 
-class GSheetInsertStringArray : CreateAPIs() {
+class GSheetInsertStringArray(override var context: Context) : CreateAPIs() {
 
     private var dataSequence: MutableList<String> = mutableListOf()
     override fun getJSON(): JSONObject {

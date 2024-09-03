@@ -8,12 +8,13 @@ import com.prasunmondal.dev.libs.logs.instant.terminal.LogMe
 open class CacheFileOps : CacheFileName() {
     fun saveCacheDataToFile(
         cacheKey: String,
-        cache: MutableMap<String, MutableMap<String, CacheModel>>
+        cache: MutableMap<String, MutableMap<String, CacheModel>>,
+        context: Context
     ) {
         LogMe.log("Saving cache data - File: ${getFileName(cacheKey)}")
         val filename = getFileName(cacheKey)
         val writeObj = IOObjectToFile()
-        writeObj.WriteObjectToFile(AppContexts.get(), filename, cache)
+        writeObj.WriteObjectToFile(context, filename, cache)
         CacheFilesList.addToCacheFilesList(filename)
     }
 

@@ -1,5 +1,7 @@
 package com.prasunmondal.dev.libs.gsheet.clients.Tests.ReadAPIs.FetchData
 
+import com.prasunmondal.dev.libs.contexts.AppContexts
+import com.prasunmondal.dev.libs.gsheet.ContextKeeper
 import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.ReadAPIs.FetchData.GSheetFetchByOrCondition
 import com.prasunmondal.dev.libs.gsheet.clients.GScript
 import com.prasunmondal.dev.libs.gsheet.clients.Tests.ModelInsertObject
@@ -12,7 +14,7 @@ class FetchByOrConditionTest {
     }
 
     fun test() {
-        val t = GSheetFetchByOrCondition<ModelInsertObject>()
+        val t = GSheetFetchByOrCondition<ModelInsertObject>(AppContexts.get())
         t.setUId("test-tiu2t4t")
         t.sheetId(ProjectConfig.DB_SHEET_ID)
         t.tabName("TestSheet1")
@@ -20,7 +22,7 @@ class FetchByOrConditionTest {
         t.classTypeForResponseParsing = ModelInsertObject::class.java
         GScript.addRequest(t)
 
-        val w = GSheetFetchByOrCondition<ModelInsertObject>()
+        val w = GSheetFetchByOrCondition<ModelInsertObject>(AppContexts.get())
         w.setUId("test-wiew7triq")
         w.sheetId(ProjectConfig.DB_SHEET_ID)
         w.tabName("TestSheet1")
@@ -28,7 +30,7 @@ class FetchByOrConditionTest {
         w.classTypeForResponseParsing = ModelInsertObject::class.java
         GScript.addRequest(w)
 
-        val r = GSheetFetchByOrCondition<ModelInsertObject>()
+        val r = GSheetFetchByOrCondition<ModelInsertObject>(AppContexts.get())
         r.setUId("test-r2654643")
         r.sheetId(ProjectConfig.DB_SHEET_ID)
         r.tabName("TestSheet1")
@@ -37,7 +39,7 @@ class FetchByOrConditionTest {
         GScript.addRequest(r)
 
         // TODO - Fix multiple AND conditions
-        val z = GSheetFetchByOrCondition<ModelInsertObject>()
+        val z = GSheetFetchByOrCondition<ModelInsertObject>(AppContexts.get())
         z.setUId("test-z5634243")
         z.sheetId(ProjectConfig.DB_SHEET_ID)
         z.tabName("TestSheet1")

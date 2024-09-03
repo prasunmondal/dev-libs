@@ -18,7 +18,7 @@ interface ResponseCache : Serializable {
             if (requestObj is ReadAPIs<*>) {
                 val cacheKey = requestObj.getCacheKey()
                 LogMe.log("Expensive Operation - saving data to local: $cacheKey")
-                CentralCacheObj.centralCache.put(cacheKey, responseObj.parsedResponse, false)
+                CentralCacheObj.centralCache.put(requestObj.context, cacheKey, responseObj.parsedResponse, false)
             }
         }
 

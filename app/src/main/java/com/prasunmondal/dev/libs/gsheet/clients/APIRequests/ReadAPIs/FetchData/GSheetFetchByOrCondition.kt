@@ -1,12 +1,15 @@
 package com.prasunmondal.dev.libs.gsheet.clients.APIRequests.ReadAPIs.FetchData
 
+import android.content.Context
+import com.prasunmondal.dev.libs.gsheet.ContextKeeper
 import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.ReadAPIs.ReadAPIs
 import org.json.JSONObject
 
-class GSheetFetchByOrCondition<T> : ReadAPIs<T>() {
+class GSheetFetchByOrCondition<T>(override var context: Context) : ReadAPIs<T>() {
     override var opCode = "FETCH_BY_CONDITION_OR"
     private var conditionOrColumn = ""
     private var conditionOrValue = ""
+
 
     override fun getJSON(): JSONObject {
         val postDataParams = JSONObject()

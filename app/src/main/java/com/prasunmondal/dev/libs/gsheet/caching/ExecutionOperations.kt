@@ -12,18 +12,18 @@ interface ExecutionOperations<T> : GSheetCaching<T>, CachingUtils<T> {
     fun execute(useCache: Boolean = true): List<T> {
         if (isCachingEnabledForThisRequest(prepareRequest())) {
             // If the request is ReadAPI, look into the cache
-            return get(context, prepareRequest() as ReadAPIs<T>, useCache)
+            return get(prepareRequest() as ReadAPIs<T>, useCache)
         } else {
             // If the request is not ReadAPI, execute directly
             val responseObj =
-                prepareRequest().executeOne(ProjectConfig.dBServerScriptURL, prepareRequest())
+                prepareRequest().executeOne(scriptURL, prepareRequest())
 
             if (responseObj is ReadResponse<*>) {
                 return responseObj.parsedResponse as List<T>
             }
 
             // Delete the cached objects
-            deleteCacheObjects("$sheetURL\\$tabname")
+            deleteCacheObjects(context, "$sheetURL\\$tabname")
 
             return listOf()
         }

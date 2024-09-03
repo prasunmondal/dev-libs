@@ -1,5 +1,6 @@
 package com.prasunmondal.dev.libs.gsheet.clients.Tests.ReadAPIs.FetchData
 
+import com.prasunmondal.dev.libs.contexts.AppContexts
 import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.ReadAPIs.FetchData.GSheetFetchByQuery
 import com.prasunmondal.dev.libs.gsheet.clients.GScript
 import com.prasunmondal.dev.libs.gsheet.clients.Tests.ModelInsertObject
@@ -11,7 +12,7 @@ class FetchByQueryTest {
     }
 
     fun test() {
-        val t = GSheetFetchByQuery<ModelInsertObject>()
+        val t = GSheetFetchByQuery<ModelInsertObject>(AppContexts.get())
         t.setUId("test-83567t")
         t.sheetId(ProjectConfig.DB_SHEET_ID)
         t.tabName("TestSheet1")

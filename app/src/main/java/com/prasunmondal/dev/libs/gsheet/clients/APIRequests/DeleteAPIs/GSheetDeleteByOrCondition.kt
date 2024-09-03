@@ -1,8 +1,10 @@
 package com.prasunmondal.dev.libs.gsheet.clients.APIRequests.DeleteAPIs
 
+import android.content.Context
+import com.prasunmondal.dev.libs.gsheet.ContextKeeper
 import org.json.JSONObject
 
-class GSheetDeleteByOrCondition : DeleteAPIs() {
+class GSheetDeleteByOrCondition(override var context: Context) : DeleteAPIs() {
     private var conditionOrColumn = ""
     private var conditionOrValue = ""
     override fun getJSON(): JSONObject {

@@ -2,6 +2,7 @@ package com.prasunmondal.dev.libs.gsheet.serializer
 
 import android.content.Context
 import com.prasunmondal.dev.libs.caching.CentralCacheObj
+import com.prasunmondal.dev.libs.contexts.AppContexts
 import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.APIRequests
 import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.CreateAPIs.GSheetInsertObject
 import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.DeleteAPIs.GSheetDeleteAll
@@ -139,13 +140,13 @@ abstract class Tech4BytesSerializable<T : Any> : java.io.Serializable {
 
     private fun getGetRequest(): APIRequests {
         return if (query == null || query!!.isEmpty()) {
-            val request = GSheetFetchAll<T>()
+            val request = GSheetFetchAll<T>(AppContexts.get())
             request.sheetId = sheetURL
             request.tabName = tabname
             request.classTypeForResponseParsing = classTypeForResponseParsing
             request
         } else {
-            val request = GSheetFetchByQuery<T>()
+            val request = GSheetFetchByQuery<T>(AppContexts.get())
             request.sheetId = sheetURL
             request.tabName = tabname
             request.query = query!!
@@ -173,7 +174,7 @@ abstract class Tech4BytesSerializable<T : Any> : java.io.Serializable {
             cacheKey
         }
         val parsedData = parseNGetResponse2(response)
-        CentralCacheObj.centralCache.put(resolvedCacheKey, parsedData)
+        CentralCacheObj.centralCache.put(AppContexts.get(), resolvedCacheKey, parsedData)
         LogMe.log("Put Complete")
         LogMe.log("cacheKey: $resolvedCacheKey")
         LogMe.log(parsedData.size)
@@ -234,7 +235,7 @@ abstract class Tech4BytesSerializable<T : Any> : java.io.Serializable {
             finalCacheKey = getFilterName()
         }
         if (dataObject == null) {
-            CentralCacheObj.centralCache.put(finalCacheKey, dataObject)
+            CentralCacheObj.centralCache.put(AppContexts.get(), finalCacheKey, dataObject)
             return
         }
 
@@ -247,7 +248,7 @@ abstract class Tech4BytesSerializable<T : Any> : java.io.Serializable {
         } else {
             dataObject
         }
-        CentralCacheObj.centralCache.put(finalCacheKey, dataToSave)
+        CentralCacheObj.centralCache.put(AppContexts.get(), finalCacheKey, dataToSave)
     }
 
     fun <T> saveToServer(obj: T) {
@@ -261,7 +262,7 @@ abstract class Tech4BytesSerializable<T : Any> : java.io.Serializable {
     }
 
     private fun <T> getSaveRequest(obj: T): GSheetInsertObject {
-        var request = GSheetInsertObject()
+        var request = GSheetInsertObject(AppContexts.get())
         request.sheetId = sheetURL
         request.tabName = tabname
         request.setDataObject(obj as Any)
@@ -297,7 +298,7 @@ abstract class Tech4BytesSerializable<T : Any> : java.io.Serializable {
     }
 
     fun getDeleteRequest(): GSheetDeleteAll {
-        val deleteRequest = GSheetDeleteAll()
+        val deleteRequest = GSheetDeleteAll(AppContexts.get())
         deleteRequest.sheetId = sheetURL
         deleteRequest.tabName = tabname
         deleteRequest.execute(ProjectConfig.dBServerScriptURL)

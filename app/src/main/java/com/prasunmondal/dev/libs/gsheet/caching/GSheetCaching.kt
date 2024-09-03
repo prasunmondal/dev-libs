@@ -20,7 +20,6 @@ interface GSheetCaching<T>: GScript {
     var appendInLocal: Boolean
     var cacheTag: String?
     var shallCacheData: Boolean
-    var context: Context
     var filter: ClientFilter<T>?
     var sort: ClientSort<T>?
 
@@ -28,23 +27,23 @@ interface GSheetCaching<T>: GScript {
         val apiResponse = (this as APIRequests).execute(scriptURL)
         val parsedResponse = parseResponse(apiResponse)
         if(shallCacheData) {
-            saveResponse(parsedResponse)
+            saveResponse(context, parsedResponse)
         }
         return parsedResponse
     }
     fun parseResponse(apiResponse: APIResponse): List<T> {
         return JsonParser.convertJsonArrayStringToJavaObjList(apiResponse.content, classTypeForResponseParsing)
     }
-    fun saveResponse(listOfObj: List<T>) {
+    fun saveResponse(context: Context, listOfObj: List<T>) {
         LogMe.log("Expensive Operation - saving data to local: ${getCacheKeyForGSheet()}")
-        CentralCacheObj.centralCache.put(getCacheKeyForGSheet(), listOfObj, false)
+        CentralCacheObj.centralCache.put(context, getCacheKeyForGSheet(), listOfObj, false)
     }
-    fun getResponseFromCache(useCache: Boolean = false): Any? {
+    fun getResponseFromCache(context: Context, useCache: Boolean = false): Any? {
         return arrayListOf(CentralCacheObj.centralCache.get<T>(context, getCacheKeyForGSheet(), useCache, false))
     }
-    fun getResponseFromCacheOrServer(useCache: Boolean = true): List<T> {
+    fun getResponseFromCacheOrServer(context: Context, useCache: Boolean = true): List<T> {
         if(CentralCacheObj.centralCache.isAvailable(context, getCacheKeyForGSheet())) {
-            return getResponseFromCache(useCache) as List<T>
+            return getResponseFromCache(context, useCache) as List<T>
         } else {
             return getFromServer(shallCacheData)
         }

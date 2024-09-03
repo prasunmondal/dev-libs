@@ -1,7 +1,6 @@
 package com.prasunmondal.dev.libs.gsheet.clients
 
-import android.content.Context
-import com.prasunmondal.dev.libs.contexts.AppContexts
+import com.prasunmondal.dev.libs.gsheet.ContextKeeper
 import com.prasunmondal.dev.libs.gsheet.caching.createApis.InsertObjectTemplate
 import com.prasunmondal.dev.libs.gsheet.caching.deleteApis.DeleteAPIsTemplate
 import com.prasunmondal.dev.libs.gsheet.caching.readApis.FetchAllTemplate
@@ -9,6 +8,7 @@ import com.prasunmondal.dev.libs.gsheet.post.serializable.PostObjectResponse
 import java.util.function.Consumer
 
 open class GSheetSerialized<T : Any>(
+    var context: ContextKeeper,
     var scriptURL: String,
     var sheetURL: String,
     var tabName: String,
@@ -23,16 +23,18 @@ open class GSheetSerialized<T : Any>(
     var sort: ClientSort<T>? = null
 ) {
 
-    fun fetchAll(context: Context = AppContexts.get()): FetchAllTemplate<T> {
+//    val _context = context as Context
+
+    fun fetchAll(): FetchAllTemplate<T> {
         return FetchAllTemplate(
-            sheetURL, tabName, query, classTypeForResponseParsing,
-            appendInServer, appendInLocal, cacheTag, shallCacheData, context, filter, sort)
+            context.get(), sheetURL, tabName, query, classTypeForResponseParsing,
+            appendInServer, appendInLocal, cacheTag, shallCacheData, filter, sort)
     }
 
-    fun insert(obj: T, context: Context = AppContexts.get()): InsertObjectTemplate<T> {
+    fun insert(obj: T): InsertObjectTemplate<T> {
         return InsertObjectTemplate(
-            sheetURL, tabName, query, classTypeForResponseParsing,
-            appendInServer, appendInLocal, cacheTag, shallCacheData, context, filter, sort, obj)
+            context.get(), sheetURL, tabName, query, classTypeForResponseParsing,
+            appendInServer, appendInLocal, cacheTag, shallCacheData, filter, sort, obj)
     }
 
 //    fun insert(obj: List<T>, context: Context = AppContexts.get()): InsertObjectTemplate<T> {
@@ -41,9 +43,9 @@ open class GSheetSerialized<T : Any>(
 //            appendInServer, appendInLocal, cacheTag, shallCacheData, context, filter, sort, obj)
 //    }
 
-    fun deleteAll(context: Context = AppContexts.get()): DeleteAPIsTemplate<T> {
+    fun deleteAll(): DeleteAPIsTemplate<T> {
         return DeleteAPIsTemplate(
-            sheetURL, tabName, query, classTypeForResponseParsing,
-            appendInServer, appendInLocal, cacheTag, shallCacheData, context, filter, sort)
+            context.get(), sheetURL, tabName, query, classTypeForResponseParsing,
+            appendInServer, appendInLocal, cacheTag, shallCacheData, filter, sort)
     }
 }

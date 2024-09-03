@@ -125,7 +125,7 @@ open class CentralCache : CacheFileOps() {
 //            return content
 //        }
 
-    fun <T> put(key: String, data: T, appendCacheKeyPrefix: Boolean = true) {
+    fun <T> put(context: Context, key: String, data: T, appendCacheKeyPrefix: Boolean = true) {
         val cacheClassKey = getClassKey()
         val cacheKey = getCacheKey(key, appendCacheKeyPrefix)
         LogMe.log("Putting data to Cache - key: $cacheKey")
@@ -133,14 +133,15 @@ open class CentralCache : CacheFileOps() {
         if (presentData == null) {
             CentralCacheObj.centralCache.cache[cacheClassKey] = hashMapOf()
         }
-        CentralCacheObj.centralCache.cache[cacheClassKey]!![cacheKey] = CacheModel(data as Any?)
+        CentralCacheObj.centralCache.cache[cacheClassKey]!![cacheKey] = CacheModel(context, data as Any?)
         CentralCacheObj.centralCache.saveCacheDataToFile(
             cacheKey,
-            CentralCacheObj.centralCache.cache
+            CentralCacheObj.centralCache.cache,
+            context
         )
     }
 
-    fun <T> putDirect(key: String, data: T) {
+    fun <T> putDirect(context: Context, key: String, data: T) {
         val cacheClassKey = getClassKey()
         val cacheKey = getCacheKey(key, false)
         LogMe.log("Putting data to Cache - key: $cacheKey")
@@ -148,15 +149,15 @@ open class CentralCache : CacheFileOps() {
         if (presentData == null) {
             CentralCacheObj.centralCache.cache[cacheClassKey] = hashMapOf()
         }
-        CentralCacheObj.centralCache.cache[cacheClassKey]!![key] = CacheModel(data as Any?)
+        CentralCacheObj.centralCache.cache[cacheClassKey]!![key] = CacheModel(context, data as Any?)
         CentralCacheObj.centralCache.saveCacheDataToFile(
             key,
-            CentralCacheObj.centralCache.cache
+            CentralCacheObj.centralCache.cache, context
         )
     }
 
-    fun <T> putNGet(key: String, data: T): T {
-        put(key, data)
+    fun <T> putNGet(key: String, data: T, context: Context): T {
+        put(context, key, data, true)
         return data
     }
 
@@ -171,28 +172,28 @@ open class CentralCache : CacheFileOps() {
         CacheFilesList.clearCacheFilesList()
     }
 
-    fun invalidateClassCache(cacheKey: String) {
+    fun invalidateClassCache(cacheKey: String, context: Context) {
         CentralCacheObj.centralCache.cache[getClassKey()] = hashMapOf()
         CentralCacheObj.centralCache.saveCacheDataToFile(
             cacheKey,
-            CentralCacheObj.centralCache.cache
+            CentralCacheObj.centralCache.cache, context
         )
     }
 
-    fun <T : Any> invalidateClassCache(clazz: KClass<T>, cacheKey: String) {
+    fun <T : Any> invalidateClassCache(clazz: KClass<T>, cacheKey: String, context: Context) {
         CentralCacheObj.centralCache.cache[ClassDetailsUtils.getClassName(clazz)] = hashMapOf()
         CentralCacheObj.centralCache.saveCacheDataToFile(
             cacheKey,
-            CentralCacheObj.centralCache.cache
+            CentralCacheObj.centralCache.cache, context
         )
     }
 
-    fun removeCacheObjectsWhereKeyStartsWith(keyStartingString: String) {
+    fun removeCacheObjectsWhereKeyStartsWith(context: Context, keyStartingString: String) {
         val keysToRemove = CentralCacheObj.centralCache.cache[getClassKey()]!!.keys.filter { it.startsWith(keyStartingString) }
         for (key in keysToRemove) {
             CentralCacheObj.centralCache.cache[getClassKey()]!!.remove(key)
             LogMe.log("Cache Op: Deleted: key: $key")
         }
-        CentralCacheObj.centralCache.saveCacheDataToFile("ignoredFileName", CentralCacheObj.centralCache.cache)
+        CentralCacheObj.centralCache.saveCacheDataToFile("ignoredFileName", CentralCacheObj.centralCache.cache, context)
     }
 }
