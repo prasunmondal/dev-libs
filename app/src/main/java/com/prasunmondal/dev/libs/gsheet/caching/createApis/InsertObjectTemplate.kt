@@ -38,13 +38,13 @@ class InsertObjectTemplate<T : Any>(
     }
 
     fun saveToLocal(append: Boolean = false) {
-        val request = GSheetInsertObject(context)
+//        val request = GSheetInsertObject(context)
         val list: MutableList<T> = mutableListOf()
         if(append) {
-            val existingList = CentralCacheObj.centralCache.get<T>(context, "${request.sheetId}//${request.tabName}") as MutableList<T>
+            val existingList = CentralCacheObj.centralCache.get<T>(context, "${sheetId}//${tabname}") as MutableList<T>
             list.addAll(existingList)
         }
         list.add(data)
-        CentralCacheObj.centralCache.putDirect(context, "${request.sheetId}//${request.tabName}", list)
+        CentralCacheObj.centralCache.putDirect(context, "${sheetId}//${tabname}", list)
     }
 }
