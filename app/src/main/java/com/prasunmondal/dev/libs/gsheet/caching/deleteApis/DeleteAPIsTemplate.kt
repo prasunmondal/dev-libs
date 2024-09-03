@@ -10,7 +10,7 @@ import com.prasunmondal.dev.libs.gsheet.clients.ClientSort
 
 class DeleteAPIsTemplate<T>(
     override var context: Context,
-    override var sheetURL: String,
+    override var sheetId: String,
     override var tabname: String,
     override var query: String?,
     override var classTypeForResponseParsing: Class<T>,
@@ -23,8 +23,8 @@ class DeleteAPIsTemplate<T>(
 ) : RequestTemplatesInterface<T> {
     override fun prepareRequest(): APIRequests {
         val request = GSheetDeleteAll(context)
-        if (sheetURL.isNotBlank() && tabname.isNotBlank()) {
-            request.sheetId(sheetURL)
+        if (sheetId.isNotBlank() && tabname.isNotBlank()) {
+            request.sheetId(sheetId)
             request.tabName(tabname)
         }
         return request

@@ -13,7 +13,7 @@ import java.util.Date
 
 class PostToGSheet(
     private var scriptURL: String,
-    private var sheetURL: String,
+    private var sheetId: String,
     private var sheetTabname: String,
     private var templateSheetURL: String,
     private var templateSheetTabname: String,
@@ -61,7 +61,7 @@ class PostToGSheet(
             write(
                 context,
                 this.scriptURL,
-                this.sheetURL,
+                this.sheetId,
                 tabName,
                 this.templateSheetURL,
                 this.templateSheetTabname,

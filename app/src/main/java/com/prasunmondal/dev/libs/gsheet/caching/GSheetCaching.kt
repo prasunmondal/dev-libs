@@ -12,7 +12,7 @@ import com.prasunmondal.dev.libs.logs.instant.terminal.LogMe
 
 interface GSheetCaching<T>: GScript {
 
-    var sheetURL: String
+    var sheetId: String
     var tabname: String
     var query: String?
     var classTypeForResponseParsing: Class<T>

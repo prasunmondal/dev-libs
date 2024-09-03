@@ -9,8 +9,8 @@ interface FetchByOrConditionTemplate<T> : RequestTemplatesInterface<T>, CachingU
     override fun prepareRequest(): APIRequests {
         val request = GSheetFetchByAndCondition<T>(context)
 
-        if (sheetURL.isNotBlank() && tabname.isNotBlank()) {
-            request.sheetId(sheetURL)
+        if (sheetId.isNotBlank() && tabname.isNotBlank()) {
+            request.sheetId(sheetId)
             request.tabName(tabname)
             request.filter = filter
             request.sort = sort

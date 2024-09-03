@@ -10,7 +10,7 @@ import com.prasunmondal.dev.libs.gsheet.clients.ClientSort
 
 class FetchAllTemplate<T>(
     override var context: Context,
-    override var sheetURL: String,
+    override var sheetId: String,
     override var tabname: String,
     override var query: String?,
     override var classTypeForResponseParsing: Class<T>,
@@ -25,8 +25,8 @@ class FetchAllTemplate<T>(
     override fun prepareRequest(): APIRequests {
         val request = GSheetFetchAll<T>(context)
 
-        if (sheetURL.isNotBlank() && tabname.isNotBlank()) {
-            request.sheetId(sheetURL)
+        if (sheetId.isNotBlank() && tabname.isNotBlank()) {
+            request.sheetId(sheetId)
             request.tabName(tabname)
             request.filter = filter
             request.sort = sort

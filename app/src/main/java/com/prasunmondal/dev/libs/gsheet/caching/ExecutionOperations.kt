@@ -5,7 +5,6 @@ import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.APIRequestsQueue
 import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.ReadAPIs.ReadAPIs
 import com.prasunmondal.dev.libs.gsheet.clients.APIResponses.ReadResponse
 import com.prasunmondal.dev.libs.gsheet.clients.GScript
-import com.prasunmondal.dev.libs.gsheet.clients.Tests.ProjectConfig
 
 interface ExecutionOperations<T> : GSheetCaching<T>, CachingUtils<T> {
 
@@ -23,7 +22,7 @@ interface ExecutionOperations<T> : GSheetCaching<T>, CachingUtils<T> {
             }
 
             // Delete the cached objects
-            deleteCacheObjects(context, "$sheetURL\\$tabname")
+            deleteCacheObjects(context, "$sheetId\\$tabname")
 
             return listOf()
         }

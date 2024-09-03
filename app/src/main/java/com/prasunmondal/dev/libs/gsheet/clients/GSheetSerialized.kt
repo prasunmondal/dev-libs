@@ -10,7 +10,7 @@ import java.util.function.Consumer
 open class GSheetSerialized<T : Any>(
     var context: ContextWrapper,
     var scriptURL: String,
-    var sheetURL: String,
+    var sheetId: String,
     var tabName: String,
     var classTypeForResponseParsing: Class<T>,
     var appendInServer: Boolean,
@@ -27,13 +27,13 @@ open class GSheetSerialized<T : Any>(
 
     fun fetchAll(): FetchAllTemplate<T> {
         return FetchAllTemplate(
-            context.get, sheetURL, tabName, query, classTypeForResponseParsing,
+            context.get, sheetId, tabName, query, classTypeForResponseParsing,
             appendInServer, appendInLocal, cacheTag, shallCacheData, filter, sort)
     }
 
     fun insert(obj: T): InsertObjectTemplate<T> {
         return InsertObjectTemplate(
-            context.get, sheetURL, tabName, query, classTypeForResponseParsing,
+            context.get, sheetId, tabName, query, classTypeForResponseParsing,
             appendInServer, appendInLocal, cacheTag, shallCacheData, filter, sort, obj)
     }
 
@@ -45,7 +45,7 @@ open class GSheetSerialized<T : Any>(
 
     fun deleteAll(): DeleteAPIsTemplate<T> {
         return DeleteAPIsTemplate(
-            context.get, sheetURL, tabName, query, classTypeForResponseParsing,
+            context.get, sheetId, tabName, query, classTypeForResponseParsing,
             appendInServer, appendInLocal, cacheTag, shallCacheData, filter, sort)
     }
 }

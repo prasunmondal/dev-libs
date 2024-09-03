@@ -11,7 +11,7 @@ import com.prasunmondal.dev.libs.gsheet.clients.ClientSort
 
 class InsertObjectTemplate<T : Any>(
     override var context: Context,
-    override var sheetURL: String,
+    override var sheetId: String,
     override var tabname: String,
     override var query: String?,
     override var classTypeForResponseParsing: Class<T>,
@@ -27,7 +27,7 @@ class InsertObjectTemplate<T : Any>(
     var request = GSheetInsertObject(context)
 
     override fun prepareRequest(): APIRequests {
-        request.sheetId = sheetURL
+        request.sheetId = sheetId
         request.tabName = tabname
         request.setDataObject(data as Any)
         return request
