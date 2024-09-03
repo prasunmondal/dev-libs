@@ -8,6 +8,10 @@ class AppContexts {
     companion object {
         var contexts: MutableMap<String, Context> = mutableMapOf()
 
+        var applicationContext: Context
+            get() { return applicationContext }
+            set(value) { applicationContext = value}
+
         fun set(obj: Any, context: Context) {
             val className = obj.javaClass.canonicalName.replace(".Companion", "")
             LogMe.log("Setting context: $className")
