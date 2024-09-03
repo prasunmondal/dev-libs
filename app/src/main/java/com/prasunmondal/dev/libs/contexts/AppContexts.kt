@@ -24,15 +24,30 @@ class AppContexts {
         fun get(): Context {
             val getCallerClassname = getCaller()
             var contextResult: Context? = null
+
+            LogMe.log("No Contexts Found.")
+
             contexts.forEach { classname, context ->
                 if (getCallerClassname.startsWith(classname))
                     contextResult = context
             }
             if (contextResult == null) {
-                getCaller()
                 contextResult = contexts[contexts.keys.first()]!!.applicationContext
             }
-            LogMe.log("No Contexts Found.")
+
+            if(contextResult == null) {
+                LogMe.log("")
+                LogMe.log("No Contexts Found.")
+                LogMe.log("Caller Classname: $getCallerClassname")
+                LogMe.log("Available Contexts: ")
+                contexts.forEach { classname, context ->
+                    LogMe.log(classname)
+                }
+                LogMe.log("")
+                LogMe.log("Caller Classname Stacktrace: ")
+                getCaller(true)
+                LogMe.log("")
+            }
             return contextResult!!
         }
 
