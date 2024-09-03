@@ -1,7 +1,6 @@
 package com.prasunmondal.dev.libs.caching
 
 import android.content.Context
-import com.prasunmondal.dev.libs.contexts.AppContexts
 import com.prasunmondal.dev.libs.files.IOObjectToFile
 import com.prasunmondal.dev.libs.logs.instant.terminal.LogMe
 import com.prasunmondal.dev.libs.reflections.code.current.ClassDetailsUtils
@@ -161,15 +160,15 @@ open class CentralCache : CacheFileOps() {
         return data
     }
 
-    fun invalidateFullCache() {
+    fun invalidateFullCache(context: Context) {
         CentralCacheObj.centralCache.cache.clear()
-        val cacheFiles = CacheFilesList.getCacheFilesList()
+        val cacheFiles = CacheFilesList.getCacheFilesList(context)
         val writeObj = IOObjectToFile()
         cacheFiles.forEach {
             LogMe.log("Clearing cache: deleting file - $it")
-            writeObj.WriteObjectToFile(AppContexts.get(), it, null)
+            writeObj.WriteObjectToFile(context, it, null)
         }
-        CacheFilesList.clearCacheFilesList()
+        CacheFilesList.clearCacheFilesList(context)
     }
 
     fun invalidateClassCache(cacheKey: String, context: Context) {

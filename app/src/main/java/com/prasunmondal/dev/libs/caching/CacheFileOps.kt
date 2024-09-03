@@ -1,7 +1,6 @@
 package com.prasunmondal.dev.libs.caching
 
 import android.content.Context
-import com.prasunmondal.dev.libs.contexts.AppContexts
 import com.prasunmondal.dev.libs.files.IOObjectToFile
 import com.prasunmondal.dev.libs.logs.instant.terminal.LogMe
 
@@ -15,7 +14,7 @@ open class CacheFileOps : CacheFileName() {
         val filename = getFileName(cacheKey)
         val writeObj = IOObjectToFile()
         writeObj.WriteObjectToFile(context, filename, cache)
-        CacheFilesList.addToCacheFilesList(filename)
+        CacheFilesList.addToCacheFilesList(context, filename)
     }
 
     fun getCacheDataFromFile(

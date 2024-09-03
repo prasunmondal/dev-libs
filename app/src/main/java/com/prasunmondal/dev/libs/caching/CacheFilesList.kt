@@ -1,6 +1,6 @@
 package com.prasunmondal.dev.libs.caching
 
-import com.prasunmondal.dev.libs.contexts.AppContexts
+import android.content.Context
 import com.prasunmondal.dev.libs.files.IOObjectToFile
 import com.prasunmondal.dev.libs.logs.instant.terminal.LogMe
 
@@ -9,11 +9,11 @@ class CacheFilesList : java.io.Serializable {
 
         private val cacheFilesFileName: String = "cacheFilesIndex.dat"
 
-        fun getCacheFilesList(): MutableList<String> {
+        fun getCacheFilesList(context: Context): MutableList<String> {
             val readObj = IOObjectToFile()
             val list = try {
                 readObj.ReadObjectFromFile(
-                    AppContexts.get(),
+                    context,
                     cacheFilesFileName
                 ) as MutableList<String>
             } catch (e: Exception) {
@@ -23,27 +23,27 @@ class CacheFilesList : java.io.Serializable {
             return list
         }
 
-        fun addToCacheFilesList(filename: String) {
-            val list = getCacheFilesList()
+        fun addToCacheFilesList(context: Context, filename: String) {
+            val list = getCacheFilesList(context)
             if (list.contains(filename))
                 return
             list.add(filename)
             val writeObj = IOObjectToFile()
-            writeObj.WriteObjectToFile(AppContexts.get(), cacheFilesFileName, list)
+            writeObj.WriteObjectToFile(context, cacheFilesFileName, list)
         }
 
-        fun removeFromCacheFilesList(classKey: String) {
-            val list = getCacheFilesList()
+        fun removeFromCacheFilesList(context: Context, classKey: String) {
+            val list = getCacheFilesList(context)
             if (!list.contains(classKey))
                 return
             list.remove(classKey)
             val writeObj = IOObjectToFile()
-            writeObj.WriteObjectToFile(AppContexts.get(), cacheFilesFileName, list)
+            writeObj.WriteObjectToFile(context, cacheFilesFileName, list)
         }
 
-        fun clearCacheFilesList() {
+        fun clearCacheFilesList(context: Context) {
             val writeObj = IOObjectToFile()
-            writeObj.WriteObjectToFile(AppContexts.get(), cacheFilesFileName, null)
+            writeObj.WriteObjectToFile(context, cacheFilesFileName, null)
         }
     }
 }
