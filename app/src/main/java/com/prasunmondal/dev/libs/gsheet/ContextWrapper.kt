@@ -2,9 +2,10 @@ package com.prasunmondal.dev.libs.gsheet
 
 import android.content.Context
 
-class ContextKeeper(private var context: Context) {
+class ContextWrapper(private var context: Context) {
 
-    fun get(): Context {
+    val get: Context
+        get() {
             return context
         }
 }

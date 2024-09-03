@@ -1,14 +1,14 @@
 package com.tech4bytes.mbrosv3.BusinessData
 
 import com.prasunmondal.dev.libs.contexts.AppContexts
-import com.prasunmondal.dev.libs.gsheet.ContextKeeper
+import com.prasunmondal.dev.libs.gsheet.ContextWrapper
 import com.prasunmondal.dev.libs.gsheet.clients.ClientFilter
 import com.prasunmondal.dev.libs.gsheet.clients.GSheetSerialized
 import com.prasunmondal.dev.libs.gsheet.clients.Tests.ProjectConfig
 
 
 object SingleAttributedDataUtils : GSheetSerialized<SingleAttributedDataModel>(
-    ContextKeeper(AppContexts.get()),
+    ContextWrapper(AppContexts.get()),
     ProjectConfig.dBServerScriptURL,
     "1X6HriHjIE0XfAblDlE7Uf5a8JTHu00kW2SWvTFKL78w",
     "metadata",

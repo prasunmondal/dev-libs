@@ -1,7 +1,7 @@
 package com.prasunmondal.dev.libs.gsheet.clients.Tests.ReadAPIs.FetchData.FetchAll
 
 import com.prasunmondal.dev.libs.contexts.AppContexts
-import com.prasunmondal.dev.libs.gsheet.ContextKeeper
+import com.prasunmondal.dev.libs.gsheet.ContextWrapper
 import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.APIRequestsQueue
 import com.prasunmondal.dev.libs.gsheet.clients.ClientFilter
 import com.prasunmondal.dev.libs.gsheet.clients.GScript
@@ -75,7 +75,7 @@ class FetchAllBySorting {
 }
 
 object FetchAllBySortingModel : GSheetSerialized<ModelInsertObject>(
-    ContextKeeper(AppContexts.get()),
+    ContextWrapper(AppContexts.get()),
     ProjectConfig.dBServerScriptURL,
     ProjectConfig.DB_SHEET_ID,
     "TestSheet1",

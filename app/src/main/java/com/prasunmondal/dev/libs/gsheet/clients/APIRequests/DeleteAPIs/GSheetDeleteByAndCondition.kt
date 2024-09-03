@@ -1,7 +1,6 @@
 package com.prasunmondal.dev.libs.gsheet.clients.APIRequests.DeleteAPIs
 
 import android.content.Context
-import com.prasunmondal.dev.libs.gsheet.ContextKeeper
 import org.json.JSONObject
 
 class GSheetDeleteByAndCondition(override var context: Context) : DeleteAPIs() {
