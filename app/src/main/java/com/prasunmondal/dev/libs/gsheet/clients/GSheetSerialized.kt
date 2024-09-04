@@ -4,6 +4,7 @@ import com.prasunmondal.dev.libs.gsheet.ContextWrapper
 import com.prasunmondal.dev.libs.gsheet.caching.createApis.InsertObjectTemplate
 import com.prasunmondal.dev.libs.gsheet.caching.deleteApis.DeleteAPIsTemplate
 import com.prasunmondal.dev.libs.gsheet.caching.readApis.FetchAllTemplate
+import com.prasunmondal.dev.libs.gsheet.caching.readApis.FetchByQueryTemplate
 import com.prasunmondal.dev.libs.gsheet.clients.Tests.ProjectConfig
 import com.prasunmondal.dev.libs.gsheet.post.serializable.PostObjectResponse
 import java.util.function.Consumer
@@ -23,11 +24,14 @@ open class GSheetSerialized<T : Any>(
     var filter: ClientFilter<T>? = null,
     var sort: ClientSort<T>? = null
 ) {
-
-//    val _context = context as Context
-
     fun fetchAll(): FetchAllTemplate<T> {
         return FetchAllTemplate(
+            context.get, sheetId, tabName, query, modelClass,
+            appendInServer, appendInLocal, cacheTag, shallCacheData, filter, sort)
+    }
+
+    fun fetchByQuery(query: String? = this.query): FetchByQueryTemplate<T> {
+        return FetchByQueryTemplate(
             context.get, sheetId, tabName, query, modelClass,
             appendInServer, appendInLocal, cacheTag, shallCacheData, filter, sort)
     }
