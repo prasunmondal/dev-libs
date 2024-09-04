@@ -12,7 +12,7 @@ open class GSheetSerialized<T : Any>(
     var scriptURL: String,
     var sheetId: String,
     var tabName: String,
-    var classTypeForResponseParsing: Class<T>,
+    var modelClass: Class<T>,
     var appendInServer: Boolean,
     var appendInLocal: Boolean,
     var query: String? = null,
@@ -27,13 +27,13 @@ open class GSheetSerialized<T : Any>(
 
     fun fetchAll(): FetchAllTemplate<T> {
         return FetchAllTemplate(
-            context.get, sheetId, tabName, query, classTypeForResponseParsing,
+            context.get, sheetId, tabName, query, modelClass,
             appendInServer, appendInLocal, cacheTag, shallCacheData, filter, sort)
     }
 
     fun insert(obj: T): InsertObjectTemplate<T> {
         return InsertObjectTemplate(
-            context.get, sheetId, tabName, query, classTypeForResponseParsing,
+            context.get, sheetId, tabName, query, modelClass,
             appendInServer, appendInLocal, cacheTag, shallCacheData, filter, sort, obj)
     }
 
@@ -45,7 +45,7 @@ open class GSheetSerialized<T : Any>(
 
     fun deleteAll(): DeleteAPIsTemplate<T> {
         return DeleteAPIsTemplate(
-            context.get, sheetId, tabName, query, classTypeForResponseParsing,
+            context.get, sheetId, tabName, query, modelClass,
             appendInServer, appendInLocal, cacheTag, shallCacheData, filter, sort)
     }
 }

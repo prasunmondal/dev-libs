@@ -15,7 +15,7 @@ interface GSheetCaching<T>: GScript {
     var sheetId: String
     var tabname: String
     var query: String?
-    var classTypeForResponseParsing: Class<T>
+    var modelClass: Class<T>
     var appendInServer: Boolean
     var appendInLocal: Boolean
     var cacheTag: String?
@@ -32,7 +32,7 @@ interface GSheetCaching<T>: GScript {
         return parsedResponse
     }
     fun parseResponse(apiResponse: APIResponse): List<T> {
-        return JsonParser.convertJsonArrayStringToJavaObjList(apiResponse.content, classTypeForResponseParsing)
+        return JsonParser.convertJsonArrayStringToJavaObjList(apiResponse.content, modelClass)
     }
     fun saveResponse(context: Context, listOfObj: List<T>) {
         LogMe.log("Expensive Operation - saving data to local: ${getCacheKeyForGSheet()}")

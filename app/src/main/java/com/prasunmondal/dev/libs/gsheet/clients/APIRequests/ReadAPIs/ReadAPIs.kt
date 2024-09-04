@@ -12,7 +12,7 @@ abstract class ReadAPIs<T> : APIRequests(), ResponseCache {
     lateinit var sheetId: String
     lateinit var tabName: String
     lateinit var data: String
-    open lateinit var classTypeForResponseParsing: Class<T>
+    open lateinit var modelClass: Class<T>
     var cacheData: Boolean = true
     var filter: ClientFilter<T>? = null
     var sort: ClientSort<T>? = null
@@ -53,7 +53,7 @@ abstract class ReadAPIs<T> : APIRequests(), ResponseCache {
         buildingResponseObj_.tabName = this.tabName
         buildingResponseObj_.parsedResponse = JsonParser.convertJsonArrayStringToJavaObjList(
             receivedResponseObj.content,
-            (requestObj as ReadAPIs<T>).classTypeForResponseParsing
+            (requestObj as ReadAPIs<T>).modelClass
         )
         
         if(requestObj.filter!=null)

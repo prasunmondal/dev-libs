@@ -78,7 +78,7 @@ object FetchAllBySortingModel : GSheetSerialized<ModelInsertObject>(
     ProjectConfig.dBServerScriptURL,
     ProjectConfig.DB_SHEET_ID,
     "TestSheet1",
-    classTypeForResponseParsing = ModelInsertObject::class.java,
+    modelClass = ModelInsertObject::class.java,
     appendInServer = true,
     appendInLocal = true,
     filter = ClientFilter("filterWithNamePrasun") { list: List<ModelInsertObject> -> list.filter { it.name == "Prasun" } }

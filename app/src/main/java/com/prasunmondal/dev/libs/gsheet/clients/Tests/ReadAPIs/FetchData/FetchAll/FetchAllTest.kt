@@ -43,14 +43,14 @@ class FetchAllTest {
         t.setUId("test-ti35uy2t")
         t.sheetId(ProjectConfig.DB_SHEET_ID)
         t.tabName("TestSheet1")
-        t.classTypeForResponseParsing = ModelInsertObject::class.java
+        t.modelClass = ModelInsertObject::class.java
         GScript.addRequest(t)
 
         val w = GSheetFetchAll<ModelInsertObject>(AppContexts.get())
         w.setUId("test-w245ueyt")
         w.sheetId(ProjectConfig.DB_SHEET_ID)
         w.tabName("TestSheet1")
-        w.classTypeForResponseParsing = ModelInsertObject::class.java
+        w.modelClass = ModelInsertObject::class.java
         GScript.addRequest(w)
 
         val responses = GScript.execute(ProjectConfig.dBServerScriptURL)

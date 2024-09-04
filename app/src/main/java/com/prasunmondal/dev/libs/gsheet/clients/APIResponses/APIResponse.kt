@@ -50,8 +50,8 @@ open class APIResponse : Serializable {
         return "APIResponse(content='$content', statusCode=$statusCode, affectedRows=$affectedRows, opId='$opId', logs='$logs')"
     }
 
-    fun <T> parseToObj(classTypeForResponseParsing: Class<T>): List<T> {
-        return com.prasunmondal.dev.libs.jsons.JsonParser.convertJsonArrayStringToJavaObjList(this.content, classTypeForResponseParsing)
+    fun <T> parseToObj(modelClass: Class<T>): List<T> {
+        return com.prasunmondal.dev.libs.jsons.JsonParser.convertJsonArrayStringToJavaObjList(this.content, modelClass)
     }
 
     companion object {

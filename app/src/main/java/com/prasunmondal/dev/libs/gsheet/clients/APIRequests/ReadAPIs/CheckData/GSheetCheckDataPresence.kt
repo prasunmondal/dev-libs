@@ -8,7 +8,7 @@ import org.json.JSONObject
 class GSheetCheckDataPresence(override var context: Context) : ReadAPIs<CheckResult>() {
     private var keys = ""
     private var values = ""
-    override var classTypeForResponseParsing = CheckResult::class.java
+    override var modelClass = CheckResult::class.java
     override var opCode = "IS_PRESENT_CONDITIONAL_AND"
 
     fun keys(keys: String) {

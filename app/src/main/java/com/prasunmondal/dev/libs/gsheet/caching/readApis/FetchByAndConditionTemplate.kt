@@ -14,7 +14,7 @@ interface FetchWithByAndConditionTemplate<T> : RequestTemplatesInterface<T>, Cac
             request.tabName(tabname)
             request.filter = filter
             request.sort = sort
-            request.classTypeForResponseParsing = classTypeForResponseParsing
+            request.modelClass = modelClass
         }
         return request
     }

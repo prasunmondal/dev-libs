@@ -43,7 +43,7 @@ class FetchByAndConditionTest {
         t.sheetId(ProjectConfig.DB_SHEET_ID)
         t.tabName("TestSheet1")
         t.conditionAnd("name", "Swagata")
-        t.classTypeForResponseParsing = ModelInsertObject::class.java
+        t.modelClass = ModelInsertObject::class.java
         GScript.addRequest(t)
 
         val w = GSheetFetchByAndCondition<ModelInsertObject>(AppContexts.get())
@@ -51,7 +51,7 @@ class FetchByAndConditionTest {
         w.sheetId(ProjectConfig.DB_SHEET_ID)
         w.tabName("TestSheet1")
         w.conditionAnd("name", "Mondal")
-        w.classTypeForResponseParsing = ModelInsertObject::class.java
+        w.modelClass = ModelInsertObject::class.java
         GScript.addRequest(w)
 
         val r = GSheetFetchByAndCondition<ModelInsertObject>(AppContexts.get())
@@ -59,7 +59,7 @@ class FetchByAndConditionTest {
         r.sheetId(ProjectConfig.DB_SHEET_ID)
         r.tabName("TestSheet1")
         r.conditionAnd("name", "Prasun")
-        r.classTypeForResponseParsing = ModelInsertObject::class.java
+        r.modelClass = ModelInsertObject::class.java
         GScript.addRequest(r)
 
         // TODO - Fix multiple AND conditions
@@ -68,7 +68,7 @@ class FetchByAndConditionTest {
         z.sheetId(ProjectConfig.DB_SHEET_ID)
         z.tabName("TestSheet1")
         z.conditionAnd("name", "Prasun")
-        z.classTypeForResponseParsing = ModelInsertObject::class.java
+        z.modelClass = ModelInsertObject::class.java
         GScript.addRequest(z)
 
         val responses = GScript.execute(ProjectConfig.dBServerScriptURL)

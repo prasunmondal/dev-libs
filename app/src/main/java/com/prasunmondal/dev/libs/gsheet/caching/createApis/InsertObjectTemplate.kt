@@ -14,7 +14,7 @@ class InsertObjectTemplate<T : Any>(
     override var sheetId: String,
     override var tabname: String,
     override var query: String?,
-    override var classTypeForResponseParsing: Class<T>,
+    override var modelClass: Class<T>,
     override var appendInServer: Boolean,
     override var appendInLocal: Boolean,
     override var cacheTag: String?,
