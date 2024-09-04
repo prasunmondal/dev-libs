@@ -4,12 +4,13 @@ import com.prasunmondal.dev.libs.gsheet.ContextWrapper
 import com.prasunmondal.dev.libs.gsheet.caching.createApis.InsertObjectTemplate
 import com.prasunmondal.dev.libs.gsheet.caching.deleteApis.DeleteAPIsTemplate
 import com.prasunmondal.dev.libs.gsheet.caching.readApis.FetchAllTemplate
+import com.prasunmondal.dev.libs.gsheet.clients.Tests.ProjectConfig
 import com.prasunmondal.dev.libs.gsheet.post.serializable.PostObjectResponse
 import java.util.function.Consumer
 
 open class GSheetSerialized<T : Any>(
     var context: ContextWrapper,
-    var scriptURL: String,
+    var scriptURL: String = ProjectConfig.dBServerScriptURL,
     var sheetId: String,
     var tabName: String,
     var modelClass: Class<T>,
