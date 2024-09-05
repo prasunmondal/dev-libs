@@ -9,32 +9,27 @@ class CacheModel : java.io.Serializable {
     var entryTime: LocalDateTime
     var expiryTime: LocalDateTime
     var content: Any?
-
-    @Transient
-    var context: Context
-
     constructor(context: Context, content: Any?) {
         entryTime = LocalDateTime.now()
         expiryTime = Date_Utils.getNextTimeOccurrenceTimestamp(1)
         LogMe.log("$entryTime - $expiryTime")
         this.content = content
-        this.context = context
     }
 
     override fun toString(): String {
         return "CacheModel(entryTime=$entryTime, expiryTime=$expiryTime, content=$content)"
     }
 
-    fun isExpired(cacheObjectKey: String, cacheClassKey: String): Boolean {
+    fun isExpired(context: Context, cacheObjectKey: String, cacheClassKey: String): Boolean {
         val isExpired = this.expiryTime.isBefore(LocalDateTime.now())
         if (isExpired) {
-            deletedExpiredData(cacheObjectKey, cacheClassKey)
+            deletedExpiredData(context, cacheObjectKey, cacheClassKey)
             return true
         }
         return false
     }
 
-    fun deletedExpiredData(cacheObjectKey: String, cacheClassKey: String) {
+    fun deletedExpiredData(context: Context, cacheObjectKey: String, cacheClassKey: String) {
         LogMe.log("Data Expired (key:$cacheObjectKey)")
         LogMe.log("Deleting cache data")
         CentralCacheObj.centralCache.cache[cacheClassKey]!!.remove(cacheObjectKey)

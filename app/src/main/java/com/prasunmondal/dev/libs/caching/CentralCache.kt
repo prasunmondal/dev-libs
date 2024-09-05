@@ -30,7 +30,7 @@ open class CentralCache : CacheFileOps() {
         val cacheClassKey = getClassKey()
 
         // check if the value is available in local cache
-        var valueFromCache = getFromCacheMemory<T>(key, appendCacheKeyPrefix)
+        var valueFromCache = getFromCacheMemory<T>(context, key, appendCacheKeyPrefix)
         if (valueFromCache != null) {
             return valueFromCache
         }
@@ -39,7 +39,7 @@ open class CentralCache : CacheFileOps() {
         // load from cache file
         CentralCacheObj.centralCache.cache =
             CentralCacheObj.centralCache.getCacheDataFromFile(context, cacheObjectKey)
-        valueFromCache = getFromCacheMemory<T>(key, appendCacheKeyPrefix)
+        valueFromCache = getFromCacheMemory<T>(context, key, appendCacheKeyPrefix)
         return if (valueFromCache != null) {
             valueFromCache
         } else {
@@ -64,7 +64,7 @@ open class CentralCache : CacheFileOps() {
         val cacheObjectKey = getCacheKey(key, appendCacheKeyPrefix)
 
         // check if the value is available in local cache
-        val isPresentInCache = getAvailableInCacheMemory(key, appendCacheKeyPrefix)
+        val isPresentInCache = getAvailableInCacheMemory(context, key, appendCacheKeyPrefix)
         if (isPresentInCache) {
             return true
         }
@@ -74,11 +74,11 @@ open class CentralCache : CacheFileOps() {
         CentralCacheObj.centralCache.cache =
             CentralCacheObj.centralCache.getCacheDataFromFile(context, cacheObjectKey)
 
-        val t = getAvailableInCacheMemory(key, appendCacheKeyPrefix)
+        val t = getAvailableInCacheMemory(context, key, appendCacheKeyPrefix)
         return t
     }
 
-    fun getAvailableInCacheMemory(key: String, appendCacheKeyPrefix: Boolean): Boolean {
+    fun getAvailableInCacheMemory(context: Context, key: String, appendCacheKeyPrefix: Boolean): Boolean {
         val cacheObjectKey = getCacheKey(key, appendCacheKeyPrefix)
         val cacheClassKey = getClassKey()
 
@@ -86,7 +86,7 @@ open class CentralCache : CacheFileOps() {
         if (classElements != null && classElements.containsKey(cacheObjectKey)) {
             LogMe.log("Cache Hit (key:$cacheObjectKey)- File")
             val cacheObj = classElements[cacheObjectKey]!!
-            if (cacheObj.isExpired(cacheObjectKey, cacheClassKey)) {
+            if (cacheObj.isExpired(context, cacheObjectKey, cacheClassKey)) {
                 return false
             }
             return true
@@ -94,7 +94,7 @@ open class CentralCache : CacheFileOps() {
         return false
     }
 
-    fun <T> getFromCacheMemory(key: String, appendCacheKeyPrefix: Boolean): T? {
+    fun <T> getFromCacheMemory(context: Context, key: String, appendCacheKeyPrefix: Boolean): T? {
         val cacheObjectKey = getCacheKey(key, appendCacheKeyPrefix)
         val cacheClassKey = getClassKey()
 
@@ -102,7 +102,7 @@ open class CentralCache : CacheFileOps() {
         if (classElements != null && classElements.containsKey(cacheObjectKey)) {
             LogMe.log("Cache Hit (key:$cacheObjectKey)- File")
             val cacheObj = classElements[cacheObjectKey]!!
-            if (cacheObj.isExpired(cacheObjectKey, cacheClassKey)) {
+            if (cacheObj.isExpired(context, cacheObjectKey, cacheClassKey)) {
                 return null
             }
             return cacheObj.content as T
