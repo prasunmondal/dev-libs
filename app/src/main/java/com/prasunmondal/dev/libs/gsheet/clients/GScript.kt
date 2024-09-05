@@ -15,7 +15,6 @@ import com.prasunmondal.dev.libs.caching.CentralCacheObj
 import com.prasunmondal.dev.libs.logs.instant.terminal.LogMe
 import org.json.JSONArray
 import org.json.JSONObject
-import java.io.Serializable
 import java.net.URL
 import java.util.UUID
 import java.util.function.Consumer
@@ -95,7 +94,7 @@ interface GScript {
             return responseList
         }
 
-        fun removeCallsWhoseResponsesAreCached(context: Context, apiRequest: APIRequests, useCache: Boolean = true): Boolean {
+        fun isResponseCached(context: Context, apiRequest: APIRequests, useCache: Boolean = true): Boolean {
 //            Filter the calls that are already cached.
             if (apiRequest is ReadAPIs<*>) {
                 if (useCache) {
@@ -123,7 +122,7 @@ interface GScript {
 
             val scriptUrl = URL(scriptURL)
             val filteredCalls =
-                apiRequestQueue.getQueue().filter { (key, apiRequest) -> removeCallsWhoseResponsesAreCached(apiRequest.context, apiRequest, useCache) } as MutableMap
+                apiRequestQueue.getQueue().filter { (key, apiRequest) -> !isResponseCached(apiRequest.context, apiRequest, useCache) } as MutableMap
 
             if (filteredCalls.isEmpty()) return mutableMapOf()
 
