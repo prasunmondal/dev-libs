@@ -97,7 +97,6 @@ interface GScript {
         fun isResponseCached(context: Context, apiRequest: APIRequests, useCache: Boolean = true): Boolean {
 //            Filter the calls that are already cached.
             if (apiRequest is ReadAPIs<*>) {
-                if (useCache) {
                     val isAvailable = CentralCacheObj.centralCache.isAvailable(
                         context,
                         apiRequest.getCacheKey(),
@@ -105,8 +104,6 @@ interface GScript {
                     )
                     LogMe.log("GScript.execute::shallFetch: ${!isAvailable} - ${apiRequest.getCacheKey()}")
                     return isAvailable
-                }
-                LogMe.log("GScript.execute::shallFetch: true - ${apiRequest.getCacheKey()}")
             }
             LogMe.log("GScript.execute::shallFetch: true - forced using flag useCache")
             return false
