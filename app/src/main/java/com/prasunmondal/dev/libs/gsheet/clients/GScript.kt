@@ -98,8 +98,7 @@ interface GScript {
         fun removeCallsWhoseResponsesAreCached(context: Context, apiRequest: APIRequests, useCache: Boolean = true): Boolean {
 //            Filter the calls that are already cached.
             if (useCache && apiRequest is ReadAPIs<*>) {
-                val cacheKey = apiRequest.getCacheKey()
-                return CentralCacheObj.centralCache.isAvailable(context, cacheKey, useCache)
+                return CentralCacheObj.centralCache.isAvailable(context, apiRequest.getCacheKey(), useCache)
             }
             return false
         }
@@ -145,10 +144,6 @@ interface GScript {
                 if (requestObj is ReadAPIs<*>) {
                     preparedResponse = requestObj.prepareResponse(requestObj, map[responseOpId]!!, null)
                     map[responseOpId] = preparedResponse
-//                    var parsedResponse =parsedResponse(preparedResponse as ReadResponse<*>).parsedResponse
-//                    parsedResponse = requestObj.filter(parsedResponse)
-//                    parsedResponse = requestObj.sort(parsedResponse)
-//                    preparedResponse.parsedResponse = parsedResponse
                     ResponseCache.saveToLocal(requestObj, preparedResponse as ReadResponse<*>)
                 }
             }
