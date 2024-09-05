@@ -32,7 +32,7 @@ interface GScript {
 
 
     // TODO: add direct execution
-    fun execute(scriptURL: String, useCache: Boolean = true): APIResponse {
+    fun execute(scriptURL: String = ProjectConfig.dBServerScriptURL, useCache: Boolean = true): APIResponse {
         val apiRequest = this as APIRequests
         val instantCalls = APIRequestsQueue()
         val uId = generateUniqueString()
