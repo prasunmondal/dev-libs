@@ -11,6 +11,7 @@ import com.prasunmondal.dev.libs.gsheet.metrics.GSheetMetrics
 import com.prasunmondal.dev.libs.gsheet.post.serializable.PostObjectResponse
 import com.prasunmondal.dev.libs.jsons.JsonParser
 import android.content.Context
+import com.prasunmondal.dev.libs.caching.CentralCacheObj
 import com.prasunmondal.dev.libs.logs.instant.terminal.LogMe
 import org.json.JSONArray
 import org.json.JSONObject
@@ -94,10 +95,13 @@ interface GScript {
             return responseList
         }
 
-        fun removeCallsWhoseResponsesAreCached(apiRequest: APIRequests): Boolean {
-//            Enable the below code to filter the calls that are already cached.
-//            return !ResponseCache.isCached(apiRequest)
-            return true
+        fun removeCallsWhoseResponsesAreCached(context: Context, apiRequest: APIRequests, useCache: Boolean = true): Boolean {
+//            Filter the calls that are already cached.
+            if (useCache && apiRequest is ReadAPIs<*>) {
+                val cacheKey = apiRequest.getCacheKey()
+                return CentralCacheObj.centralCache.isAvailable(context, cacheKey, useCache)
+            }
+            return false
         }
 
         fun execute(
@@ -110,7 +114,7 @@ interface GScript {
 
             val scriptUrl = URL(scriptURL)
             val filteredCalls =
-                apiRequestQueue.getQueue().filter { (key, apiRequest) -> removeCallsWhoseResponsesAreCached(apiRequest) } as MutableMap
+                apiRequestQueue.getQueue().filter { (key, apiRequest) -> removeCallsWhoseResponsesAreCached(apiRequest.context, apiRequest, useCache) } as MutableMap
 
             if (filteredCalls.isEmpty()) return mutableMapOf()
 
