@@ -101,7 +101,7 @@ interface GScript {
                     val isAvailable = CentralCacheObj.centralCache.isAvailable(
                         context,
                         apiRequest.getCacheKey(),
-                        useCache
+                        useCache, false
                     )
                     LogMe.log("GScript.execute::shallFetch: ${!isAvailable} - ${apiRequest.getCacheKey()}")
                     return isAvailable
