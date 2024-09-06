@@ -40,7 +40,7 @@ interface CachingUtils<T> {
             synchronized(Tech4BytesSerializableLocks.getLock(cacheKey)!!) {
                 // Synchronized code block
                 println("Synchronized function called with key: $cacheKey")
-                val response = request.executeOne(request.scriptURL, request)
+                val response = request.executeOne(request.scriptURL, request, useCache)
                 if (response == null)
                     listOf()
                 else {
