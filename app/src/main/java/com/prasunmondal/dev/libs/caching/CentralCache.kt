@@ -32,6 +32,7 @@ open class CentralCache : CacheFileOps() {
         // check if the value is available in local cache
         var valueFromCache = getFromCacheMemory<T>(context, key, appendCacheKeyPrefix)
         if (valueFromCache != null) {
+            LogMe.log("Cache Use: RAM (key:$cacheObjectKey)")
             return valueFromCache
         }
 
@@ -41,8 +42,10 @@ open class CentralCache : CacheFileOps() {
             CentralCacheObj.centralCache.getCacheDataFromFile(context, cacheObjectKey)
         valueFromCache = getFromCacheMemory<T>(context, key, appendCacheKeyPrefix)
         return if (valueFromCache != null) {
+            LogMe.log("Cache Use: File (key:$cacheObjectKey)")
             valueFromCache
         } else {
+            LogMe.log("Cache Use: Server (key:$cacheObjectKey)")
             LogMe.log("Cache Miss (key:$cacheObjectKey)")
             null
         }
