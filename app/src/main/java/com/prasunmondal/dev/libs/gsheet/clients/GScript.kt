@@ -30,7 +30,7 @@ interface GScript {
         get() = null
         set(value) = TODO()
 
-    fun execute(useCache: Boolean = true): MutableMap<String, APIResponse> {
+    fun executeQueue(useCache: Boolean = true): MutableMap<String, APIResponse> {
         return Companion.execute(ProjectConfig.dBServerScriptURL, useCache)
     }
     // TODO: add direct execution
