@@ -109,6 +109,10 @@ interface GScript {
             return false
         }
 
+        fun execute(useCache: Boolean): MutableMap<String, APIResponse> {
+            return execute(ProjectConfig.dBServerScriptURL, useCache)
+        }
+
         fun execute(
             apiRequestQueue: APIRequestsQueue,
             scriptURL: String,
