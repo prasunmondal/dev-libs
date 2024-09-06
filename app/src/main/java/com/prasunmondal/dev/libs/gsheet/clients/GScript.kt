@@ -30,7 +30,9 @@ interface GScript {
         get() = null
         set(value) = TODO()
 
-
+    fun execute(useCache: Boolean = true): MutableMap<String, APIResponse> {
+        return Companion.execute(ProjectConfig.dBServerScriptURL, useCache)
+    }
     // TODO: add direct execution
     fun execute(scriptURL: String = ProjectConfig.dBServerScriptURL, useCache: Boolean = true): APIResponse {
         val apiRequest = this as APIRequests
@@ -109,7 +111,7 @@ interface GScript {
             return false
         }
 
-        fun execute(useCache: Boolean): MutableMap<String, APIResponse> {
+        fun execute(useCache: Boolean = true): MutableMap<String, APIResponse> {
             return execute(ProjectConfig.dBServerScriptURL, useCache)
         }
 
