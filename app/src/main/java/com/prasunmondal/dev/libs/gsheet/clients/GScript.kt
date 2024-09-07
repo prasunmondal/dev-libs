@@ -1,6 +1,6 @@
 package com.prasunmondal.dev.libs.gsheet.clients
 
-import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.APIRequests
+import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.APIRequest
 import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.APIRequestsQueue
 import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.ReadAPIs.ReadAPIs
 import com.prasunmondal.dev.libs.gsheet.clients.APIResponses.APIResponse
@@ -35,7 +35,7 @@ interface GScript {
     }
     // TODO: add direct execution
     fun execute(scriptURL: String = ProjectConfig.dBServerScriptURL, useCache: Boolean = true): APIResponse {
-        val apiRequest = this as APIRequests
+        val apiRequest = this as APIRequest
         val instantCalls = APIRequestsQueue()
         val uId = generateUniqueString()
         instantCalls.addRequest(uId, apiRequest)
@@ -43,8 +43,8 @@ interface GScript {
         return response[uId]!!
     }
 
-    fun executeOne(scriptURL: String, apiRequest: APIRequests, useCache: Boolean = true): APIResponse {
-        val apiRequest = this as APIRequests
+    fun executeOne(scriptURL: String, apiRequest: APIRequest, useCache: Boolean = true): APIResponse {
+        val apiRequest = this as APIRequest
         val instantCalls = APIRequestsQueue()
         val uId = generateUniqueString()
         instantCalls.addRequest(uId, apiRequest)
@@ -65,7 +65,7 @@ interface GScript {
 
     companion object {
         var defaultQueue = APIRequestsQueue()
-        fun addRequest(apiCall: APIRequests?): String? {
+        fun addRequest(apiCall: APIRequest?): String? {
             if (apiCall == null)
                 return null
 
@@ -74,13 +74,13 @@ interface GScript {
             return uid
         }
 
-        fun addRequest(apiCallsList: List<APIRequests>) {
+        fun addRequest(apiCallsList: List<APIRequest>) {
             apiCallsList.forEach {
                 addRequest(it)
             }
         }
 
-        fun getCombinedJson(requestList: MutableMap<String, APIRequests>): Array<JSONObject> {
+        fun getCombinedJson(requestList: MutableMap<String, APIRequest>): Array<JSONObject> {
             val jsonArray = mutableListOf<JSONObject>()
             requestList.forEach { (uid, apiCall) ->
                 val requestJson = apiCall.getJSON()
@@ -96,7 +96,7 @@ interface GScript {
             return responseList
         }
 
-        fun isResponseCached(context: Context, apiRequest: APIRequests, useCache: Boolean = true): Boolean {
+        fun isResponseCached(context: Context, apiRequest: APIRequest, useCache: Boolean = true): Boolean {
 //            Filter the calls that are already cached.
             if (apiRequest is ReadAPIs<*>) {
                     val isAvailable = CentralCacheObj.centralCache.isAvailable(

@@ -1,6 +1,6 @@
 package com.prasunmondal.dev.libs.gsheet.clients.APIRequests.ReadAPIs
 
-import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.APIRequests
+import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.APIRequest
 import com.prasunmondal.dev.libs.gsheet.clients.APIResponses.APIResponse
 import com.prasunmondal.dev.libs.gsheet.clients.APIResponses.ReadResponse
 import com.prasunmondal.dev.libs.gsheet.clients.ClientFilter
@@ -8,7 +8,7 @@ import com.prasunmondal.dev.libs.gsheet.clients.ClientSort
 import com.prasunmondal.dev.libs.gsheet.clients.responseCaching.ResponseCache
 import com.prasunmondal.dev.libs.jsons.JsonParser
 
-abstract class ReadAPIs<T> : APIRequests(), ResponseCache {
+abstract class ReadAPIs<T> : APIRequest(), ResponseCache {
     lateinit var sheetId: String
     lateinit var tabName: String
     lateinit var data: String
@@ -38,7 +38,7 @@ abstract class ReadAPIs<T> : APIRequests(), ResponseCache {
     }
 
     override fun prepareResponse(
-        requestObj: APIRequests,
+        requestObj: APIRequest,
         receivedResponseObj: APIResponse,
         buildingResponseObj: APIResponse?
     ): ReadResponse<T> {

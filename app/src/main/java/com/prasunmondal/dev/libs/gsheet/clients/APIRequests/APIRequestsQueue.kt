@@ -6,13 +6,13 @@ import com.prasunmondal.dev.libs.gsheet.clients.Tests.ProjectConfig
 import com.prasunmondal.dev.libs.gsheet.exceptions.GScriptDuplicateUIDException
 
 class APIRequestsQueue {
-    private val listofAPIRequest = mutableMapOf<String, APIRequests>()
+    private val listofAPIRequest = mutableMapOf<String, APIRequest>()
 
-    fun getQueue(): MutableMap<String, APIRequests> {
+    fun getQueue(): MutableMap<String, APIRequest> {
         return listofAPIRequest
     }
 
-    fun addRequest(request: APIRequests) {
+    fun addRequest(request: APIRequest) {
         listofAPIRequest[StringUtils.generateUniqueString()] = request
     }
 
@@ -20,7 +20,7 @@ class APIRequestsQueue {
         GScript.execute(this, ProjectConfig.dBServerScriptURL, true)
     }
 
-    fun addRequest(uid: String, request: APIRequests) {
+    fun addRequest(uid: String, request: APIRequest) {
         if (listofAPIRequest.containsKey(uid)) {
             throw GScriptDuplicateUIDException()
         }

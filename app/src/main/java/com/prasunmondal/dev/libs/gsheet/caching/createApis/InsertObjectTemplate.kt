@@ -4,7 +4,7 @@ import android.content.Context
 import com.prasunmondal.dev.libs.caching.CentralCacheObj
 import com.prasunmondal.dev.libs.gsheet.caching.CachingUtils
 import com.prasunmondal.dev.libs.gsheet.caching.RequestTemplatesInterface
-import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.APIRequests
+import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.APIRequest
 import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.CreateAPIs.GSheetInsertObject
 import com.prasunmondal.dev.libs.gsheet.clients.ClientFilter
 import com.prasunmondal.dev.libs.gsheet.clients.ClientSort
@@ -26,7 +26,7 @@ class InsertObjectTemplate<T : Any>(
 
     var request = GSheetInsertObject(context)
 
-    override fun prepareRequest(): APIRequests {
+    override fun prepareRequest(): APIRequest {
         request.sheetId = sheetId
         request.tabName = tabname
         request.setDataObject(data as Any)

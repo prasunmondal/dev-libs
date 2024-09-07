@@ -5,7 +5,7 @@ import com.prasunmondal.dev.libs.gsheet.clients.APIResponses.APIResponse
 import com.prasunmondal.dev.libs.gsheet.clients.GScript
 import org.json.JSONObject
 
-abstract class APIRequests : GScript {
+abstract class APIRequest : GScript {
     private var uId: String = setUId()
     open var opCode: String = ""
 
@@ -32,7 +32,7 @@ abstract class APIRequests : GScript {
 //    }
 
     open fun prepareResponse(
-        requestObj: APIRequests,
+        requestObj: APIRequest,
         receivedResponseObj: APIResponse,
         buildingResponseObj: APIResponse? = null
     ): APIResponse {

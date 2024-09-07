@@ -1,8 +1,8 @@
 package com.prasunmondal.dev.libs.gsheet.clients.APIRequests.DeleteAPIs
 
-import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.APIRequests
+import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.APIRequest
 
-abstract class DeleteAPIs : APIRequests() {
+abstract class DeleteAPIs : APIRequest() {
     lateinit var sheetId: String
     lateinit var tabName: String
     lateinit var data: String

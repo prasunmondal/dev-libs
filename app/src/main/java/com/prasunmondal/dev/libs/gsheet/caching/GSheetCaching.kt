@@ -2,7 +2,7 @@ package com.prasunmondal.dev.libs.gsheet.caching
 
 import android.content.Context
 import com.prasunmondal.dev.libs.caching.CentralCacheObj
-import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.APIRequests
+import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.APIRequest
 import com.prasunmondal.dev.libs.gsheet.clients.APIResponses.APIResponse
 import com.prasunmondal.dev.libs.gsheet.clients.ClientFilter
 import com.prasunmondal.dev.libs.gsheet.clients.ClientSort
@@ -24,7 +24,7 @@ interface GSheetCaching<T>: GScript {
     var sort: ClientSort<T>?
 
     fun getFromServer(shallCacheData: Boolean = true): List<T> {
-        val apiResponse = (this as APIRequests).execute(scriptURL)
+        val apiResponse = (this as APIRequest).execute(scriptURL)
         val parsedResponse = parseResponse(apiResponse)
         if(shallCacheData) {
             saveResponse(context, parsedResponse)

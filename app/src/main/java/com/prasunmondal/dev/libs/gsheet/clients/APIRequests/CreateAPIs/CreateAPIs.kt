@@ -1,10 +1,10 @@
 package com.prasunmondal.dev.libs.gsheet.clients.APIRequests.CreateAPIs
 
-import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.APIRequests
+import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.APIRequest
 import com.prasunmondal.dev.libs.gsheet.clients.APIResponses.APIResponse
 import com.prasunmondal.dev.libs.gsheet.clients.APIResponses.CreateResponse
 
-abstract class CreateAPIs : APIRequests() {
+abstract class CreateAPIs : APIRequest() {
     lateinit var sheetId: String
     lateinit var tabName: String
     lateinit var data: String
@@ -19,7 +19,7 @@ abstract class CreateAPIs : APIRequests() {
     }
 
     override fun prepareResponse(
-        requestObj: APIRequests,
+        requestObj: APIRequest,
         receivedResponseObj: APIResponse,
         buildingResponseObj: APIResponse?
     ): APIResponse {

@@ -2,11 +2,11 @@ package com.prasunmondal.dev.libs.gsheet.caching.readApis
 
 import com.prasunmondal.dev.libs.gsheet.caching.CachingUtils
 import com.prasunmondal.dev.libs.gsheet.caching.RequestTemplatesInterface
-import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.APIRequests
+import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.APIRequest
 import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.ReadAPIs.FetchData.GSheetFetchByAndCondition
 
 interface FetchWithByAndConditionTemplate<T> : RequestTemplatesInterface<T>, CachingUtils<T> {
-    override fun prepareRequest(): APIRequests {
+    override fun prepareRequest(): APIRequest {
         val request = GSheetFetchByAndCondition<T>(context)
 
         if (sheetId.isNotBlank() && tabname.isNotBlank()) {

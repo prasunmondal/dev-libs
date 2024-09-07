@@ -1,6 +1,6 @@
 package com.prasunmondal.dev.libs.gsheet.caching
 
-import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.APIRequests
+import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.APIRequest
 import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.APIRequestsQueue
 import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.ReadAPIs.ReadAPIs
 import com.prasunmondal.dev.libs.gsheet.clients.APIResponses.ReadResponse
@@ -28,7 +28,7 @@ interface ExecutionOperations<T> : GSheetCaching<T>, CachingUtils<T> {
         }
     }
 
-    fun isCachingEnabledForThisRequest(request: APIRequests): Boolean {
+    fun isCachingEnabledForThisRequest(request: APIRequest): Boolean {
         return request is ReadAPIs<*>
     }
 
@@ -40,9 +40,9 @@ interface ExecutionOperations<T> : GSheetCaching<T>, CachingUtils<T> {
         requestQueue1.addRequest(prepareRequest())
     }
 
-    fun getRequestObj(): APIRequests {
+    fun getRequestObj(): APIRequest {
         return prepareRequest()
     }
 
-    fun prepareRequest(): APIRequests
+    fun prepareRequest(): APIRequest
 }

@@ -3,7 +3,7 @@ package com.prasunmondal.dev.libs.gsheet.caching.readApis
 import android.content.Context
 import com.prasunmondal.dev.libs.gsheet.caching.CachingUtils
 import com.prasunmondal.dev.libs.gsheet.caching.RequestTemplatesInterface
-import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.APIRequests
+import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.APIRequest
 import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.ReadAPIs.FetchData.GSheetFetchByQuery
 import com.prasunmondal.dev.libs.gsheet.clients.ClientFilter
 import com.prasunmondal.dev.libs.gsheet.clients.ClientSort
@@ -22,7 +22,7 @@ class FetchByQueryTemplate<T>(
     override var sort: ClientSort<T>?,
 ) : RequestTemplatesInterface<T>, CachingUtils<T> {
 
-    override fun prepareRequest(): APIRequests {
+    override fun prepareRequest(): APIRequest {
         val request = GSheetFetchByQuery<T>(context)
 
         if (sheetId.isNotBlank() && tabname.isNotBlank()) {

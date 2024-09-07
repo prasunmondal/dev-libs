@@ -2,7 +2,7 @@ package com.prasunmondal.dev.libs.gsheet.clients.responseCaching
 
 import android.content.Context
 import com.prasunmondal.dev.libs.caching.CentralCacheObj
-import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.APIRequests
+import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.APIRequest
 import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.ReadAPIs.ReadAPIs
 import com.prasunmondal.dev.libs.gsheet.clients.APIResponses.ReadResponse
 import com.prasunmondal.dev.libs.logs.instant.terminal.LogMe
@@ -14,7 +14,7 @@ interface ResponseCache : Serializable {
 
     companion object {
 
-        fun saveToLocal(requestObj: APIRequests, responseObj: ReadResponse<*>) {
+        fun saveToLocal(requestObj: APIRequest, responseObj: ReadResponse<*>) {
             if (requestObj is ReadAPIs<*>) {
                 val cacheKey = requestObj.getCacheKey()
                 LogMe.log("Expensive Operation - saving data to local: $cacheKey")
@@ -22,7 +22,7 @@ interface ResponseCache : Serializable {
             }
         }
 
-        fun isCached(context: Context, requestObj: APIRequests): Boolean {
+        fun isCached(context: Context, requestObj: APIRequest): Boolean {
             if (requestObj is ReadAPIs<*>) {
                 val cacheKey = requestObj.getCacheKey()
                 LogMe.log("Expensive Operation - saving data to local: $cacheKey")

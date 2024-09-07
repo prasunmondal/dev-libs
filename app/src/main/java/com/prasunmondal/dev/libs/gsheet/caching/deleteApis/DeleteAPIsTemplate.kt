@@ -2,7 +2,7 @@ package com.prasunmondal.dev.libs.gsheet.caching.deleteApis
 
 import android.content.Context
 import com.prasunmondal.dev.libs.gsheet.caching.RequestTemplatesInterface
-import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.APIRequests
+import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.APIRequest
 import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.CreateAPIs.GSheetInsertObject
 import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.DeleteAPIs.GSheetDeleteAll
 import com.prasunmondal.dev.libs.gsheet.clients.ClientFilter
@@ -21,7 +21,7 @@ class DeleteAPIsTemplate<T>(
     override var filter: ClientFilter<T>?,
     override var sort: ClientSort<T>?
 ) : RequestTemplatesInterface<T> {
-    override fun prepareRequest(): APIRequests {
+    override fun prepareRequest(): APIRequest {
         val request = GSheetDeleteAll(context)
         if (sheetId.isNotBlank() && tabname.isNotBlank()) {
             request.sheetId(sheetId)
