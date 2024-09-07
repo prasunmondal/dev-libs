@@ -43,9 +43,13 @@ open class GSheetSerialized<T : Any>(
             appendInServer, appendInLocal, cacheTag, shallCacheData, filter, sort, objList)
     }
 
+    fun save(obj: T): SaveObjectsListTemplate<T> {
+        return SaveObjectsListTemplate(context.get, sheetId, tabName, query, modelClass,
+            appendInServer, appendInLocal, cacheTag, shallCacheData, filter, sort, listOf(obj))
+    }
+
     fun insert(obj: T): InsertObjectTemplate<T> {
-        return InsertObjectTemplate(
-            context.get, sheetId, tabName, query, modelClass,
+        return InsertObjectTemplate(context.get, sheetId, tabName, query, modelClass,
             appendInServer, appendInLocal, cacheTag, shallCacheData, filter, sort, obj)
     }
 
