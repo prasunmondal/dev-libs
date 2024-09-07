@@ -8,41 +8,55 @@ import com.prasunmondal.dev.libs.gsheet.clients.GScript
 
 interface ExecutionOperations<T> : GSheetCaching<T>, CachingUtils<T> {
 
-    fun execute(useCache: Boolean = true): List<T> {
-        if (isCachingEnabledForThisRequest(prepareRequest())) {
-            // If the request is ReadAPI, look into the cache
-            return get(prepareRequest() as ReadAPIs<T>, useCache)
-        } else {
-            // If the request is not ReadAPI, execute directly
-            val responseObj =
-                prepareRequest().executeOne(scriptURL, prepareRequest())
+    fun execute(): List<T> {
 
-            if (responseObj is ReadResponse<*>) {
-                return responseObj.parsedResponse as List<T>
-            }
+        // If there are more than 1 request, results are not returned
+        if(prepareRequest().size > 1) {
+            val requestQueue = APIRequestsQueue()
+            requestQueue.addRequest(prepareRequest())
+            requestQueue.execute()
+            return listOf()
+        }
+
+        // if only one request is available
+        val request = prepareRequest()[0]
+
+        if(request is ReadAPIs<*>) {
+            // if read request:
+            // - search in cache, or file, or server
+            // - return the parsed list of objects
+            return get(request as ReadAPIs<T>)
+        } else {
+            // if not read (i.e update, create or delete) operation:
+            // delete the existing related data first
+            // make the call
+            // return empty list.
 
             // Delete the cached objects
             deleteCacheObjects(context, "$sheetId\\$tabname")
-
+            val responseObj = prepareRequest()[0].executeOne()
+            if (responseObj is ReadResponse<*>) {
+                return responseObj.parsedResponse as List<T>
+            }
             return listOf()
         }
     }
 
-    fun isCachingEnabledForThisRequest(request: APIRequest): Boolean {
+    fun isCachingEnabledForThisRequest(request: List<APIRequest>): Boolean {
         return request is ReadAPIs<*>
     }
 
     fun queue() {
-        GScript.addRequest(prepareRequest())
+        GScript.addRequests(prepareRequest())
     }
 
     fun queue(requestQueue1: APIRequestsQueue) {
         requestQueue1.addRequest(prepareRequest())
     }
 
-    fun getRequestObj(): APIRequest {
+    fun getRequestObj(): List<APIRequest> {
         return prepareRequest()
     }
 
-    fun prepareRequest(): APIRequest
+    fun prepareRequest(): List<APIRequest>
 }

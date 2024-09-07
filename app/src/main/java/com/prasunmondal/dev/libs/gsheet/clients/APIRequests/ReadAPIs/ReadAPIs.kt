@@ -16,6 +16,7 @@ abstract class ReadAPIs<T> : APIRequest(), ResponseCache {
     var cacheData: Boolean = true
     var filter: ClientFilter<T>? = null
     var sort: ClientSort<T>? = null
+    var useCache: Boolean = true
 
     fun sheetId(sheetId: String) {
         this.sheetId = sheetId

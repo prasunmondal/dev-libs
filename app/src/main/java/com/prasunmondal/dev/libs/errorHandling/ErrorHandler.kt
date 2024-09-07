@@ -20,7 +20,7 @@ class ErrorHandler: GSheetSerialized<ErrorModel>(
                     ${getStackTrace(error as Exception)}< EXCEPTION END >
                     """.trimIndent()
 
-        val requestObj = insert(ErrorModel(str)).getRequestObj()
+        val requestObj = insert(ErrorModel(str)).getRequestObj()[0]
         requestObj.context = context
         (requestObj as CreateAPIs).sheetId = sheetId
         requestObj.tabName = tabName

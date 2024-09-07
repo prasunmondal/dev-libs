@@ -46,8 +46,8 @@ class FetchAllBySorting {
 
     fun resetData() {
         LogMe.log("Resetting Data")
-        FetchAllBySortingModel.fetchAll().execute()
-        GScript.clearAll()
+        FetchAllBySortingModel.fetchAll(false).execute()
+        GScript.clearDefaultRequestQueue()
 //        val deleteRequest = FetchAllBySortingModel.deleteAll().prepareRequest()
 //        GScript.addRequest(deleteRequest)
         FetchAllBySortingModel.deleteAll().execute()

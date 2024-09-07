@@ -24,16 +24,20 @@ open class GSheetSerialized<T : Any>(
     var filter: ClientFilter<T>? = null,
     var sort: ClientSort<T>? = null
 ) {
-    fun fetchAll(): FetchAllTemplate<T> {
+    fun fetchAll(useCache: Boolean = true): FetchAllTemplate<T> {
         return FetchAllTemplate(
-            context.get, sheetId, tabName, query, modelClass,
+            context.get, sheetId, tabName, modelClass, useCache, query,
             appendInServer, appendInLocal, cacheTag, shallCacheData, filter, sort)
     }
 
-    fun fetchByQuery(query: String? = this.query): FetchByQueryTemplate<T> {
+    fun fetchByQuery(query: String? = this.query, useCache: Boolean = true): FetchByQueryTemplate<T> {
         return FetchByQueryTemplate(
-            context.get, sheetId, tabName, query, modelClass,
+            context.get, sheetId, tabName, modelClass, useCache, query,
             appendInServer, appendInLocal, cacheTag, shallCacheData, filter, sort)
+    }
+
+    fun save(list: List<T>) {
+        deleteAll()
     }
 
     fun insert(obj: T): InsertObjectTemplate<T> {

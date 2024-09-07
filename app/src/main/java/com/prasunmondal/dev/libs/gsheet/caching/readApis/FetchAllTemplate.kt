@@ -12,8 +12,9 @@ class FetchAllTemplate<T>(
     override var context: Context,
     override var sheetId: String,
     override var tabname: String,
-    override var query: String?,
     override var modelClass: Class<T>,
+    var useCache: Boolean = true,
+    override var query: String?,
     override var appendInServer: Boolean,
     override var appendInLocal: Boolean,
     override var cacheTag: String?,
@@ -22,7 +23,7 @@ class FetchAllTemplate<T>(
     override var sort: ClientSort<T>?,
 ) : RequestTemplatesInterface<T>, CachingUtils<T> {
 
-    override fun prepareRequest(): APIRequest {
+    override fun prepareRequest(): List<APIRequest> {
         val request = GSheetFetchAll<T>(context)
 
         if (sheetId.isNotBlank() && tabname.isNotBlank()) {
@@ -31,7 +32,8 @@ class FetchAllTemplate<T>(
             request.filter = filter
             request.sort = sort
             request.modelClass = modelClass
+            request.useCache = this.useCache
         }
-        return request
+        return listOf(request)
     }
 }

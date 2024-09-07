@@ -8,9 +8,9 @@ import com.prasunmondal.dev.libs.gsheet.serializer.Tech4BytesSerializableLocks
 import com.prasunmondal.dev.libs.logs.instant.terminal.LogMe
 
 interface CachingUtils<T> {
-    fun <T> getMultiple(context: Context, request: ReadAPIs<T>, useCache: Boolean): List<T> {
+    fun <T> getMultiple(context: Context, request: ReadAPIs<T>): List<T> {
         val cacheKey = request.getCacheKey()
-        var cacheResults = readFromCache(context, request, useCache)
+        var cacheResults = readFromCache(context, request, request.useCache)
 
         LogMe.log("Getting delivery records: Cache Hit: " + (cacheResults != null))
         return if (cacheResults != null) {
@@ -19,8 +19,8 @@ interface CachingUtils<T> {
             synchronized(Tech4BytesSerializableLocks.getLock(cacheKey)!!) {
                 // Synchronized code block
                 println("Synchronized function called with key: $cacheKey")
-                request.execute(request.scriptURL)
-                cacheResults = readFromCache(context, request, useCache)
+                request.execute()
+                cacheResults = readFromCache(context, request, request.useCache)
                 if (cacheResults == null)
                     listOf()
                 else
@@ -29,9 +29,9 @@ interface CachingUtils<T> {
         }
     }
 
-    fun get(request: ReadAPIs<T>, useCache: Boolean): List<T> {
+    fun get(request: ReadAPIs<T>): List<T> {
         val cacheKey = request.getCacheKey()
-        var cacheResults = readFromCache(request.context, request, useCache)
+        var cacheResults = readFromCache(request.context, request, request.useCache)
 
         LogMe.log("Getting delivery records: Cache Hit: " + (cacheResults != null))
         return if (cacheResults != null) {
@@ -40,7 +40,7 @@ interface CachingUtils<T> {
             synchronized(Tech4BytesSerializableLocks.getLock(cacheKey)!!) {
                 // Synchronized code block
                 println("Synchronized function called with key: $cacheKey")
-                val response = request.executeOne(request.scriptURL, request, useCache)
+                val response = request.executeOne()
                 if (response == null)
                     listOf()
                 else {

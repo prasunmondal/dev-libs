@@ -21,13 +21,13 @@ class DeleteAPIsTemplate<T>(
     override var filter: ClientFilter<T>?,
     override var sort: ClientSort<T>?
 ) : RequestTemplatesInterface<T> {
-    override fun prepareRequest(): APIRequest {
+    override fun prepareRequest(): List<APIRequest> {
         val request = GSheetDeleteAll(context)
         if (sheetId.isNotBlank() && tabname.isNotBlank()) {
             request.sheetId(sheetId)
             request.tabName(tabname)
         }
-        return request
+        return listOf(request)
     }
 
     override fun cacheUpdateOperation() {

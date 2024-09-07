@@ -26,11 +26,11 @@ class InsertObjectTemplate<T : Any>(
 
     var request = GSheetInsertObject(context)
 
-    override fun prepareRequest(): APIRequest {
+    override fun prepareRequest(): List<APIRequest> {
         request.sheetId = sheetId
         request.tabName = tabname
         request.setDataObject(data as Any)
-        return request
+        return listOf(request)
     }
 
     override fun cacheUpdateOperation() {

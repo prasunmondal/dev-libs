@@ -6,7 +6,7 @@ import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.APIRequest
 import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.ReadAPIs.FetchData.GSheetFetchByAndCondition
 
 interface FetchWithByAndConditionTemplate<T> : RequestTemplatesInterface<T>, CachingUtils<T> {
-    override fun prepareRequest(): APIRequest {
+    override fun prepareRequest(): List<APIRequest> {
         val request = GSheetFetchByAndCondition<T>(context)
 
         if (sheetId.isNotBlank() && tabname.isNotBlank()) {
@@ -16,6 +16,6 @@ interface FetchWithByAndConditionTemplate<T> : RequestTemplatesInterface<T>, Cac
             request.sort = sort
             request.modelClass = modelClass
         }
-        return request
+        return listOf(request)
     }
 }

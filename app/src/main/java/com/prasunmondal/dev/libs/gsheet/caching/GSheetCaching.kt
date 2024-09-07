@@ -24,7 +24,7 @@ interface GSheetCaching<T>: GScript {
     var sort: ClientSort<T>?
 
     fun getFromServer(shallCacheData: Boolean = true): List<T> {
-        val apiResponse = (this as APIRequest).execute(scriptURL)
+        val apiResponse = (this as APIRequest).execute()
         val parsedResponse = parseResponse(apiResponse)
         if(shallCacheData) {
             saveResponse(context, parsedResponse)

@@ -14,7 +14,7 @@ import java.nio.charset.StandardCharsets
 import java.util.function.Consumer
 import javax.net.ssl.HttpsURLConnection
 
-class ExecutePostCallsString(
+class PostCall(
     private val scriptUrl: URL,
     private val postDataParams: String,
     private val onCompletion: Consumer<String>?,
