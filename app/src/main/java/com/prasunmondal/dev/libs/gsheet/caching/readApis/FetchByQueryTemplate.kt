@@ -37,4 +37,8 @@ class FetchByQueryTemplate<T>(
         }
         return listOf(request)
     }
+
+    override fun cacheUpdateOperation() {
+        // No Action Required.
+    }
 }

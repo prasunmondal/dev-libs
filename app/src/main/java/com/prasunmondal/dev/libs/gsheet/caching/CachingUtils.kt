@@ -72,8 +72,4 @@ interface CachingUtils<T> {
     fun deleteCacheObjects(context: Context, whereKeyStartsWith: String) {
         CentralCacheObj.centralCache.removeCacheObjectsWhereKeyStartsWith(context, whereKeyStartsWith)
     }
-
-    fun cacheUpdateOperation() {
-
-    }
 }

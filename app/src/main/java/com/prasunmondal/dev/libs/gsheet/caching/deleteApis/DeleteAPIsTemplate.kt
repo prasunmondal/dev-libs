@@ -3,7 +3,6 @@ package com.prasunmondal.dev.libs.gsheet.caching.deleteApis
 import android.content.Context
 import com.prasunmondal.dev.libs.gsheet.caching.RequestTemplatesInterface
 import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.APIRequest
-import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.CreateAPIs.GSheetInsertObject
 import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.DeleteAPIs.GSheetDeleteAll
 import com.prasunmondal.dev.libs.gsheet.clients.ClientFilter
 import com.prasunmondal.dev.libs.gsheet.clients.ClientSort
@@ -31,7 +30,6 @@ class DeleteAPIsTemplate<T>(
     }
 
     override fun cacheUpdateOperation() {
-        val request = GSheetInsertObject(context)
-        deleteCacheObjects(context, "${request.sheetId}//${request.tabName}")
+        deleteCacheObjects(context, "$sheetId//$tabname")
     }
 }
