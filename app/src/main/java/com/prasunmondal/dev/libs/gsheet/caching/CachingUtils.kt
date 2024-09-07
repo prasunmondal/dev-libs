@@ -6,6 +6,7 @@ import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.ReadAPIs.ReadAPIs
 import com.prasunmondal.dev.libs.gsheet.clients.APIResponses.ReadResponse
 import com.prasunmondal.dev.libs.gsheet.serializer.Tech4BytesSerializableLocks
 import com.prasunmondal.dev.libs.logs.instant.terminal.LogMe
+import java.util.function.Consumer
 
 interface CachingUtils<T> {
     fun <T> getMultiple(context: Context, request: ReadAPIs<T>): List<T> {

@@ -59,8 +59,4 @@ class SaveObjectsListTemplate<T : Any>(
         requestsList.add(fetchRequest)
         return requestsList.toList()
     }
-
-    override fun cacheUpdateOperation() {
-        deleteCacheObjects(context, "$sheetId//$tabname")
-    }
 }

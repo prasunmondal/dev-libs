@@ -59,5 +59,4 @@ interface ExecutionOperations<T> : GSheetCaching<T>, CachingUtils<T> {
     }
 
     fun prepareRequest(): List<APIRequest>
-    fun cacheUpdateOperation()
 }

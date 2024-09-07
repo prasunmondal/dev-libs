@@ -2,6 +2,7 @@ package com.prasunmondal.dev.libs.gsheet
 
 import android.content.Context
 import com.prasunmondal.dev.libs.caching.CentralCacheObj
+import com.prasunmondal.dev.libs.gsheet.caching.ExecutionOperations
 import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.APIRequest
 import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.APIRequestsQueue
 import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.ReadAPIs.ReadAPIs
@@ -90,28 +91,34 @@ class GScriptUtils {
             GSheetMetrics.callCounter++
 
             val scriptUrl = URL(scriptURL)
-            val filteredCalls =
-                apiRequestQueue.getQueue().filter { (key, apiRequest) ->
-                    !isResponseCached(
-                        apiRequest.context,
-                        apiRequest
-                    )
-                } as MutableMap
+            executeAllCacheUpdateOperations(apiRequestQueue)
+            val filteredCalls = filterOutCallsWhoseResultsAreAlreadyCached(apiRequestQueue)
 
             if (filteredCalls.isEmpty()) return mutableMapOf()
 
             val finalRequestJSON = getCombinedJson(filteredCalls)
-
-            val postCall = PostCall(
-                scriptUrl,
-                finalRequestJSON
-            ) { } // response -> GScriptUtils.postExecute(response)
+            val postCall = PostCall(scriptUrl, finalRequestJSON) { } // response -> GScriptUtils.postExecute(response)
             val response = postCall.execute().get()
 
             val responseJsonList = JsonParser.convertJsonArrayStringToJsonObjList(response)
             val responseParsedList =
                 parseJsonTesponses(responseJsonList, filteredCalls)
             return responseParsedList
+        }
+
+        private fun filterOutCallsWhoseResultsAreAlreadyCached(apiRequestQueue: APIRequestsQueue): MutableMap<String, APIRequest> {
+            return apiRequestQueue.getQueue().filter { (key, apiRequest) ->
+                !isResponseCached(
+                    apiRequest.context,
+                    apiRequest
+                )
+            } as MutableMap
+        }
+
+        private fun executeAllCacheUpdateOperations(apiRequestQueue: APIRequestsQueue) {
+            apiRequestQueue.getQueue().forEach {
+                it.value.cacheUpdateOperation?.let { it1 -> it1(it.value) }
+            }
         }
     }
 }

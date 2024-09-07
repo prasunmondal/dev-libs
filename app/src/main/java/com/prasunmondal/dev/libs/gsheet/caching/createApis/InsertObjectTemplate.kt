@@ -48,8 +48,4 @@ class InsertObjectTemplate<T : Any>(
 
         return requestsList
     }
-
-    override fun cacheUpdateOperation() {
-        deleteCacheObjects(context,"${insertRequest.sheetId}//${insertRequest.tabName}")
-    }
 }

@@ -67,7 +67,6 @@ class FetchAllBySorting {
 
         var request = FetchAllBySortingModelWithFilter.insert(obj1).getRequestObj()
         requestQueue1.addRequest(request)
-        requestQueue1.addRequest("id6", request)
         requestQueue1.execute()
         LogMe.log("Reset Completed.")
     }

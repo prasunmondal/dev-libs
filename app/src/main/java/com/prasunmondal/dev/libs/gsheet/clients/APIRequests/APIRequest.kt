@@ -4,10 +4,13 @@ import com.prasunmondal.dev.libs.StringUtils.StringUtils
 import com.prasunmondal.dev.libs.gsheet.clients.APIResponses.APIResponse
 import com.prasunmondal.dev.libs.gsheet.clients.GScript
 import org.json.JSONObject
+import java.util.function.Consumer
+import kotlin.reflect.KFunction
 
 abstract class APIRequest : GScript {
     private var uId: String = setUId()
     open var opCode: String = ""
+    open var cacheUpdateOperation: ((APIRequest) -> Unit)? = null
 
     abstract fun getJSON(): JSONObject
 
@@ -23,13 +26,6 @@ abstract class APIRequest : GScript {
         }
         return this.uId
     }
-
-//    open fun <T> defaultInitialize(
-//        request: APIRequests,
-//        reqValues: APIRequestsTemplates<T>
-//    ): APIRequests {
-//        return request
-//    }
 
     open fun prepareResponse(
         requestObj: APIRequest,

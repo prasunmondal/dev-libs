@@ -38,6 +38,10 @@ abstract class ReadAPIs<T> : APIRequest(), ResponseCache {
         return cacheKey
     }
 
+    fun cacheUpdateOperation() {
+        // No Action Required.
+    }
+
     override fun prepareResponse(
         requestObj: APIRequest,
         receivedResponseObj: APIResponse,

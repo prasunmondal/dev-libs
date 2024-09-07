@@ -28,8 +28,4 @@ class DeleteAPIsTemplate<T>(
         }
         return listOf(request)
     }
-
-    override fun cacheUpdateOperation() {
-        deleteCacheObjects(context, "$sheetId//$tabname")
-    }
 }
