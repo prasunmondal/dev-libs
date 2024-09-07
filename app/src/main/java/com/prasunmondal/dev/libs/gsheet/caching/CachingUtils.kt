@@ -31,7 +31,7 @@ interface CachingUtils<T> {
 
     fun get(request: ReadAPIs<T>): List<T> {
         val cacheKey = request.getCacheKey()
-        var cacheResults = readFromCache(request.context, request, request.useCache)
+        val cacheResults = readFromCache(request.context, request, request.useCache)
 
         LogMe.log("Getting delivery records: Cache Hit: " + (cacheResults != null))
         return if (cacheResults != null) {

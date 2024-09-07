@@ -191,6 +191,9 @@ open class CentralCache : CacheFileOps() {
     }
 
     fun removeCacheObjectsWhereKeyStartsWith(context: Context, keyStartingString: String) {
+        if(CentralCacheObj.centralCache.cache[getClassKey()].isNullOrEmpty()) {
+            return
+        }
         val keysToRemove = CentralCacheObj.centralCache.cache[getClassKey()]!!.keys.filter { it.startsWith(keyStartingString) }
         for (key in keysToRemove) {
             CentralCacheObj.centralCache.cache[getClassKey()]!!.remove(key)

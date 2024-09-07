@@ -2,9 +2,11 @@ package com.prasunmondal.dev.libs.gsheet.clients
 
 import com.prasunmondal.dev.libs.gsheet.ContextWrapper
 import com.prasunmondal.dev.libs.gsheet.caching.createApis.InsertObjectTemplate
+import com.prasunmondal.dev.libs.gsheet.caching.createApis.SaveObjectsListTemplate
 import com.prasunmondal.dev.libs.gsheet.caching.deleteApis.DeleteAPIsTemplate
 import com.prasunmondal.dev.libs.gsheet.caching.readApis.FetchAllTemplate
 import com.prasunmondal.dev.libs.gsheet.caching.readApis.FetchByQueryTemplate
+import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.APIRequest
 import com.prasunmondal.dev.libs.gsheet.clients.Tests.ProjectConfig
 import com.prasunmondal.dev.libs.gsheet.post.serializable.PostObjectResponse
 import java.util.function.Consumer
@@ -36,8 +38,9 @@ open class GSheetSerialized<T : Any>(
             appendInServer, appendInLocal, cacheTag, shallCacheData, filter, sort)
     }
 
-    fun save(list: List<T>) {
-        deleteAll()
+    fun save(objList: List<T>): SaveObjectsListTemplate<T> {
+        return SaveObjectsListTemplate(context.get, sheetId, tabName, query, modelClass,
+            appendInServer, appendInLocal, cacheTag, shallCacheData, filter, sort, objList)
     }
 
     fun insert(obj: T): InsertObjectTemplate<T> {
