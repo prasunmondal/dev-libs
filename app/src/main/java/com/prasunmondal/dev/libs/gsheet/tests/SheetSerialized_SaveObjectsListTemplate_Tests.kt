@@ -15,7 +15,7 @@ class SheetSerialized_SaveObjectsListTemplate_Tests {
     fun saveListOfObjects() {
         val numberOfSaveObj = 3
         LogMe.startMethod()
-        GSheetTestUtils.resetSheetToHaveOneDataRow()
+        GSheetTestUtils.resetSheetToHaveNDataRows(1)
 
         val numberOfServerCallMadeAtStart = GSheetMetrics.callCounter
         LogMe.log("Calls made at start: $numberOfServerCallMadeAtStart")
@@ -41,7 +41,7 @@ class SheetSerialized_SaveObjectsListTemplate_Tests {
 
     fun saveObjectsOneByOne() {
         LogMe.startMethod()
-        GSheetTestUtils.resetSheetToHaveOneDataRow()
+        GSheetTestUtils.resetSheetToHaveNDataRows(1)
 
         val numberOfServerCallMadeAtStart = GSheetMetrics.callCounter
         LogMe.log("Calls made at start: $numberOfServerCallMadeAtStart")

@@ -1,6 +1,7 @@
 package com.prasunmondal.dev.libs.gsheet.tests
 
 import com.prasunmondal.dev.libs.StringUtils.StringUtils
+import com.prasunmondal.dev.libs.gsheet.clients.GScript
 import com.prasunmondal.dev.libs.gsheet.clients.Tests.ModelInsertObject
 import com.prasunmondal.dev.libs.gsheet.clients.Tests.ReadAPIs.FetchData.FetchAll.FetchAllBySortingModelNoFilter
 import com.prasunmondal.dev.libs.gsheet.metrics.GSheetMetricsState
@@ -13,10 +14,11 @@ class GSheetTestUtils {
         fun resetSheetToHaveNoData() {
             FetchAllBySortingModelNoFilter.deleteAll().execute()
         }
-        fun resetSheetToHaveOneDataRow(): List<ModelInsertObject> {
-            FetchAllBySortingModelNoFilter.deleteAll().execute()
-            val list = createListOfObjectByRandomValues(1)
-            FetchAllBySortingModelNoFilter.save(list).execute()
+        fun resetSheetToHaveNDataRows(rows: Int): List<ModelInsertObject> {
+            FetchAllBySortingModelNoFilter.deleteAll().queue()
+            val list = createListOfObjectByRandomValues(rows)
+            FetchAllBySortingModelNoFilter.save(list).queue()
+            GScript.execute()
             return list
         }
 

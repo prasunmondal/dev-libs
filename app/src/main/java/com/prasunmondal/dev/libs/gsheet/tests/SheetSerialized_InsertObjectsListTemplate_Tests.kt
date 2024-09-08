@@ -14,7 +14,7 @@ class SheetSerialized_InsertObjectsListTemplate_Tests {
     fun insertListOfObjects() {
         val numberOfSaveObj = 3
         LogMe.startMethod()
-        val initialListInServer = GSheetTestUtils.resetSheetToHaveOneDataRow()
+        val initialListInServer = GSheetTestUtils.resetSheetToHaveNDataRows(1)
 
         val numberOfServerCallMadeAtStart = GSheetMetrics.callCounter
         LogMe.log("Calls made at start: $numberOfServerCallMadeAtStart")
@@ -39,24 +39,25 @@ class SheetSerialized_InsertObjectsListTemplate_Tests {
     }
 
     fun insertObjectsOneByOne() {
+        val numberOfSaveObj = 1
         LogMe.startMethod()
-        GSheetTestUtils.resetSheetToHaveOneDataRow()
+        val initialListInServer = GSheetTestUtils.resetSheetToHaveNDataRows(3)
 
         val numberOfServerCallMadeAtStart = GSheetMetrics.callCounter
         LogMe.log("Calls made at start: $numberOfServerCallMadeAtStart")
 
-        val obj1 = GSheetTestUtils.createObjectByRandomValues()
-        FetchAllBySortingModelNoFilter.save(obj1).execute()
-        val numberOfServerCallMadeB4 = GSheetMetrics.callCounter
-        LogMe.log("Calls made before fetch: $numberOfServerCallMadeB4")
+        val generatedList = GSheetTestUtils.createListOfObjectByRandomValues(numberOfSaveObj)[0]
 
+        val metricsB4Save = GSheetMetricsState.getState()
+        FetchAllBySortingModelNoFilter.insert(generatedList).execute()
+        val metricsAfterSave = GSheetMetricsState.getState()
         val fetchedList = FetchAllBySortingModelNoFilter.fetchAll().execute()
-        val numberOfServerCallMadeAfter = GSheetMetrics.callCounter
-        LogMe.log("Calls made before fetch: $numberOfServerCallMadeAfter")
-
-        if(GSheetTestUtils.areIdentical(listOf(obj1), fetchedList)
-            && fetchedList.size == 1
-            && numberOfServerCallMadeB4 == numberOfServerCallMadeAfter) {
+        val metricsAfterFetch = GSheetMetricsState.getState()
+        val serverList = initialListInServer + generatedList
+        if(GSheetTestUtils.areIdentical(serverList, fetchedList)
+            && fetchedList.size == numberOfSaveObj + 3
+            && GSheetTestUtils.isMetricsExpected(metricsB4Save, metricsAfterSave, 1, 1+numberOfSaveObj,1+numberOfSaveObj)
+            && GSheetTestUtils.isMetricsExpected(metricsAfterSave, metricsAfterFetch, 0, 0,0)) {
             LogMe.log("Successful")
         } else {
             LogMe.log("Failed")
