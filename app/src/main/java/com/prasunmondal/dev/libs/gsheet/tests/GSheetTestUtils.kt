@@ -45,6 +45,9 @@ class GSheetTestUtils {
 //            LogMe.log("Expected $metricsName Metrics $initial + $increment = $final".replace("  "," "))
 //            LogMe.log("Actual $metricsName Metrics $initial + ${final - initial} = $final".replace("  "," "))
 
+            LogMe.log("Call Counter:: Expected: ${initial.callCounter} + $incrementInCallCounter = ${initial.callCounter + incrementInCallCounter}, Actual: ${initial.callCounter} + $incrementInCallCounter = ${final.callCounter}")
+            LogMe.log("Requests Queued:: Expected: ${initial.requestsQueued} + $incrementInCallCounter = ${initial.requestsQueued + incrementInCallCounter}, Actual: ${initial.requestsQueued} + $incrementInCallCounter = ${final.requestsQueued}")
+            LogMe.log("Requests Processed:: Expected: ${initial.requestsProcessed} + $incrementInCallCounter = ${initial.requestsProcessed + incrementInCallCounter}, Actual: ${initial.requestsProcessed} + $incrementInCallCounter = ${final.requestsProcessed}")
             val r1 = (initial.callCounter + incrementInCallCounter) == final.callCounter
             val r2 = (initial.requestsQueued + incrementInRequestsQueued) == final.requestsQueued
             val r3 = (initial.requestsProcessed + incrementInRequestsProcessed) == final.requestsProcessed
