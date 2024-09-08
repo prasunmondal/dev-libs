@@ -39,7 +39,7 @@ class GScriptUtils {
         }
 
         fun isResponseCached(context: Context, apiRequest: APIRequest): Boolean {
-//            Filter the calls that are already cached.
+//            Filter the calls that can be served from cache.
             if (apiRequest is ReadAPIs<*>) {
                 val isAvailable = CentralCacheObj.centralCache.isAvailable(
                     context,

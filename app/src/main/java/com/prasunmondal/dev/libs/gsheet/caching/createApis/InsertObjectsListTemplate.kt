@@ -9,7 +9,7 @@ import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.ReadAPIs.FetchData.G
 import com.prasunmondal.dev.libs.gsheet.clients.ClientFilter
 import com.prasunmondal.dev.libs.gsheet.clients.ClientSort
 
-class InsertObjectTemplate<T : Any>(
+class InsertObjectsListTemplate<T : Any>(
     override var context: Context,
     override var sheetId: String,
     override var tabname: String,
@@ -21,20 +21,20 @@ class InsertObjectTemplate<T : Any>(
     override var shallCacheData: Boolean,
     override var filter: ClientFilter<T>?,
     override var sort: ClientSort<T>?,
-    var data: T,
+    var data: List<T>,
     var uId: String = ""
 ) : RequestTemplatesInterface<T>, CachingUtils<T> {
-
-    var insertRequest = GSheetInsertObject(context)
-
     override fun prepareRequest(): List<APIRequest> {
         val requestsList: MutableList<APIRequest> = mutableListOf()
 
-        insertRequest.sheetId = sheetId
-        insertRequest.tabName = tabname
-        insertRequest.setDataObject(data as Any)
-        insertRequest.setUId(uId)
-        requestsList.add(insertRequest)
+        data.forEach { _ ->
+            val insertRequest = GSheetInsertObject(context)
+            insertRequest.sheetId = sheetId
+            insertRequest.tabName = tabname
+            insertRequest.setDataObject(data as Any)
+            insertRequest.setUId(uId)
+            requestsList.add(insertRequest)
+        }
 
         // fetch
         val fetchRequest = GSheetFetchAll<T>(context)
