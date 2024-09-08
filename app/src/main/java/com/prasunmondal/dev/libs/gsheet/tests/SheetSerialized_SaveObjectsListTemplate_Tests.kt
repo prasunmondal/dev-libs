@@ -30,7 +30,8 @@ class SheetSerialized_SaveObjectsListTemplate_Tests {
 
         if(GSheetTestUtils.areIdentical(generatedList, fetchedList)
             && fetchedList.size == numberOfSaveObj
-            && GSheetTestUtils.isMetricsExpected(metricsB4Save, metricsAfterSave, 1, 2+numberOfSaveObj,2+numberOfSaveObj)) {
+            && GSheetTestUtils.isMetricsExpected(metricsB4Save, metricsAfterSave, 1, 2+numberOfSaveObj,2+numberOfSaveObj)
+            && GSheetTestUtils.isMetricsExpected(metricsAfterSave, metricsAfterFetch, 0, 0,0)) {
             LogMe.log("Successful")
         } else {
             LogMe.log("Failed")
@@ -40,9 +41,7 @@ class SheetSerialized_SaveObjectsListTemplate_Tests {
 
     fun saveObjectsOneByOne() {
         LogMe.startMethod()
-        val previousPresentData = GSheetTestUtils.resetSheetToHaveOneDataRow()
-
-        GSheetTestUtils.createObjectByRandomValues()
+        GSheetTestUtils.resetSheetToHaveOneDataRow()
 
         val numberOfServerCallMadeAtStart = GSheetMetrics.callCounter
         LogMe.log("Calls made at start: $numberOfServerCallMadeAtStart")
