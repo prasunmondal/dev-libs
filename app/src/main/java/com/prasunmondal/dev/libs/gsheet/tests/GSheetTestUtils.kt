@@ -3,6 +3,8 @@ package com.prasunmondal.dev.libs.gsheet.tests
 import com.prasunmondal.dev.libs.StringUtils.StringUtils
 import com.prasunmondal.dev.libs.gsheet.clients.Tests.ModelInsertObject
 import com.prasunmondal.dev.libs.gsheet.clients.Tests.ReadAPIs.FetchData.FetchAll.FetchAllBySortingModelNoFilter
+import com.prasunmondal.dev.libs.gsheet.metrics.GSheetMetricsState
+import com.prasunmondal.dev.libs.logs.instant.terminal.LogMe
 
 class GSheetTestUtils {
 
@@ -37,6 +39,16 @@ class GSheetTestUtils {
                     p1.name == p2.name && p1.title == p2.title }
             }
             return result
+        }
+
+        fun isMetricsExpected(initial: GSheetMetricsState, final: GSheetMetricsState, incrementInCallCounter: Int, incrementInRequestsQueued: Int, incrementInRequestsProcessed: Int, metricsName: String = ""): Boolean {
+//            LogMe.log("Expected $metricsName Metrics $initial + $increment = $final".replace("  "," "))
+//            LogMe.log("Actual $metricsName Metrics $initial + ${final - initial} = $final".replace("  "," "))
+
+            val r1 = (initial.callCounter + incrementInCallCounter) == final.callCounter
+            val r2 = (initial.requestsQueued + incrementInRequestsQueued) == final.requestsQueued
+            val r3 = (initial.requestsProcessed + incrementInRequestsProcessed) == final.requestsProcessed
+            return r1 && r2 && r3
         }
     }
 }

@@ -89,10 +89,12 @@ class GScriptUtils {
         ): MutableMap<String, APIResponse> {
 
             GSheetMetrics.callCounter++
+            GSheetMetrics.requestsQueued = GSheetMetrics.requestsQueued + apiRequestQueue.getQueue().size
 
             val scriptUrl = URL(scriptURL)
             executeAllCacheUpdateOperations(apiRequestQueue)
             val filteredCalls = filterOutCallsWhoseResultsAreAlreadyCached(apiRequestQueue)
+            GSheetMetrics.requestsProcessed = GSheetMetrics.requestsProcessed + filteredCalls.size
 
             if (filteredCalls.isEmpty()) return mutableMapOf()
 
