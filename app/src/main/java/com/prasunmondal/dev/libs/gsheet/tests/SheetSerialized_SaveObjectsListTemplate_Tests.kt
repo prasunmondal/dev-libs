@@ -7,12 +7,12 @@ import com.prasunmondal.dev.libs.logs.instant.terminal.LogMe
 
 class SheetSerialized_SaveObjectsListTemplate_Tests {
 
-    constructor() {
+    init {
         saveListOfObjects()
         saveObjectsOneByOne()
     }
 
-    fun saveListOfObjects() {
+    private fun saveListOfObjects() {
         val numberOfSaveObj = 3
         LogMe.startMethod()
         GSheetTestUtils.resetSheetToHaveNDataRows(1)
@@ -39,7 +39,7 @@ class SheetSerialized_SaveObjectsListTemplate_Tests {
         }
     }
 
-    fun saveObjectsOneByOne() {
+    private fun saveObjectsOneByOne() {
         LogMe.startMethod()
         GSheetTestUtils.resetSheetToHaveNDataRows(1)
 

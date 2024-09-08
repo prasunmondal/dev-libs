@@ -6,12 +6,12 @@ import com.prasunmondal.dev.libs.gsheet.metrics.GSheetMetricsState
 import com.prasunmondal.dev.libs.logs.instant.terminal.LogMe
 
 class SheetSerialized_InsertObjectsListTemplate_Tests {
-    constructor() {
+    init {
         insertListOfObjects()
         insertObjectsOneByOne()
     }
 
-    fun insertListOfObjects() {
+    private fun insertListOfObjects() {
         val numberOfSaveObj = 3
         LogMe.startMethod()
         val initialListInServer = GSheetTestUtils.resetSheetToHaveNDataRows(1)
@@ -38,7 +38,7 @@ class SheetSerialized_InsertObjectsListTemplate_Tests {
         }
     }
 
-    fun insertObjectsOneByOne() {
+    private fun insertObjectsOneByOne() {
         val numberOfSaveObj = 1
         LogMe.startMethod()
         val initialListInServer = GSheetTestUtils.resetSheetToHaveNDataRows(3)

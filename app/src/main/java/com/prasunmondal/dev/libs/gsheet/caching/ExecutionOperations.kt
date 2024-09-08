@@ -58,5 +58,9 @@ interface ExecutionOperations<T> : GSheetCaching<T>, CachingUtils<T> {
         return prepareRequest()
     }
 
+//    fun insertToLocal(list: List<T>) {
+//        CentralCacheObj.centralCache.get<T>(context, prepareRequest()[0].)
+//    }
+
     fun prepareRequest(): List<APIRequest>
 }
