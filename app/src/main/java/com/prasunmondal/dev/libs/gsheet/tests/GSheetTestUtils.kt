@@ -15,7 +15,9 @@ class GSheetTestUtils {
         }
         fun resetSheetToHaveOneDataRow(): List<ModelInsertObject> {
             FetchAllBySortingModelNoFilter.deleteAll().execute()
-            return createListOfObjectByRandomValues(1)
+            val list = createListOfObjectByRandomValues(1)
+            FetchAllBySortingModelNoFilter.save(list).execute()
+            return list
         }
 
         fun createObjectByRandomValues(): ModelInsertObject {

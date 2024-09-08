@@ -27,11 +27,11 @@ class InsertObjectsListTemplate<T : Any>(
     override fun prepareRequest(): List<APIRequest> {
         val requestsList: MutableList<APIRequest> = mutableListOf()
 
-        data.forEach { _ ->
+        data.forEach {
             val insertRequest = GSheetInsertObject(context)
             insertRequest.sheetId = sheetId
             insertRequest.tabName = tabname
-            insertRequest.setDataObject(data as Any)
+            insertRequest.setDataObject(it as Any)
             insertRequest.setUId(uId)
             requestsList.add(insertRequest)
         }
