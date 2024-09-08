@@ -1,7 +1,7 @@
 package com.prasunmondal.dev.libs.files
 
 import android.content.Context
-import com.prasunmondal.dev.libs.logs.instant.terminal.LogMe.log
+import com.prasunmondal.dev.libs.logs.instant.terminal.LogMe
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -12,8 +12,8 @@ class IOObjectToFile {
     @Synchronized
     @Throws(IOException::class)
     fun WriteObjectToFile(context: Context, fileName: String, obj: Any?) {
-        log("Writing to file: $fileName")
-        log("Writing to file content: ${obj ?: "null"}")
+        LogMe.log("Writing to file: $fileName")
+        LogMe.log("Writing to file content: ${obj ?: "null"}")
         var fos: FileOutputStream? = null
         var os: ObjectOutputStream? = null
         try {
@@ -32,7 +32,7 @@ class IOObjectToFile {
     }
 
     fun ReadObjectFromFile(context: Context, fileName: String): Any? {
-        log("Reading from file: $fileName")
+        LogMe.log("Reading from file: $fileName")
         try {
             val fis = context.openFileInput(fileName)
             val `is` = ObjectInputStream(fis)
