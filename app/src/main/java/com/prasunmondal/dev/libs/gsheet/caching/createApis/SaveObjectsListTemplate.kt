@@ -22,7 +22,8 @@ class SaveObjectsListTemplate<T : Any>(
     override var shallCacheData: Boolean,
     override var filter: ClientFilter<T>?,
     override var sort: ClientSort<T>?,
-    var data: List<T>
+    var data: List<T>,
+    var uId: String = ""
 ) : RequestTemplatesInterface<T>, CachingUtils<T> {
 
     override fun prepareRequest(): List<APIRequest> {
@@ -41,6 +42,7 @@ class SaveObjectsListTemplate<T : Any>(
             val insertRequest = GSheetInsertObject(context)
             insertRequest.sheetId = sheetId
             insertRequest.tabName = tabname
+            insertRequest.setUId(uId)
             insertRequest.setDataObject(it as Any)
             requestsList.add(insertRequest)
         }

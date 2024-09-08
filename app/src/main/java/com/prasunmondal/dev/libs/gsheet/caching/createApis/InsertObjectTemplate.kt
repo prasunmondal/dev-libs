@@ -21,7 +21,8 @@ class InsertObjectTemplate<T : Any>(
     override var shallCacheData: Boolean,
     override var filter: ClientFilter<T>?,
     override var sort: ClientSort<T>?,
-    var data: T
+    var data: T,
+    var uId: String = ""
 ) : RequestTemplatesInterface<T>, CachingUtils<T> {
 
     var insertRequest = GSheetInsertObject(context)
@@ -32,6 +33,7 @@ class InsertObjectTemplate<T : Any>(
         insertRequest.sheetId = sheetId
         insertRequest.tabName = tabname
         insertRequest.setDataObject(data as Any)
+        insertRequest.setUId(uId)
         requestsList.add(insertRequest)
 
         // fetch

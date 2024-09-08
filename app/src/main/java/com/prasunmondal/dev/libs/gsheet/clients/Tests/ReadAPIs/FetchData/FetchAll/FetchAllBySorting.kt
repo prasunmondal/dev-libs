@@ -66,7 +66,9 @@ class FetchAllBySorting {
         GScript.execute(ProjectConfig.dBServerScriptURL)
 
         var request = FetchAllBySortingModelWithFilter.insert(obj1).getRequestObj()
+        var request2 = FetchAllBySortingModelWithFilter.insert(obj1).getRequestObj()
         requestQueue1.addRequest(request)
+        requestQueue1.addRequest(request2)
         requestQueue1.execute()
         LogMe.log("Reset Completed.")
     }

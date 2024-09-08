@@ -28,17 +28,22 @@ class APIRequestsQueue {
         GScriptUtils.executeRequestsList(this, ProjectConfig.dBServerScriptURL)
     }
 
-    fun addRequest(uid: String, request: APIRequest) {
-        if (listofAPIRequest.containsKey(uid)) {
+    fun addRequest(uid: String, request: APIRequest): String {
+        var uIdToBeUsed = request.getUId()
+        if(uid.isNotBlank())
+            uIdToBeUsed = uid
+
+        if(uIdToBeUsed.isBlank())
+            uIdToBeUsed = request.getUId()
+
+        if(uIdToBeUsed.isBlank())
+            uIdToBeUsed = StringUtils.generateUniqueString()
+
+        if (listofAPIRequest.containsKey(uIdToBeUsed)) {
             throw GScriptDuplicateUIDException()
         }
-        listofAPIRequest[uid] = request
-    }
-
-    fun addRequest(uid: String, requests: List<APIRequest>) {
-        requests.forEach {
-            addRequest(uid, it)
-        }
+        listofAPIRequest[uIdToBeUsed] = request
+        return uid
     }
 
     fun clearList() {
