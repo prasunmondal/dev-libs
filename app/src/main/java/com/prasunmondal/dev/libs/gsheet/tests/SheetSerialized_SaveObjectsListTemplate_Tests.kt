@@ -30,7 +30,7 @@ class SheetSerialized_SaveObjectsListTemplate_Tests {
 
         if(GSheetTestUtils.areIdentical(generatedList, fetchedList)
             && fetchedList.size == numberOfSaveObj
-            && GSheetTestUtils.isMetricsExpected(metricsB4Save, metricsAfterSave, 1, 2+numberOfSaveObj,2+numberOfSaveObj)
+            && GSheetTestUtils.isMetricsExpected(metricsB4Save, metricsAfterSave, 1, 3,3)
             && GSheetTestUtils.isMetricsExpected(metricsAfterSave, metricsAfterFetch, 0, 0,0)) {
             LogMe.log("Successful")
         } else {

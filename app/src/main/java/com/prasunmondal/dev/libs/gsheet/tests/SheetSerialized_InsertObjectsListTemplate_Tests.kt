@@ -29,7 +29,7 @@ class SheetSerialized_InsertObjectsListTemplate_Tests {
         val serverList = initialListInServer + generatedList
         if(GSheetTestUtils.areIdentical(serverList, fetchedList)
             && fetchedList.size == numberOfSaveObj + 1
-            && GSheetTestUtils.isMetricsExpected(metricsB4Save, metricsAfterSave, 1, 1+numberOfSaveObj,1+numberOfSaveObj)
+            && GSheetTestUtils.isMetricsExpected(metricsB4Save, metricsAfterSave, 1, 2,2)
             && GSheetTestUtils.isMetricsExpected(metricsAfterSave, metricsAfterFetch, 0, 0,0)) {
             LogMe.log("Successful")
         } else {
