@@ -9,7 +9,7 @@ class CacheTraverse {
         fun getAllCacheKeys(context: Context, cacheObjectKey: String = ""): MutableList<String> {
             val listOfCacheKeys = mutableListOf<String>()
             CentralCacheObj.centralCache.cache =
-                CentralCacheObj.centralCache.getCacheDataFromFile(context, cacheObjectKey)
+                CentralCacheObj.centralCache.getFromFile(context, cacheObjectKey)
 
             CentralCacheObj.centralCache.cache.forEach { k, v ->
                 v.forEach { k1, v1 ->

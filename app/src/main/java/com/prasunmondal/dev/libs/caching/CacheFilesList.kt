@@ -1,7 +1,7 @@
 package com.prasunmondal.dev.libs.caching
 
 import android.content.Context
-import com.prasunmondal.dev.libs.files.IOObjectToFile
+import com.prasunmondal.dev.libs.files.FileOps
 import com.prasunmondal.dev.libs.logs.instant.terminal.LogMe
 
 class CacheFilesList : java.io.Serializable {
@@ -10,9 +10,8 @@ class CacheFilesList : java.io.Serializable {
         private val cacheFilesFileName: String = "cacheFilesIndex.dat"
 
         fun getCacheFilesList(context: Context): MutableList<String> {
-            val readObj = IOObjectToFile()
             val list = try {
-                readObj.ReadObjectFromFile(
+                FileOps.read(
                     context,
                     cacheFilesFileName
                 ) as MutableList<String>
@@ -28,8 +27,7 @@ class CacheFilesList : java.io.Serializable {
             if (list.contains(filename))
                 return
             list.add(filename)
-            val writeObj = IOObjectToFile()
-            writeObj.WriteObjectToFile(context, cacheFilesFileName, list)
+            FileOps.write(context, cacheFilesFileName, list)
         }
 
         fun removeFromCacheFilesList(context: Context, classKey: String) {
@@ -37,13 +35,11 @@ class CacheFilesList : java.io.Serializable {
             if (!list.contains(classKey))
                 return
             list.remove(classKey)
-            val writeObj = IOObjectToFile()
-            writeObj.WriteObjectToFile(context, cacheFilesFileName, list)
+            FileOps.write(context, cacheFilesFileName, list)
         }
 
         fun clearCacheFilesList(context: Context) {
-            val writeObj = IOObjectToFile()
-            writeObj.WriteObjectToFile(context, cacheFilesFileName, null)
+            FileOps.write(context, cacheFilesFileName, null)
         }
     }
 }

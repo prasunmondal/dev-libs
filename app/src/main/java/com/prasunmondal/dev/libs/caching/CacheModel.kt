@@ -9,7 +9,8 @@ class CacheModel : java.io.Serializable {
     var entryTime: LocalDateTime
     var expiryTime: LocalDateTime
     var content: Any?
-    constructor(context: Context, content: Any?) {
+
+    constructor(content: Any?) {
         entryTime = LocalDateTime.now()
         expiryTime = Date_Utils.getNextTimeOccurrenceTimestamp(1)
         LogMe.log("$entryTime - $expiryTime")
@@ -33,7 +34,7 @@ class CacheModel : java.io.Serializable {
         LogMe.log("Data Expired (key:$cacheObjectKey)")
         LogMe.log("Deleting cache data")
         CentralCacheObj.centralCache.cache[cacheClassKey]!!.remove(cacheObjectKey)
-        CentralCacheObj.centralCache.saveCacheDataToFile(
+        CentralCacheObj.centralCache.saveToFile(
             cacheObjectKey,
             CentralCacheObj.centralCache.cache,
             context
