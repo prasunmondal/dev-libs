@@ -1,30 +1,29 @@
-package com.prasunmondal.dev.libs.caching.fileOps
+package com.prasunmondal.dev.libs.caching
 
 import android.content.Context
-import com.prasunmondal.dev.libs.caching.CacheFileName
-import com.prasunmondal.dev.libs.caching.CacheFilesList
-import com.prasunmondal.dev.libs.caching.CacheModel
-import com.prasunmondal.dev.libs.files.FileOps
+import com.prasunmondal.dev.libs.files.IOObjectToFile
 import com.prasunmondal.dev.libs.logs.instant.terminal.LogMe
 
 open class CacheFileOps : CacheFileName() {
-    fun saveToFile(
+    fun saveCacheDataToFile(
         cacheKey: String,
         cache: MutableMap<String, MutableMap<String, CacheModel>>,
         context: Context
     ) {
         LogMe.log("Saving cache data - File: ${getFileName(cacheKey)}")
         val filename = getFileName(cacheKey)
-        FileOps.write(context, filename, cache)
+        val writeObj = IOObjectToFile()
+        writeObj.WriteObjectToFile(context, filename, cache)
         CacheFilesList.addToCacheFilesList(context, filename)
     }
 
-    fun getFromFile(
+    fun getCacheDataFromFile(
         context: Context,
         cacheKey: String
     ): MutableMap<String, MutableMap<String, CacheModel>> {
         return try {
-            val result = FileOps.read(
+            val readObj = IOObjectToFile()
+            val result = readObj.ReadObjectFromFile(
                 context,
                 getFileName(cacheKey)
             ) as MutableMap<String, MutableMap<String, CacheModel>>

@@ -8,10 +8,10 @@ import java.io.IOException
 import java.io.ObjectInputStream
 import java.io.ObjectOutputStream
 
-object FileOps {
+class IOObjectToFile {
     @Synchronized
     @Throws(IOException::class)
-    fun write(context: Context, fileName: String, obj: Any?) {
+    fun WriteObjectToFile(context: Context, fileName: String, obj: Any?) {
         LogMe.log("Writing to file: $fileName")
         LogMe.log("Writing to file content: ${obj ?: "null"}")
         var fos: FileOutputStream? = null
@@ -31,7 +31,7 @@ object FileOps {
         }
     }
 
-    fun read(context: Context, fileName: String): Any? {
+    fun ReadObjectFromFile(context: Context, fileName: String): Any? {
         LogMe.log("Reading from file: $fileName")
         try {
             val fis = context.openFileInput(fileName)
@@ -47,6 +47,7 @@ object FileOps {
         return null
     }
 
+    companion object {
         fun deleteObjectFromFile(fileName: String) {
             var fileName = fileName
             try {
@@ -67,4 +68,5 @@ object FileOps {
                 e.printStackTrace()
             }
         }
+    }
 }

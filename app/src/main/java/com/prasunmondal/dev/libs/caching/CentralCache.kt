@@ -1,8 +1,7 @@
 package com.prasunmondal.dev.libs.caching
 
 import android.content.Context
-import com.prasunmondal.dev.libs.caching.fileOps.CacheFileOps
-import com.prasunmondal.dev.libs.files.FileOps
+import com.prasunmondal.dev.libs.files.IOObjectToFile
 import com.prasunmondal.dev.libs.logs.instant.terminal.LogMe
 import com.prasunmondal.dev.libs.reflections.code.current.ClassDetailsUtils
 import kotlin.reflect.KClass
@@ -40,7 +39,7 @@ open class CentralCache : CacheFileOps() {
         // if not available in local cache,
         // load from cache file
         CentralCacheObj.centralCache.cache =
-            CentralCacheObj.centralCache.getFromFile(context, cacheObjectKey)
+            CentralCacheObj.centralCache.getCacheDataFromFile(context, cacheObjectKey)
         valueFromCache = getFromCacheMemory<T>(context, key, appendCacheKeyPrefix)
         return if (valueFromCache != null) {
             LogMe.log("Cache Use: File (key:$cacheObjectKey)")
@@ -76,7 +75,7 @@ open class CentralCache : CacheFileOps() {
         // if not available in local cache,
         // load from cache file
         CentralCacheObj.centralCache.cache =
-            CentralCacheObj.centralCache.getFromFile(context, cacheObjectKey)
+            CentralCacheObj.centralCache.getCacheDataFromFile(context, cacheObjectKey)
 
         val t = getAvailableInCacheMemory(context, key, appendCacheKeyPrefix)
         return t
@@ -136,8 +135,8 @@ open class CentralCache : CacheFileOps() {
         if (presentData == null) {
             CentralCacheObj.centralCache.cache[cacheClassKey] = hashMapOf()
         }
-        CentralCacheObj.centralCache.cache[cacheClassKey]!![cacheKey] = CacheModel(data as Any?)
-        CentralCacheObj.centralCache.saveToFile(
+        CentralCacheObj.centralCache.cache[cacheClassKey]!![cacheKey] = CacheModel(context, data as Any?)
+        CentralCacheObj.centralCache.saveCacheDataToFile(
             cacheKey,
             CentralCacheObj.centralCache.cache,
             context
@@ -152,8 +151,8 @@ open class CentralCache : CacheFileOps() {
         if (presentData == null) {
             CentralCacheObj.centralCache.cache[cacheClassKey] = hashMapOf()
         }
-        CentralCacheObj.centralCache.cache[cacheClassKey]!![key] = CacheModel(data as Any?)
-        CentralCacheObj.centralCache.saveToFile(
+        CentralCacheObj.centralCache.cache[cacheClassKey]!![key] = CacheModel(context, data as Any?)
+        CentralCacheObj.centralCache.saveCacheDataToFile(
             key,
             CentralCacheObj.centralCache.cache, context
         )
@@ -167,16 +166,17 @@ open class CentralCache : CacheFileOps() {
     fun invalidateFullCache(context: Context) {
         CentralCacheObj.centralCache.cache.clear()
         val cacheFiles = CacheFilesList.getCacheFilesList(context)
+        val writeObj = IOObjectToFile()
         cacheFiles.forEach {
             LogMe.log("Clearing cache: deleting file - $it")
-            FileOps.write(context, it, null)
+            writeObj.WriteObjectToFile(context, it, null)
         }
         CacheFilesList.clearCacheFilesList(context)
     }
 
     fun invalidateClassCache(cacheKey: String, context: Context) {
         CentralCacheObj.centralCache.cache[getClassKey()] = hashMapOf()
-        CentralCacheObj.centralCache.saveToFile(
+        CentralCacheObj.centralCache.saveCacheDataToFile(
             cacheKey,
             CentralCacheObj.centralCache.cache, context
         )
@@ -184,7 +184,7 @@ open class CentralCache : CacheFileOps() {
 
     fun <T : Any> invalidateClassCache(clazz: KClass<T>, cacheKey: String, context: Context) {
         CentralCacheObj.centralCache.cache[ClassDetailsUtils.getClassName(clazz)] = hashMapOf()
-        CentralCacheObj.centralCache.saveToFile(
+        CentralCacheObj.centralCache.saveCacheDataToFile(
             cacheKey,
             CentralCacheObj.centralCache.cache, context
         )
@@ -199,6 +199,6 @@ open class CentralCache : CacheFileOps() {
             CentralCacheObj.centralCache.cache[getClassKey()]!!.remove(key)
             LogMe.log("Cache Op: Deleted: key: $key")
         }
-        CentralCacheObj.centralCache.saveToFile("ignoredFileName", CentralCacheObj.centralCache.cache, context)
+        CentralCacheObj.centralCache.saveCacheDataToFile("ignoredFileName", CentralCacheObj.centralCache.cache, context)
     }
 }

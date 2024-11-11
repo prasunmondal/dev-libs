@@ -4,6 +4,7 @@ import android.content.Context
 import com.prasunmondal.dev.libs.gsheet.caching.CachingUtils
 import com.prasunmondal.dev.libs.gsheet.caching.RequestTemplatesInterface
 import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.APIRequest
+import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.CreateAPIs.GSheetInsertObject
 import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.CreateAPIs.GSheetInsertObjects
 import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.DeleteAPIs.GSheetDeleteAll
 import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.ReadAPIs.FetchData.GSheetFetchAll
@@ -38,12 +39,14 @@ class SaveObjectsListTemplate<T : Any>(
         requestsList.add(deleteRequest)
 
         // save the list
-        val insertRequest = GSheetInsertObjects(context)
-        insertRequest.sheetId = sheetId
-        insertRequest.tabName = tabname
-        insertRequest.setUId(uId)
-        insertRequest.setDataObject(data as Any)
-        requestsList.add(insertRequest)
+//        data.forEach {
+            val insertRequest = GSheetInsertObjects(context)
+            insertRequest.sheetId = sheetId
+            insertRequest.tabName = tabname
+            insertRequest.setUId(uId)
+            insertRequest.setDataObject(data as Any)
+            requestsList.add(insertRequest)
+//        }
 
 
         // fetch
