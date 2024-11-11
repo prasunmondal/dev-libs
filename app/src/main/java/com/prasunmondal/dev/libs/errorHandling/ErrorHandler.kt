@@ -1,39 +1,33 @@
 package com.prasunmondal.dev.libs.errorHandling
 
 import android.content.Context
-import com.prasunmondal.dev.libs.gsheet.clients.APIRequests.CreateAPIs.CreateAPIs
+import com.prasunmondal.dev.libs.contexts.AppContexts
+import com.prasunmondal.dev.libs.gsheet.ContextWrapper
 import com.prasunmondal.dev.libs.gsheet.clients.GSheetSerialized
+import com.prasunmondal.dev.libs.logs.instant.terminal.LogMe
 
-class ErrorHandler: GSheetSerialized<ErrorModel>(
-    context = null!!,
-    scriptURL = "",
+object ErrorHandler: GSheetSerialized<ErrorModel> (
+    context = ContextWrapper(AppContexts.get()),
     sheetId = "",
-    tabName = "appConstants",
+    tabName = "errors",
     modelClass = ErrorModel::class.java
-){
-    fun reportError(context: Context, sheetId: String, tabName: String, error: Throwable) {
-        val str = """
-                    < EXCEPTION START >
-                    Exception: $error
-                    Message: ${error.message}
-                    --------------- Stacktrace ---------------
-                    ${getStackTrace(error as Exception)}< EXCEPTION END >
-                    """.trimIndent()
-
-        val requestObj = insert(ErrorModel(str)).getRequestObj()[0]
-        requestObj.context = context
-        (requestObj as CreateAPIs).sheetId = sheetId
-        requestObj.tabName = tabName
-        requestObj.execute()
-    }
-
-    private fun getStackTrace(ex: Exception): String? {
-        val sb = StringBuilder()
-        val st = ex.stackTrace
-        sb.append(ex.javaClass.name).append(": ").append(ex.message).append("\n")
-        for (stackTraceElement in st) {
-            sb.append("\t at ").append(stackTraceElement.toString()).append("\n")
+) {
+    fun registerErrorLogger(context: Context, sheetId: String, tabname: String) {
+        Thread.setDefaultUncaughtExceptionHandler { thread, e ->
+            try {
+                LogMe.log("Logging error to sheet")
+                val errorObj = ErrorModel(context, e as Exception)
+                val t = ErrorHandler.insert(errorObj)
+                t.context = context
+                t.sheetId = sheetId
+                t.tabname = tabname
+                t.execute()
+                throw e
+            } catch (e: Exception) {
+                LogMe.log("Failed to write error to server")
+                LogMe.log(e.message)
+                LogMe.log(e.stackTraceToString())
+            }
         }
-        return sb.toString()
     }
 }
