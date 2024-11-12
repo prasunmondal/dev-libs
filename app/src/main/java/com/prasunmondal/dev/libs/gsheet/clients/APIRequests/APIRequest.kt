@@ -4,8 +4,6 @@ import com.prasunmondal.dev.libs.StringUtils.StringUtils
 import com.prasunmondal.dev.libs.gsheet.clients.APIResponses.APIResponse
 import com.prasunmondal.dev.libs.gsheet.clients.GScript
 import org.json.JSONObject
-import java.util.function.Consumer
-import kotlin.reflect.KFunction
 
 abstract class APIRequest : GScript {
     private var uId: String = setUId()
