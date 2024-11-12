@@ -2,41 +2,31 @@ package com.prasunmondal.dev.libs.numbers
 
 import java.math.BigDecimal
 import java.math.RoundingMode
-import java.text.DecimalFormat
 
 interface DoubleUtils {
 
-    fun getDoubleOrN(input: String, n: Double): Double {
+    fun getDoubleOrN(input: String, digitsAfterDecimal: Int = -1, n: Double): Double {
         return try {
-            input.toDouble()
+            roundOff(input.toDouble(), digitsAfterDecimal)
         } catch (e: Exception) {
             n
         }
     }
 
-    fun getDoubleOrZero(input: String): Double {
-        return getDoubleOrN(input, 0.0)
-    }
-
-    fun getDoubleOrBlank(input: String): String {
+    fun getDoubleOrBlank(input: String, digitsAfterDecimal: Int = -1): String {
         val t = getDoubleOrZero(input)
         if (t == 0.0)
             return ""
-        return t.toString()
+        return roundOff(t, digitsAfterDecimal).toString()
     }
 
-    fun getDoubleOrZero(input: String, roundOffPattern: String): Double {
-        val number = getDoubleOrZero(input)
-        return try {
-            val df = DecimalFormat(roundOffPattern)
-            df.roundingMode = RoundingMode.FLOOR
-            df.format(number).toDouble()
-        } catch (e: Exception) {
-            number
-        }
+    fun getDoubleOrZero(input: String, digitsAfterDecimal: Int = -1): Double {
+        return roundOff(getDoubleOrZero(input), digitsAfterDecimal)
     }
 
-    fun roundOff(number: Double, digitsAfterDecimal: Int): Double {
+    fun roundOff(number: Double, digitsAfterDecimal: Int = -1): Double {
+        if(digitsAfterDecimal < 0)
+            return number
         return BigDecimal(number).setScale(digitsAfterDecimal, RoundingMode.HALF_UP).toDouble()
     }
 }
