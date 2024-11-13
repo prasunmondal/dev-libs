@@ -25,6 +25,8 @@ interface DoubleUtils {
     }
 
     fun roundOff(number: Double, digitsAfterDecimal: Int = -1): Double {
+        if(number.isNaN())
+            return 0.0
         if(digitsAfterDecimal < 0)
             return number
         return BigDecimal(number).setScale(digitsAfterDecimal, RoundingMode.HALF_UP).toDouble()
