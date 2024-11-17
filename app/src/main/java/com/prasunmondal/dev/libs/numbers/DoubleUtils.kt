@@ -24,6 +24,10 @@ interface DoubleUtils {
         return getDoubleOrN(input, digitsAfterDecimal, 0.0)
     }
 
+    fun getIntOrDoubleAsString(value: String): String {
+        return getIntOrDoubleAsString(getDoubleOrZero(value))
+    }
+
     fun getIntOrDoubleAsString(value: Double): String {
         return if (value % 1.0 == 0.0) {
             value.toLong().toString() // Convert to Long to remove decimals
