@@ -24,6 +24,14 @@ interface DoubleUtils {
         return getDoubleOrN(input, digitsAfterDecimal, 0.0)
     }
 
+    fun getIntOrDoubleAsString(value: Double): String {
+        return if (value % 1.0 == 0.0) {
+            value.toLong().toString() // Convert to Long to remove decimals
+        } else {
+            value.toString() // Keep as Double with decimals
+        }
+    }
+
     fun roundOff(number: Double, digitsAfterDecimal: Int = -1): Double {
         if(number.isNaN())
             return 0.0
