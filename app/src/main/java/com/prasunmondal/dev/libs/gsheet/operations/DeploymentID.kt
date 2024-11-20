@@ -17,7 +17,7 @@ class DeploymentID {
 
         # List of deployment IDs to protect
         PROTECTED_IDS=("AKfycby0rORN4PWBqs2XR2JFTlMHBA2kphA7A8LLrAQ40yF8aiXveEa1cqUJA-glH36VdRZ0Pg"
-                       "AKfycbws8KPXUkLBmDnRm2g3_z6V5rOrTDgbS9W9m6Um7k5norXL8SdPFZiYDMxqsqHumK0aaA")
+                       "AKfycbyIffM6vK5MCnUkgE_wlv-V5OZQ3juCAsBJWCKZ2Vs2FFQFEM-J4ODkaK-bL9rzUmQxlw")
 
 
         # Fetch all deployments and process each deployment ID
@@ -37,6 +37,6 @@ class DeploymentID {
 
 
         var deploymentId =
-            "AKfycbws8KPXUkLBmDnRm2g3_z6V5rOrTDgbS9W9m6Um7k5norXL8SdPFZiYDMxqsqHumK0aaA"
+            "AKfycbyIffM6vK5MCnUkgE_wlv-V5OZQ3juCAsBJWCKZ2Vs2FFQFEM-J4ODkaK-bL9rzUmQxlw"
     }
 }
